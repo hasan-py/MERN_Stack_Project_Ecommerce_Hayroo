@@ -1,0 +1,56 @@
+-----------------Hayroo E-commerce Website MERN Stack---------------
+
+*Schema Design
+
+==Brands==
+1. Bname
+2. Bdescription
+3. Bimage
+4. Btimestamp
+5. BtotalRating
+6. BtotalReviews
+
+==SubCategories==
+1. SCname
+2. SCdescription
+3. timestamp
+
+==Categories==
+1. Cname
+2. Cdescription
+3. Cimage
+4. timestamp
+5. SubCategories [list (foreienkey)]
+
+==Users==
+1. Name
+2. Username
+3. Email
+4. PhoneNumber
+5. City
+6. Country
+7. Region
+8. Password
+9. Uimage
+10. Verified
+11. SecretKey
+12. UserRole
+13. timestamp
+
+==Product==
+1. PName
+2. PDescription
+3. PSpecifications
+4. PPrice
+5. Category (Foreinkey)
+6. SubCategory (Foreinkey)
+7. Brand (Foreinkey)
+8. PImages (Multiple Images)
+9. PQuantity
+10. POffer
+11. PRatings
+12. PReviews
+13. Pstatus
+14. timestamp
+
+

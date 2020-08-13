@@ -1,0 +1,135 @@
+.topbar {
+    background: DodgerBlue;
+    color: white;
+}
+
+.topbar a {
+    color: white;
+}
+
+.custom-toggler.navbar-toggler {
+    border-color: white;
+}
+
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.secondNavItem {
+    border: 0 1px solid black;
+}
+
+.logo {
+    background: white;
+    color: black;
+    height: 50px;
+    width: 70px;
+    border-radius: 8px;
+    padding: 0px 8px;
+    padding-bottom:8px;
+    font-weight: bold;
+    margin-right:5px;
+}
+
+.customShadow {
+    -webkit-box-shadow: 0 5px 6px -6px black;
+    -moz-box-shadow: 0 5px 6px -6px black;
+    box-shadow: 0 5px 6px -6px black;
+}
+
+.customShadow img {
+    height:260px;
+}
+
+.CategoryCard {
+    border: none;
+    border-radius: 75%;
+    margin-left:10px;
+}
+
+.CategoryCard img {
+    height: 100px;
+    width: 100px;
+}
+
+.footer {
+    width: 100%;
+    background: whitesmoke;
+    padding: 10px;
+    color: DimGrey;
+}
+
+.viewAllProdcutCard {
+    margin-top: 120px;
+}
+
+.customCardSize {
+    width: 16rem;
+    margin-left:0px;
+}
+
+
+@media screen and (min-width: 340px) {
+    .customCardSize {
+        width: 18rem;
+        margin-left:20px;
+    }
+    .viewAllProdcutCard {
+    	margin-top: 10px;
+	}
+}
+
+@media screen and (min-width: 400px) {
+    .customCardSize {
+        width: 18rem;
+        margin-left:37px;
+    }
+    .viewAllProdcutCard {
+    	margin-top: 10px;
+	}
+}
+
+@media screen and (min-width: 400px) {
+    .customCardSize {
+        width: 18rem;
+        margin-left:45px;
+    }
+    .viewAllProdcutCard {
+    	margin-top: 10px;
+	}
+}
+
+@media screen and (min-width: 600px) {
+    .customCardSize {
+        width: 11rem;
+        margin-left:0px;
+    }
+    .viewAllProdcutCard {
+    	margin-top: 60px;
+	}
+}
+
+
+@media screen and (min-width: 780px) {
+    .customCardSize {
+        width: 11rem;
+        margin-left:0px;
+    }
+    .viewAllProdcutCard {
+    	margin-top: 90px;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+    .customCardSize {
+        width: 14rem;
+        margin-left:0px;
+    }
+}
+
+@media screen and (min-width: 1080px) {
+    .customCardSize {
+        width: 16rem;
+        margin-left:0px;
+    }
+}

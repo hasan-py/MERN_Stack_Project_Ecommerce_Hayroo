@@ -4,6 +4,8 @@ import Slider from "./Slider";
 import CategoryCard from "./CategoryCard";
 import ProductCard from "./ProductCard";
 import Review from "./Review";
+import Subcategory from "./Subcategory";
+
 
 export {
 	Navber,
@@ -11,5 +13,6 @@ export {
 	Slider,
 	CategoryCard,
 	ProductCard,
-	Review
+	Review,
+	Subcategory
 }

@@ -12,24 +12,12 @@ const Slider = (props) => {
 		  <div class="carousel-inner">
 		    <div class="carousel-item active">
 		      <img class="d-block w-100" src="https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/107312566/original/4ef810792c139575d41e7decb7cdbd2fbd3e97ab/design-youtube-thumbnail-facebook-banners-ecommerce-ads.jpg" alt="First slide"/>
-		      <div class="carousel-caption d-none d-md-block">
-			    <h5>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, tempore?</h5>
-			    <p>...</p>
-			  </div>
 		    </div>
 		    <div class="carousel-item">
 		      <img class="d-block w-100" src="https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/107312566/original/4ef810792c139575d41e7decb7cdbd2fbd3e97ab/design-youtube-thumbnail-facebook-banners-ecommerce-ads.jpg" alt="Second slide"/>
-		      <div class="carousel-caption d-none d-md-block">
-			    <h5>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam, doloribus!</h5>
-			    <p>...</p>
-			  </div>
 		    </div>
 		    <div class="carousel-item">
 		      <img class="d-block w-100" src="https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/107312566/original/4ef810792c139575d41e7decb7cdbd2fbd3e97ab/design-youtube-thumbnail-facebook-banners-ecommerce-ads.jpg" alt="Third slide"/>
-		      <div class="carousel-caption d-none d-md-block">
-			    <h5>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, eius.</h5>
-			    <p>...</p>
-			  </div>
 		    </div>
 		  </div>
 		  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

@@ -15,8 +15,8 @@ const Product = (props) => {
                               <div class="card-body">
                                 <div>Product Name</div>
                                 <div>Price</div>
-                                <button className="btn btn-dark mt-2">Buy Now</button>
-                                <button className="btn btn-dark mt-2 btn-sm btn-circle ml-2"><i class="material-icons">favorite</i> <span className="badge bg-light text-dark">4</span></button>
+                                <button className="btn customShadow btn-dark customBtn mt-2">Buy Now</button>
+                                <button className="btn customShadow customBtn1 btn-dark mt-2 btn-sm btn-circle ml-2"><i class="material-icons">favorite</i> <span className="badge bg-light customBtn1 text-dark">4</span></button>
                                 
                               </div>
                             </div>
@@ -27,8 +27,8 @@ const Product = (props) => {
                               <div class="card-body">
                                 <div>Product Name</div>
                                 <div>Price</div>
-                                <button className="btn btn-dark mt-2">Buy Now</button>
-                                <button className="btn btn-dark mt-2 btn-sm btn-circle ml-2"><i class="material-icons">favorite</i> <span className="badge bg-light text-dark">4</span></button>
+                                <button className="btn customShadow btn-dark customBtn mt-2">Buy Now</button>
+                                <button className="btn customShadow customBtn1 btn-dark mt-2 btn-sm btn-circle ml-2"><i class="material-icons">favorite</i> <span className="badge bg-light customBtn1 text-dark">4</span></button>
                               </div>
                             </div>
                         </div>
@@ -38,8 +38,8 @@ const Product = (props) => {
                               <div class="card-body">
                                 <div>Product Name</div>
                                 <div>Price</div>
-                                <button className="btn btn-dark mt-2">Buy Now</button>
-                                <button className="btn btn-dark mt-2 btn-sm btn-circle ml-2"><i class="material-icons">favorite</i> <span className="badge bg-light text-dark">4</span></button>
+                                <button className="btn customShadow btn-dark customBtn mt-2">Buy Now</button>
+                                <button className="btn customShadow customBtn1 btn-dark mt-2 btn-sm btn-circle ml-2"><i class="material-icons">favorite</i> <span className="badge bg-light customBtn1 text-dark">4</span></button>
                               </div>
                             </div>
                         </div>
@@ -49,8 +49,8 @@ const Product = (props) => {
                               <div class="card-body">
                                 <div>Product Name</div>
                                 <div>Price</div>
-                                <button className="btn btn-dark mt-2">Buy Now</button>
-                                <button className="btn btn-dark mt-2 btn-sm btn-circle ml-2"><i class="material-icons">favorite</i> <span className="badge bg-light text-dark">4</span></button>
+                                <button className="btn customShadow btn-dark customBtn mt-2">Buy Now</button>
+                                <button className="btn customShadow customBtn1 btn-dark mt-2 btn-sm btn-circle ml-2"><i class="material-icons">favorite</i> <span className="badge bg-light customBtn1 text-dark">4</span></button>
                               </div>
                             </div>
                         </div>

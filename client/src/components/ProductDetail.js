@@ -18,7 +18,7 @@ const ProductDetail = (props) => {
 					</div>
 					<div>Short Descriptions</div>
 					<div>
-						<button type="button" class="btn btn-primary btn-block shadow">Add to cart</button>
+						<button type="button" class="btn customBtn btn-primary btn-block customShadow">Add to cart</button>
 					</div>
 				</div>
 			</div>
@@ -27,7 +27,7 @@ const ProductDetail = (props) => {
 					<form action="">
 						<label htmlFor="reviewBody">Your Review</label>
 						<textarea className="form-control" name="reviewBody" placeholder="Type something about the product..." id="reviewBody" cols="5" rows="3"></textarea>
-						<button className="btn btn-sm btn-dark mt-3">Submit</button>
+						<button className="btn btn-sm customBtn customShadow btn-dark mt-3">Submit</button>
 					</form>
 				</div>
 				<div className="col-md-6 mb-3">

@@ -13,20 +13,20 @@ const Navber = (props) => {
 			  </button>
 			  <div class="collapse navbar-collapse" id="navbarNav">
 			    <ul class="navbar-nav ml-lg-auto">
-			      <li class="nav-item mr-lg-4">
+			      <li class="nav-item mr-lg-4 my-2">
 			        <i class="material-icons">search</i>
 			      </li>
-			      <li class="nav-item mr-lg-5">
+			      <li class="nav-item mr-lg-4 my-2">
 			        <a href="#">
-			        <i class="material-icons">add_shopping_cart</i> <strong>10</strong>
+			        <i class="material-icons">add_shopping_cart</i> <strong style={{ color:"#FF9900" }}>10</strong>
 			        </a>
 			      </li>
-			      <li class="nav-item mr-lg-4">
+			      <li class="nav-item mr-lg-4 my-2">
 			        <div class="dropdown">
-					  <a class="btn btn-light text-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					  <a style={{ background:"#000000", border:"none" }} class="btn btn-dark txt-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					    More
 					  </a>
-					  <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuLink">
+					  <div class="dropdown-menu bg-dark cutomColor" aria-labelledby="dropdownMenuLink">
 					    <a class="dropdown-item" href="#">Login</a>
 					    <a class="dropdown-item" href="#">Seller Login</a>
 					    <a class="dropdown-item" href="#">Something else here</a>

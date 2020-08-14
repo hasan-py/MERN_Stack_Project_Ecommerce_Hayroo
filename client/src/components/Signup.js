@@ -34,8 +34,8 @@ const Signup = (props) => {
 						<label htmlFor="password">Confirm Password</label>
 						<input type="confirmPassword" className="form-control" name="confirmPassword" id="confirmPassword" />
 					</div>
-					<button type="button" class="btn btn-primary btn-block mb-1">SIGNUP NOW</button>
-					<a href="/singin"> Have account? Singin here </a>
+					<button type="button" class="btn customBtn btn-primary btn-block mb-1">SIGNUP NOW</button>
+					<a className="linkTag"  href="/signin"> Have account? Signin here </a>
 				</form>
 			</div>
 	    </div>

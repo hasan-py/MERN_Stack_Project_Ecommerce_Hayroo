@@ -12,8 +12,8 @@ const ProductCard = (props) => {
 				  <div class="card-body">
 				    <div>Product Name</div>
 				    <div>Price</div>
-				    <button className="btn btn-dark mt-2">Buy Now</button>
-				    <button className="btn btn-dark mt-2 btn-sm btn-circle ml-2"><i class="material-icons">favorite</i> <span className="badge bg-light text-dark">4</span></button>
+				    <button className="btn customShadow btn-dark customBtn mt-2">Buy Now</button>
+				    <button className="btn customShadow btn-dark customBtn1 mt-2 btn-sm btn-circle ml-2"><i class="material-icons">favorite</i> <span className="badge customBtn1 bg-light text-dark">4</span></button>
 				    
 				  </div>
 				</div>
@@ -24,8 +24,8 @@ const ProductCard = (props) => {
 				  <div class="card-body">
 				  	<div>Product Name</div>
 				    <div>Price</div>
-				    <button className="btn btn-dark mt-2">Buy Now</button>
-				    <button className="btn btn-dark mt-2 btn-sm btn-circle ml-2"><i class="material-icons">favorite</i> <span className="badge bg-light text-dark">4</span></button>
+				    <button className="btn customShadow btn-dark customBtn mt-2">Buy Now</button>
+				    <button className="btn customShadow btn-dark  customBtn1 mt-2 btn-sm btn-circle ml-2"><i class="material-icons">favorite</i> <span className="badge customBtn1 bg-light text-dark">4</span></button>
 				  </div>
 				</div>
 			</div>
@@ -35,8 +35,8 @@ const ProductCard = (props) => {
 				  <div class="card-body">
 					<div>Product Name</div>
 				    <div>Price</div>
-				    <button className="btn btn-dark mt-2">Buy Now</button>
-				    <button className="btn btn-dark mt-2 btn-sm btn-circle ml-2"><i class="material-icons">favorite</i> <span className="badge bg-light text-dark">4</span></button>
+				    <button className="btn customShadow btn-dark customBtn mt-2">Buy Now</button>
+				    <button className="btn customShadow btn-dark customBtn1 mt-2 btn-sm btn-circle ml-2"><i class="material-icons">favorite</i> <span className="badge customBtn1 bg-light text-dark">4</span></button>
 				  </div>
 				</div>
 			</div>
@@ -44,7 +44,7 @@ const ProductCard = (props) => {
 				<div class="card customShadow viewAllProdcutCard customCardSize">
 				  <div class="card-body text-center">
 				  <h3>Category Name</h3>
-				  	<button type="button" class="btn btn-dark customShadow">View All</button>
+				  	<button type="button" class="btn customShadow btn-dark customShadow customBtn">View All</button>
 				    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 				  </div>
 				</div>

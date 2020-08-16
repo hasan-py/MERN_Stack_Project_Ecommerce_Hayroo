@@ -13,7 +13,7 @@ import {
     Route,
 } from "react-router-dom";
 
-function Routing() {
+function Routing() { 
   return (
       <Switch>
         <Route exact path="/">
@@ -39,7 +39,6 @@ function App(){
 	return (
 		<div className="App">
 			<Router>
-				<Navber/>
 				<Routing/>
 			</Router>
 		</div>

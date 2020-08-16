@@ -74,6 +74,11 @@ const Navber = (props) => {
 							Signup
 						</Link>
 					</li>
+					<li>
+						<Link className="nav-item btn btn-light" to="/admin/dashboard">
+							Admin
+						</Link>
+					</li>
 			   </ul>
 			  </div>
 		  </div>

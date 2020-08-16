@@ -1,9 +1,11 @@
 import React,{Fragment} from 'react';
 import {Footer,Subcategory} from "./partials";
+import {Navber} from "./partials";
 
 const Product = (props) => {
   return (
-    <Fragment>   
+    <Fragment> 
+        <Navber/>  
         <div className="container mt-3">
             <div className="row">
                 <Subcategory />
@@ -11,7 +13,7 @@ const Product = (props) => {
                     <div className="row">
                         <div className="col-md-4 mb-3">
                             <div class="card customShadow customCardSize">
-                              <img class="card-img-top" src="http://magento2.templatemela.com/MAG2014/MAG110246_3/pub/media/catalog/product/cache/9b42c9fe0793b3082848ac5ebfa58963/7/9/79_2_1_1.jpg" alt="Card image cap"/>
+                              <img class="card-img-top border" src="http://magento2.templatemela.com/MAG2014/MAG110246_3/pub/media/catalog/product/cache/9b42c9fe0793b3082848ac5ebfa58963/7/9/79_2_1_1.jpg" alt="Card image cap"/>
                               <div class="card-body">
                                 <div>Product Name</div>
                                 <div>Price</div>
@@ -23,7 +25,7 @@ const Product = (props) => {
                         </div>
                         <div className="col-md-4 mb-3">
                             <div class="card customShadow customCardSize">
-                              <img class="card-img-top" src="http://magento2.templatemela.com/MAG2014/MAG110246_3/pub/media/catalog/product/cache/9b42c9fe0793b3082848ac5ebfa58963/8/8/88.jpg" alt="Card image cap"/>
+                              <img class="card-img-top border" src="http://magento2.templatemela.com/MAG2014/MAG110246_3/pub/media/catalog/product/cache/9b42c9fe0793b3082848ac5ebfa58963/8/8/88.jpg" alt="Card image cap"/>
                               <div class="card-body">
                                 <div>Product Name</div>
                                 <div>Price</div>
@@ -34,7 +36,7 @@ const Product = (props) => {
                         </div>
                         <div className="col-md-4 mb-3">
                             <div class="card customShadow customCardSize">
-                              <img class="card-img-top" src="http://magento2.templatemela.com/MAG2014/MAG110246_3/pub/media/catalog/product/cache/9b42c9fe0793b3082848ac5ebfa58963/2/9/29_1.jpg" alt="Card image cap"/>
+                              <img class="card-img-top border" src="http://magento2.templatemela.com/MAG2014/MAG110246_3/pub/media/catalog/product/cache/9b42c9fe0793b3082848ac5ebfa58963/2/9/29_1.jpg" alt="Card image cap"/>
                               <div class="card-body">
                                 <div>Product Name</div>
                                 <div>Price</div>
@@ -45,7 +47,7 @@ const Product = (props) => {
                         </div>
                         <div className="col-md-4 mb-3">
                             <div class="card customShadow customCardSize">
-                              <img class="card-img-top" src="http://magento2.templatemela.com/MAG2014/MAG110246_3/pub/media/catalog/product/cache/9b42c9fe0793b3082848ac5ebfa58963/2/9/29_1.jpg" alt="Card image cap"/>
+                              <img class="card-img-top border" src="http://magento2.templatemela.com/MAG2014/MAG110246_3/pub/media/catalog/product/cache/9b42c9fe0793b3082848ac5ebfa58963/2/9/29_1.jpg" alt="Card image cap"/>
                               <div class="card-body">
                                 <div>Product Name</div>
                                 <div>Price</div>

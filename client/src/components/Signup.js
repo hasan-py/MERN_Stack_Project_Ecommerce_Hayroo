@@ -1,6 +1,5 @@
 import React,{Fragment} from 'react';
-import {Footer} from "./partials";
-
+import {Link} from "react-router-dom";
 
 const Signup = (props) => {
   return (
@@ -35,11 +34,11 @@ const Signup = (props) => {
 						<input type="confirmPassword" className="form-control" name="confirmPassword" id="confirmPassword" />
 					</div>
 					<button type="button" class="btn customBtn btn-primary btn-block mb-1">SIGNUP NOW</button>
-					<a className="linkTag"  href="/signin"> Have account? Signin here </a>
+					<Link className="linkTag"  to="/signin"> Have account? Signin here </Link>
+					<Link className="d-block" to="/">Goto home</Link>
 				</form>
 			</div>
 	    </div>
-	    <Footer/>
   	</Fragment>
   )
 }

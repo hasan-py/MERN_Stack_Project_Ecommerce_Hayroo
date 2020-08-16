@@ -1,9 +1,11 @@
-import React from 'react';
+import React,{Fragment} from 'react';
 import {Slider,CategoryCard,ProductCard,Review,Footer} from "./partials";
+import {Navber} from "./partials";
 
 const Home = (props) => {
   return (
-    <div>
+    <Fragment>
+        <Navber/>
     	<Slider/>
         <div className="container">
         	<div>
@@ -19,7 +21,7 @@ const Home = (props) => {
     		</div>
         </div>
     	<Footer/>
-    </div>
+    </Fragment>
   )
 }
 

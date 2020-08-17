@@ -5,6 +5,7 @@ import CategoryCard from "./CategoryCard";
 import ProductCard from "./ProductCard";
 import Review from "./Review";
 import Subcategory from "./Subcategory";
+import SubMenu from "./SubMenu";
 
 
 export {
@@ -14,5 +15,6 @@ export {
 	CategoryCard,
 	ProductCard,
 	Review,
-	Subcategory
+	Subcategory,
+	SubMenu
 }

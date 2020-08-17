@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import { Navber } from "./components/partials";
 import Home from "./components/Home";
 import Product from "./components/Product";
 import ProductDetail from "./components/ProductDetail";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
+import Dashboard from './components/Dashboard';
 
 import {
     BrowserRouter as Router,
@@ -30,6 +32,9 @@ function Routing() {
         </Route>
         <Route exact path="/signup/">
           <Signup />
+        </Route>
+        <Route exact path="/admin/dashboard">
+          <Dashboard />
         </Route>
       </Switch>
   );

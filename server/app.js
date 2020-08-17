@@ -3,6 +3,8 @@ const app = express();
 
 // Import Router
 const authRouter = require('./routes/auth');
+// Import Auth middleware
+const { loginCheck } = require('./middleware/auth')
 
 // Database Connection
 require('./config/db');

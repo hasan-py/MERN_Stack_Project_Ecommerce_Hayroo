@@ -3,6 +3,8 @@ const app = express();
 
 // Import Router
 const authRouter = require('./routes/auth');
+const brandRouter = require('./routes/brands');
+
 // Import Auth middleware
 const { loginCheck } = require('./middleware/auth')
 
@@ -16,6 +18,7 @@ app.use(express.json());
 
 // Routes
 app.use('/', authRouter)
+app.use('/', brandRouter)
 
 // Run Server
 const PORT = process.env.PORT || 5000;

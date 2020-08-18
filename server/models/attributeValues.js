@@ -1,16 +1,12 @@
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema.Types
 
-const subCSchema = new mongoose.Schema({
-    category:{
+const attributeValueSchema = new mongoose.Schema({
+    attributeName:{
         type:ObjectId,
-        ref:"categories"
+        ref:"attributes"
     },
-    subCname: {
-        type: String,
-        required: true
-    },
-    subCdescription: {
+    aValue: {
         type: String,
         required: true
     },
@@ -24,5 +20,5 @@ const subCSchema = new mongoose.Schema({
     }
 })
 
-const subCModel = mongoose.model("categories", subCSchema);
-module.exports = subCModel;
+const attributeValueModel = mongoose.model("categories", attributeValueSchema);
+module.exports = attributeValueModel;

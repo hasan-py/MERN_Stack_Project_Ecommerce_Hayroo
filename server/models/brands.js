@@ -11,16 +11,12 @@ const brandSchema = new mongoose.Schema({
         required: true
     },
     bImage: {
-        type: Number,
-        required: true
-    },
-    bTotalRating: {
         type: String,
         required: true
     },
-    bTotalReview: {
-        type: String,
-        required: true
+    bStatus:{
+        type:String,
+        required:true
     },
     created_at: {
         type: Date,

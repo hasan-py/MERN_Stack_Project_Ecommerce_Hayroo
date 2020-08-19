@@ -24,5 +24,5 @@ const subCSchema = new mongoose.Schema({
     }
 })
 
-const subCModel = mongoose.model("categories", subCSchema);
+const subCModel = mongoose.model("subCategories", subCSchema);
 module.exports = subCModel;

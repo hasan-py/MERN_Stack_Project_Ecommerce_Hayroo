@@ -12,7 +12,6 @@ class Brand {
         } catch (err) {
             console.log(err)
         }
-
     }
 
     async postAddBrand(req, res) {
@@ -46,13 +45,15 @@ class Brand {
     }
 
     async postEditBrand(req, res) {
-        let { bId, bDescription, bStatus} = req.body
+        let { bId, bDescription, bStatus } = req.body
         if (!bId || !bDescription || !bStatus) {
             return res.json({ message: "All filled must be required" })
         }
         try {
             let editBrand = brandModel.findByIdAndUpdate(bId, {
-                bDescription,bStatus,updated_at:Date.now()
+                bDescription,
+                bStatus,
+                updated_at: Date.now()
             })
             let edit = await editBrand.exec()
             if (edit) {
@@ -67,7 +68,7 @@ class Brand {
         let { bId } = req.body
         if (!bId) {
             return res.json({ message: "All filled must be required" })
-        }else{
+        } else {
             try {
                 let deleteBrand = await brandModel.findByIdAndDelete(bId)
                 if (deleteBrand) {

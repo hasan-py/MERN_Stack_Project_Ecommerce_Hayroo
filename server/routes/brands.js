@@ -5,7 +5,7 @@ const multer = require('multer');
 
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, 'public/uploads/brands')
+        cb(null, 'public/uploads/brands') // Must need to create a folder like this
     },
     filename: function(req, file, cb) {
         cb(null, Date.now() + "_" + file.originalname)

@@ -11,7 +11,7 @@ const categorySchema = new mongoose.Schema({
         required: true
     },
     cImage: {
-        type: Number,
+        type: String,
         required: true
     },
     cStatus:{

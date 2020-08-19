@@ -20,5 +20,5 @@ const attributeValueSchema = new mongoose.Schema({
     }
 })
 
-const attributeValueModel = mongoose.model("categories", attributeValueSchema);
+const attributeValueModel = mongoose.model("attributeValues", attributeValueSchema);
 module.exports = attributeValueModel;

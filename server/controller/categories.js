@@ -56,7 +56,7 @@ class Category {
             })
             let edit = await editCategory.exec()
             if (edit) {
-                return res.json({ message: "Brand edit successfully" })
+                return res.json({ message: "Category edit successfully" })
             }
         } catch (err) {
             console.log(err)

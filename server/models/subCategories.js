@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema.Types
 
-const subCSchema = new mongoose.Schema({
+const subCategorySchema = new mongoose.Schema({
     category:{
         type:ObjectId,
         ref:"categories"
@@ -10,7 +10,7 @@ const subCSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    subCdescription: {
+    subCstatus:{
         type: String,
         required: true
     },
@@ -24,5 +24,5 @@ const subCSchema = new mongoose.Schema({
     }
 })
 
-const subCModel = mongoose.model("subCategories", subCSchema);
-module.exports = subCModel;
+const subCategoryModel = mongoose.model("subCategories", subCategorySchema);
+module.exports = subCategoryModel;

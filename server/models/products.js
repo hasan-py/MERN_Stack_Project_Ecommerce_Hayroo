@@ -10,11 +10,11 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    pSpecifications: {
-        type: String,
+    pPrice: {
+        type: Number,
         required: true
     },
-    pPrice: {
+    pQuantity: {
         type: Number,
         required: true
     },
@@ -31,10 +31,6 @@ const productSchema = new mongoose.Schema({
         ref: "brands"
     },
     pImages: {
-        type: String,
-        required: true
-    },
-    pQuantity: {
         type: String,
         required: true
     },

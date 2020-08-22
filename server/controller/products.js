@@ -15,7 +15,7 @@ class Product {
     }
 
     async postAddProduct(req, res) {
-        let {pName,pDescription,pPrice,pQuantity,pCategory,pSubCategory,pBrand,pOffer,pStatus}
+        let {pName,pDescription,pPrice,pQuantity,pCategory,pSubCategory,pBrand,pOffer,pStatus} = req.body
         if(!pName | !pDescription | !pPrice | !pQuantity | !pCategory | !pSubCategory | !pBrand | !pOffer | !pStatus){
             return res.json({message:"All filled must be required"})
         }
@@ -23,11 +23,12 @@ class Product {
             return res.json({message:"Name 255 & Description must not be 3000 charecter long"})
         }
         try {
-            let productAlreadyExist = await findOne({pName:pName})
+            let productAlreadyExist = await productModel.findOne({pName:pName})
             if (productAlreadyExist){
                 return res.json({message:"Product name must be uniqe. Name already exist"})
             }else{
                 let newProduct =  new productModel({
+                    pImages:"not given",
                     pName,pDescription,pPrice,pQuantity,pCategory,pSubCategory,pBrand,pOffer,pStatus
                 })
                 let save = await newProduct.save()
@@ -35,11 +36,13 @@ class Product {
                     return res.json({success:"Product created successfully"})
                 }
             }
+        }catch(err){
+            console.log(err)
         }
     }
 
-    async postEditProduct(req, res) {
-        
+    async postEditProduct(req,res){
+        return res.json("Hello")
     }
 
     async getDeleteProduct(req, res) {
@@ -57,6 +60,12 @@ class Product {
             }
         }
     }
+
+    async getSingleProduct(req,res) {
+         return res.json({hello:"hi"})
+    }
+
+
 }
 
 const productController = new Product

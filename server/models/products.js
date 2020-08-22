@@ -38,9 +38,10 @@ const productSchema = new mongoose.Schema({
         type: String,
         default: null
     },
-    pRatings: {
-        [{ type: ObjectId, ref: "users" }]
-    },
+    pRatings: [{ 
+        type: ObjectId,
+        ref: "users"
+    }],
     pReviews: [{
         review: String,
         user: { type: ObjectId, ref: "users" }

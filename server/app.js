@@ -8,6 +8,7 @@ const categoryRouter = require('./routes/categories');
 const attributeRouter = require('./routes/attributes');
 const subCategoryRouter = require('./routes/subCategories');
 const attributeValueRouter = require('./routes/attributeValues');
+const productRouter = require('./routes/products');
 
 // Import Auth middleware
 const { loginCheck } = require('./middleware/auth')
@@ -27,6 +28,7 @@ app.use('/', categoryRouter)
 app.use('/', attributeRouter)
 app.use('/', subCategoryRouter)
 app.use('/', attributeValueRouter)
+app.use('/', productRouter)
 
 // Run Server
 const PORT = process.env.PORT || 5000;

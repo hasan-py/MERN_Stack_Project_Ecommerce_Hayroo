@@ -1,16 +1,12 @@
 import React,{Fragment} from 'react';
-import {Navber,SubMenu} from './partials';
 
 const Dashboard = (props) => {
   return (
-    <Fragment>
-    	<Navber/>
+    <Fragment>    
     	<div className="container">
     		<div className="row">
-				<div className="col-md-3">
-					<SubMenu/>
-				</div>
-				<div className="col-md-9">			
+				<div className="col-md-9">
+					<svg style={{ height:"40px" }} viewBox="0 0 20 20" fill="currentColor" class="menu w-6 h-6"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
 			    	<div className="row">
 						<div className="col-md-3">
 							<div class="card text-white bg-primary mb-3" style={{ maxWidth: "18rem" }}>

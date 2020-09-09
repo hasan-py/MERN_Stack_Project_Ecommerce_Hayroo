@@ -18,19 +18,19 @@ exports.validateEmail = function(mail) {
 
 }
 
-exports.emailCheckInDatabase = function(email) {
-    user = userModel.findOne({ email: email })
+exports.emailCheckInDatabase = async function(email) {
+    let user = await userModel.findOne({ email: email })
     user.exec((err, data) => {
-        if (data) {
-            return true;
+        if (!data) {
+            return false;
         } else {
-            return false
+            return true
         }
     })
 }
 
-exports.phoneNumberCheckInDatabase = function(phoneNumber) {
-    user = userModel.findOne({ phoneNumber: phoneNumber })
+exports.phoneNumberCheckInDatabase = async function(phoneNumber) {
+    let user = await userModel.findOne({ phoneNumber: phoneNumber })
     user.exec((err, data) => {
         if (data) {
             return true;

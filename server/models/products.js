@@ -14,9 +14,13 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    pSold: {
+        type: Number,
+        default:0
+    },
     pQuantity: {
         type: Number,
-        required: true
+        default:0
     },
     pCategory: {
         type: ObjectId,
@@ -49,17 +53,9 @@ const productSchema = new mongoose.Schema({
     pStatus: {
         type: String,
         required: true
-    },
-    created_at: {
-        type: Date,
-        default: Date.now()
-    },
-    updated_at: {
-        type: Date,
-        default: Date.now()
     }
 
-})
+},{timestamps:true})
 
 const productModel = mongoose.model("products", productSchema);
 module.exports = productModel;

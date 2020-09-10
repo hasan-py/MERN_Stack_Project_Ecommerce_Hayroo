@@ -50,7 +50,7 @@ class Attribute {
             if(currentAttribute.aName === aName){
                 let editAttribute = attributeModel.findByIdAndUpdate(aId, {
                     aName,
-                    updated_at: Date.now()
+                    updatedAt: Date.now()
                 })
                 let edit = await editAttribute.exec()
                 if (edit) {
@@ -63,7 +63,7 @@ class Attribute {
                 } else {
                     let editAttribute = attributeModel.findByIdAndUpdate(aId, {
                         aName,
-                        updated_at: Date.now()
+                        updatedAt: Date.now()
                     })
                     let edit = await editAttribute.exec()
                     if (edit) {

@@ -13,16 +13,8 @@ const subCategorySchema = new mongoose.Schema({
     subCstatus:{
         type: String,
         required: true
-    },
-    created_at: {
-        type: Date,
-        default: Date.now()
-    },
-    updated_at: {
-        type: Date,
-        default: Date.now()
     }
-})
+},{timestamps:true})
 
 const subCategoryModel = mongoose.model("subCategories", subCategorySchema);
 module.exports = subCategoryModel;

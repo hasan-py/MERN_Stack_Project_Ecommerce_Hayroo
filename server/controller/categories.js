@@ -52,7 +52,7 @@ class Category {
             let editCategory = categoryModel.findByIdAndUpdate(cId, {
                 cDescription,
                 cStatus,
-                updated_at: Date.now()
+                updatedAt: Date.now()
             })
             let edit = await editCategory.exec()
             if (edit) {

@@ -17,16 +17,8 @@ const brandSchema = new mongoose.Schema({
     bStatus:{
         type:String,
         required:true
-    },
-    created_at: {
-        type: Date,
-        default: Date.now()
-    },
-    updated_at: {
-        type: Date,
-        default: Date.now()
     }
-})
+},{timestamps:true})
 
 const brandModel = mongoose.model("brands", brandSchema);
 module.exports = brandModel;

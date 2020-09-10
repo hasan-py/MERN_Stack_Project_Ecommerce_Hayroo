@@ -49,7 +49,7 @@ class attributeValues {
                 let editattributeValues = attributeValueModel.findByIdAndUpdate(avId, {
                     aValue,
                     attributeName,
-                    updated_at: Date.now()
+                    updatedAt: Date.now()
                 })
                 let edit = await editattributeValues.exec()
                 if (edit) {
@@ -63,7 +63,7 @@ class attributeValues {
                     let editattributeValues = attributeValueModel.findByIdAndUpdate(avId, {
                         aValue,
                         attributeName,
-                        updated_at: Date.now()
+                        updatedAt: Date.now()
                     })
                     let edit = await editattributeValues.exec()
                     if (edit) {

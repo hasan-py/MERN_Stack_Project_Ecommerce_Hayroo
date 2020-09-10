@@ -53,7 +53,7 @@ class Brand {
             let editBrand = brandModel.findByIdAndUpdate(bId, {
                 bDescription,
                 bStatus,
-                updated_at: Date.now()
+                updatedAt: Date.now()
             })
             let edit = await editBrand.exec()
             if (edit) {

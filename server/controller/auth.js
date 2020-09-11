@@ -20,8 +20,8 @@ class Auth {
 
     async postSignup(req, res) {
         let { name, email, password } = req.body
-        if (!name || !email || !password ) {
-            return res.status(400).json({ error: "please fill all the fields" })
+        if (!name || !email || !password) {
+            return res.status(400).json({ error: "Filed must not be empty" })
         }
         if (name.length < 3 || name.length > 25) {
             return res.status(400).json({ error: "Name must be 3-25 charecter" })
@@ -63,7 +63,7 @@ class Auth {
         let { email, password } = req.body
         if (!email || !password) {
             return res.status(400).json({
-                error: "Please insert all filled"
+                error: "Fields must not be empty"
             })
         }
         try {

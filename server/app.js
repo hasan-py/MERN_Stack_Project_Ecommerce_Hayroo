@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const expressValidator = require("express-validator");
+const cors = require("cors")
 
 // Import Router
 const authRouter = require('./routes/auth');
@@ -31,9 +32,21 @@ mongoose.connect(process.env.DATABASE, {
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(expressValidator());
+app.use(cors());
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+// Cross Server Connect Permission
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept,token"
+  );
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,PATCH,POST,DELETE,OPTIONS');
+  next();
+});
 
 // Routes
 app.use('/api', authRouter)

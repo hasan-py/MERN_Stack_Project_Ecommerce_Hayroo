@@ -1,8 +1,17 @@
 import React,{Fragment} from 'react';
 import "./index.css"
-import {Link} from "react-router-dom";
+import {Link,useHistory,Redirect} from "react-router-dom";
+import {isAuthenticate,signout} from "../auth";
 
 const Navber = (props) => {
+	const history = useHistory();
+	const isAuth = localStorage.getItem("jwt")
+	const logout = ()=> {
+		signout();
+		return (
+			<Redirect to="/" />
+		)
+	}
   return (
     <Fragment>
     	<nav class="navbar navbar-expand-lg topbar">
@@ -16,10 +25,11 @@ const Navber = (props) => {
 			      <li class="nav-item mr-lg-4 my-2">
 			        <i class="material-icons">search</i>
 			      </li>
-			      <li class="nav-item mr-lg-4 my-2">
+			      <li class="nav-item mr-lg-4 my-2 d-flex flex-row">
 			        <a href="#">
-			        <i class="material-icons">add_shopping_cart</i> <strong style={{ color:"#FF9900" }}>10</strong>
+			        <i class="material-icons">add_shopping_cart</i>
 			        </a>
+			        <strong style={{ color:"#FF9900",fontSize:"12px" }}>10</strong>
 			      </li>
 			      <li class="nav-item mr-lg-4 my-2">
 			        <div class="dropdown">
@@ -27,9 +37,16 @@ const Navber = (props) => {
 					    More
 					  </a>
 					  <div class="dropdown-menu bg-dark cutomColor" aria-labelledby="dropdownMenuLink">
-					    <a class="dropdown-item" href="#">Login</a>
-					    <a class="dropdown-item" href="#">Seller Login</a>
-					    <a class="dropdown-item" href="#">Something else here</a>
+					    { 
+					    	isAuth && <a className="dropdown-item" onClick={e=> logout()}>Logout</a> 
+					    }
+					    {
+					    	!isAuth &&	(<Fragment>
+						    		<Link className="dropdown-item" to="/signin">Signin</Link>
+						    		<Link className="dropdown-item" to="/signup">Signup</Link>
+					    		</Fragment>)
+					    }
+					    
 					  </div>
 					</div>
 			      </li>
@@ -41,19 +58,6 @@ const Navber = (props) => {
 		  <div className="container">
 			  <div class="collapse navbar-collapse" id="navbarNav">
 			    <ul class="navbar-nav">
-			      <li class="nav-item secondNavItem">
-			        <div class="dropdown">
-					  <a class="btn btn-light text-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					    Mobile & Accessoris
-					  </a>
-
-					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-					    <a class="dropdown-item" href="#">Login</a>
-					    <a class="dropdown-item" href="#">Seller Login</a>
-					    <a class="dropdown-item" href="#">Something else here</a>
-					  </div>
-					</div>
-			      </li>
 					<li>
 						<Link className="nav-item btn btn-light" to="/product">
 							Product
@@ -62,21 +66,6 @@ const Navber = (props) => {
 					<li>
 						<Link className="nav-item btn btn-light" to="/product/details">
 							ProductDetails
-						</Link>
-					</li>
-					<li>
-						<Link className="nav-item btn btn-light" to="/signin">
-							Signin
-						</Link>
-					</li>
-					<li>
-						<Link className="nav-item btn btn-light" to="/signup">
-							Signup
-						</Link>
-					</li>
-					<li>
-						<Link className="nav-item btn btn-light" to="/admin/dashboard">
-							Admin
 						</Link>
 					</li>
 			   </ul>

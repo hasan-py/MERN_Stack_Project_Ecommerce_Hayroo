@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { Link,useHistory } from "react-router-dom";
-import { signinReq, alert, authenticate } from "./auth";
+import { signinReq, alert } from "./auth";
 
 const Signin = (props) => {
 	const history = useHistory();
@@ -19,11 +19,10 @@ const Signin = (props) => {
             if (data.error) {
                 setValues({ ...values, loading: false, error: data.error, password: "" })
             } else if (data.success) {
+                console.log(data)
                 setValues({ email: "", loading: false, error: "", password: "" })
-                authenticate(data,()=>{
-                	history.push("/")
-                })
-                console.log(data);
+                localStorage.setItem("jwt",JSON.stringify(data))
+                history.push('/')
             }
         } catch {
             console.log("Something went wrong!!");

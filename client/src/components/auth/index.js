@@ -40,22 +40,14 @@ export const signupReq = async ({name,email,password})=> {
 	}
 }
 
-export const authenticate = (data,next)=> {
-	if(typeof window !== undefined){
-		localStorage.setItem("jwt",JSON.stringify(data))
-	}
-	next()
-}
-
-export const signout = ()=> {
-	if(typeof window !== undefined){
-		localStorage.removeItem("jwt")
-	}
-}
 
 export const isAuthenticate = ()=> {
+	if(typeof window == undefined){
+		return false;
+	}
 	if(localStorage.getItem("jwt")){
 		return true
+	}else{
+		return false;
 	}
-	return false
 }

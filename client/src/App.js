@@ -7,6 +7,7 @@ import ProductDetail from "./components/ProductDetail";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import Dashboard from './components/Dashboard';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 
 import {
     BrowserRouter as Router,
@@ -17,24 +18,12 @@ import {
 function Routing() { 
   return (
       <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route exact path="/product">
-          <Product />
-        </Route>
-        <Route exact path="/product/details">
-          <ProductDetail />
-        </Route>
-        <Route exact path="/signin/">
-          <Signin />
-        </Route>
-        <Route exact path="/signup/">
-          <Signup />
-        </Route>
-        <Route exact path="/admin/dashboard">
-          <Dashboard />
-        </Route>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/product" component={Product} />
+        <Route exact path="/product-detail" component={ProductDetail} />
+        <Route exact path="/signin" component={Signin} />
+        <Route exact path="/signup" component={Signup} />
+        <ProtectedRoute exact={true} path="/dashboard" component={Dashboard} />
       </Switch>
   );
 }

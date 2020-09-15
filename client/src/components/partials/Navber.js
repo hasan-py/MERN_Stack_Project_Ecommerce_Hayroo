@@ -1,19 +1,18 @@
-import React,{Fragment} from 'react';
+import React, { Fragment } from 'react';
 import "./index.css"
-import {Link,useHistory,Redirect} from "react-router-dom";
-import {isAuthenticate,signout} from "../auth";
+import { Link, useHistory, Redirect } from "react-router-dom";
+import { isAuthenticate } from "../auth";
 
 const Navber = (props) => {
-	const history = useHistory();
-	const isAuth = localStorage.getItem("jwt")
-	const logout = ()=> {
-		signout();
-		return (
-			<Redirect to="/" />
-		)
-	}
-  return (
-    <Fragment>
+    const history = useHistory();
+    const logout = () => {
+        if(localStorage.getItem("jwt")){
+			localStorage.removeItem("jwt")
+		}
+        history.push('/signin')
+    }
+    return (
+        <Fragment>
     	<nav class="navbar navbar-expand-lg topbar">
 		  <div className="container">
 			  <Link style={{ fontSize:"30px" }} class="navbar-brand" to="/"><span className="logo">Hay</span><strong>roo</strong></Link>
@@ -31,25 +30,19 @@ const Navber = (props) => {
 			        </a>
 			        <strong style={{ color:"#FF9900",fontSize:"12px" }}>10</strong>
 			      </li>
-			      <li class="nav-item mr-lg-4 my-2">
-			        <div class="dropdown">
-					  <a style={{ background:"#000000", border:"none" }} class="btn btn-dark txt-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					    More
-					  </a>
-					  <div class="dropdown-menu bg-dark cutomColor" aria-labelledby="dropdownMenuLink">
-					    { 
-					    	isAuth && <a className="dropdown-item" onClick={e=> logout()}>Logout</a> 
-					    }
-					    {
-					    	!isAuth &&	(<Fragment>
-						    		<Link className="dropdown-item" to="/signin">Signin</Link>
-						    		<Link className="dropdown-item" to="/signup">Signup</Link>
-					    		</Fragment>)
-					    }
-					    
-					  </div>
-					</div>
-			      </li>
+			      {
+			      	!isAuthenticate() && (
+			      		<Fragment>
+			      			<li>
+						      <Link to="/signin">Signin</Link>
+						    </li>
+						    <li>
+						      <Link to="/signin">Signin</Link>
+						    </li>
+			      		</Fragment>
+			      	)
+			      }
+			      { isAuthenticate() && <li onClick={e=> logout()} style={{ cursor:"pointer" }}>Logout</li> }
 			   </ul>
 			  </div>
 		  </div>
@@ -64,7 +57,7 @@ const Navber = (props) => {
 						</Link>
 					</li>
 					<li>
-						<Link className="nav-item btn btn-light" to="/product/details">
+						<Link className="nav-item btn btn-light" to="/product-detail">
 							ProductDetails
 						</Link>
 					</li>
@@ -73,7 +66,7 @@ const Navber = (props) => {
 		  </div>
 		</nav>
     </Fragment>
-  )
+    )
 }
 
 export default Navber;

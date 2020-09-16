@@ -19,24 +19,29 @@ class Auth {
     }   
 
     async postSignup(req, res) {
-        let { name, email, password } = req.body
-        if (!name || !email || !password) {
-            return res.status(400).json({ error: "Filed must not be empty" })
+        let { name, email, password, cPassword } = req.body
+        let error = {}
+        if (!name || !email || !password || !cPassword) {
+            error = {...error,name:"Filed must not be empty",email:"Filed must not be empty",password:"Filed must not be empty",cPassword:"Filed must not be empty"}
+            return res.status(400).json({error})
         }
         if (name.length < 3 || name.length > 25) {
-            return res.status(400).json({ error: "Name must be 3-25 charecter" })
+            error = {...error,name:"Name must be 3-25 charecter"}
+            return res.status(400).json({error})
         } else {
             if (validateEmail(email)) {
                 name = toTitleCase(name)
                 if (password.length > 255 | password.length < 8) {
-                    return res.status(400).json({ error: "Password must be 8 charecter" })
+                    error = {...error,password:"Password must be 8 charecter",name:"",email:""}
+                    return res.status(400).json({error})
                 } else {
                     // Email & Number exists Logic
                     try {
                         password = bcrypt.hashSync(password, 10)
                         const data = await userModel.findOne({ email: email })
                         if (data) {
-                            return res.status(400).json({ error: "Email already exists" })
+                            error = {...error,password:"",name:"",email:"Email already exists"}
+                            return res.status(400).json({error})
                         } else {
                             let newUser = new userModel({
                                 name,
@@ -45,7 +50,7 @@ class Auth {
                             })
                             newUser.save()
                                 .then(data => {
-                                    return res.status(200).json({ success: "Account create successfully" })
+                                    return res.status(200).json({ success: "Account create successfully. Please login" })
                                 })
                                 .catch(err => { console.log(err) })
                         }
@@ -54,7 +59,8 @@ class Auth {
                     }
                 }
             } else {
-                res.status(400).json({ error: "Invalid email or password" })
+                error = {...error,password:"",name:"",email:"Email is not valid"}
+                return res.status(400).json({error})
             }
         }
     }
@@ -70,7 +76,7 @@ class Auth {
             const data = await userModel.findOne({ email: email })
             if (!data) {
                 return res.status(400).json({
-                    error: "Email or password invalid"
+                    error: "Invalid email or password"
                 })
             } else {
                 const login = await bcrypt.compare(password, data.password)
@@ -78,13 +84,12 @@ class Auth {
                     const token = jwt.sign({ _id: data._id }, JWT_SECRET);
                     const encode = jwt.verify(token, JWT_SECRET)
                     return res.status(200).json({
-                        success: "Login successfully",
                         token: token,
                         user: encode
                     })
                 } else {
                     return res.status(400).json({
-                        error: "Email or password invalid"
+                        error: "Invalid email or password"
                     })
                 }
             }

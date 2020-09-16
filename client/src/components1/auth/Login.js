@@ -1,9 +1,11 @@
-import React,{Fragment,useState} from 'react';
+import React,{Fragment,useState,useContext} from 'react';
 import {useHistory} from 'react-router-dom';
-import {loginReq} from "./authFetchApi";
+import {loginReq} from "./fetchApi";
 
 const Login = (props) => {
+
   const history = useHistory();
+
   const [data,setData] = useState({
       email:"",
       password:"",
@@ -19,11 +21,10 @@ const Login = (props) => {
         let responseData = await loginReq({email:data.email,password:data.password});
         if (responseData.error) {
             setData({ ...data, loading: false, error: responseData.error, password: "" })
-        } else if (responseData.success) {
-            console.log(responseData)
+        } else if (responseData.token) {
             setData({ email: "",password: "", loading: false, error: false})
             localStorage.setItem("jwt",JSON.stringify(responseData))
-            history.push('/wish-list');
+            window.location.href = "/wish-list";
         }
     } catch {
         console.log("Something went wrong!!");
@@ -51,7 +52,7 @@ const Login = (props) => {
               </div> 
               <a className="block text-gray-600" href="#">Lost your password?</a>
             </div>
-            <div onClick={e=> formSubmit()} style={{background: '#303031'}} className="px-4 py-2 text-white text-center cursor-pointer">Login</div>
+            <div onClick={e=> formSubmit()} style={{background: '#303031'}} className="font-medium px-4 py-2 text-white text-center cursor-pointer">Login</div>
           </form>
     </Fragment>
   )

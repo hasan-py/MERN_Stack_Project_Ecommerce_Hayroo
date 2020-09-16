@@ -1,5 +1,5 @@
 import React, { Fragment, useReducer, useState, createContext } from 'react';
-import { Navber, Footer } from "../partials";
+import { Navber, Footer, CartModal } from "../partials";
 import LoginSignup from "../auth/LoginSignup";
 import { layoutState, layoutReducer } from "./layoutContext";
 
@@ -14,6 +14,7 @@ const Layout = ({ children }) => {
 			    <div className="flex-grow">    	
 					<Navber />
 					<LoginSignup />
+					<CartModal />
 					{/* All Children pass from here */}
 					{children}
 			    </div>

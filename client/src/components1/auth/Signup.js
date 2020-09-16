@@ -4,7 +4,7 @@ const Signup = (props) => {
   return (
     <Fragment>
           <div className="text-center text-2xl mb-6">Register</div>
-          <form className="space-y-4" action>
+          <form className="space-y-4">
             <div className="flex flex-col">
               <label htmlFor="name">Username or email address<span className="text-sm text-gray-600 ml-1">*</span></label>
               <input type="text" id="name" className="px-4 py-2 focus:outline-none border" />

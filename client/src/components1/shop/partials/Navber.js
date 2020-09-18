@@ -28,10 +28,10 @@ const Navber = (props) => {
     	{/* Navber Section */}
 		<nav className="fixed top-0 w-full z-10 shadow-lg lg:shadow-none bg-white">
 	        <div className="m-4 md:mx-12 md:my-6 grid grid-cols-4 lg:grid-cols-3">
-	          <div className="hidden lg:block col-span-1 flex space-x-4 text-gray-600 mt-1">
-	            <a className="relative font-light tracking-widest hover:text-gray-800" href="#">Shop</a>
-	            <a className="font-light tracking-widest hover:text-gray-800" href="#">Pages</a>
-	            <a className="font-light tracking-widest hover:text-gray-800" href="#">Elements</a>
+	          <div className="hidden lg:block col-span-1 flex text-gray-600 mt-1">
+	            <a className="hover:bg-gray-200 px-2 py-2 rounded-lg font-light tracking-widest hover:text-gray-800" href="#">Shop</a>
+	            <a className="hover:bg-gray-200 px-2 py-2 rounded-lg font-light tracking-widest hover:text-gray-800" href="#">Pages</a>
+	            <a className="hover:bg-gray-200 px-2 py-2 rounded-lg font-light tracking-widest hover:text-gray-800" href="#">Elements</a>
 	          </div>
 	          <div className="col-span-2 lg:hidden flex justify-items-stretch	 items-center">
 	            <svg onClick={e=> navberToggleOpen()} className="col-span-1 lg:hidden w-8 h-8 cursor-pointer text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -42,9 +42,9 @@ const Navber = (props) => {
 	          <div onClick={e=> history.push('/')} style={{letterSpacing: '0.70rem'}} className="hidden lg:block flex items-left col-span-1 text-center text-gray-800 font-bold tracking-widest uppercase text-2xl cursor-pointer">
 	            Hayroo
 	          </div>
-	        <div className="flex items-right col-span-2 lg:col-span-1 flex justify-end space-x-2 md:space-x-4">
+	        <div className="flex items-right col-span-2 lg:col-span-1 flex justify-end">
 	      	  	{/*  WishList Page Button */}
-	            <div title="Wishlist">
+	            <div className="hover:bg-gray-200 rounded-lg px-2 py-2" title="Wishlist">
 	              <svg onClick={e=> history.push('wish-list')} className={`${location.pathname == '/wish-list' ? "fill-current" : ""} cursor-pointer w-8 h-8 text-gray-600 hover:text-gray-800`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 	                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
 	              </svg>
@@ -52,7 +52,7 @@ const Navber = (props) => {
 	            {
 	            	localStorage.getItem('jwt') ? (
 	        			/* Logout Button Dropdown */
-			            <div className="userDropdownBtn relative" title="Logout">
+			            <div className="userDropdownBtn hover:bg-gray-200 px-2 py-2 rounded-lg relative" title="Logout">
 			              <svg className="cursor-pointer w-8 h-8 text-gray-600 hover:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
 			              <div className="userDropdown absolute right-0 mt-1 bg-gray-200 rounded">
 			              	<li className="flex flex-col text-gray-700">
@@ -73,7 +73,7 @@ const Navber = (props) => {
 			            </div>
 	        		) : (
 			            /* Login Modal Button */
-	        			<div title="Login">
+	        			<div className="hover:bg-gray-200 px-2 py-2 rounded-lg" title="Login">
 			              <svg onClick={e=> loginModalOpen()} className="cursor-pointer w-8 h-8 text-gray-600 hover:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 			                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
 			              </svg>
@@ -81,7 +81,7 @@ const Navber = (props) => {
 	        		)
 	        	}
 	        	{/* Cart Modal Button */}
-	            <div onClick={e=> cartModalOpen()} className="relative cursor-pointer" title="Cart">
+	            <div onClick={e=> cartModalOpen()} className="hover:bg-gray-200 px-2 py-2 rounded-lg relative cursor-pointer" title="Cart">
 	              <svg className="w-8 h-8 text-gray-600 hover:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 	                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
 	              </svg>

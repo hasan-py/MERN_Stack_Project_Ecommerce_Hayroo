@@ -1,4 +1,4 @@
-import React,{Fragment,useState,useContext} from 'react';
+import React,{Fragment,useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {loginReq} from "./fetchApi";
 
@@ -24,7 +24,7 @@ const Login = (props) => {
         } else if (responseData.token) {
             setData({ email: "",password: "", loading: false, error: false})
             localStorage.setItem("jwt",JSON.stringify(responseData))
-            window.location.href = "/wish-list";
+            window.location.href = "/admin/dashboard";
         }
     } catch {
         console.log("Something went wrong!!");

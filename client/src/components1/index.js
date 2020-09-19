@@ -1,5 +1,5 @@
 import React,{Fragment} from 'react';
-import {Home,WishList} from "./shop";
+import {Home,WishList,ProtectedRoute,AdminProtectedRoute,PageNotFound} from "./shop";
 import {DashboardAdmin,DashboardUser} from "./admin";
 
 import {
@@ -7,7 +7,6 @@ import {
     Switch,
     Route,
 } from "react-router-dom";
-
 
 /* Routing All page will be here */
 const Main = (props) => {
@@ -21,11 +20,14 @@ const Main = (props) => {
         {/* Shop Routes */}
 
         {/* Admin Routes */}
-        <Route exact path="/admin/dashboard" component={DashboardAdmin} />
-        <Route exact path="/user/dashboard" component={DashboardUser} />
+        <AdminProtectedRoute exact={true} path="/admin/dashboard" component={DashboardAdmin} />
+        <ProtectedRoute exact={true} path="/user/dashboard" component={DashboardUser} />
         {/* Admin Routes */}
 
-	    </Switch>
+        {/* 404 Page */}
+        <Route component={PageNotFound} />
+
+       </Switch>
     </Router>
   )
 }

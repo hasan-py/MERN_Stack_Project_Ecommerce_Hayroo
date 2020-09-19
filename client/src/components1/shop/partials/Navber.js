@@ -2,7 +2,7 @@ import React,{Fragment,useState,useContext} from 'react';
 import {useHistory,useLocation,Redirect} from 'react-router-dom';
 import "./style.css";
 
-import {LayoutContext} from "../layout";
+import {LayoutContext} from "../index";
 import {logoutReq,isAuthenticate} from "../auth/fetchApi";
 
 const Navber = (props) => {

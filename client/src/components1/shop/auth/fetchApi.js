@@ -2,6 +2,8 @@ const apiURL = process.env.REACT_APP_API_URL
 
 export const isAuthenticate = ()=> localStorage.getItem("jwt") ? JSON.parse(localStorage.getItem("jwt")) : false
 
+export const isAdmin = ()=> localStorage.getItem("jwt") ? JSON.parse(localStorage.getItem("jwt")).user.role : false
+
 export const loginReq = async ({email,password})=> {
 	const data = { email, password }
     try {
@@ -18,7 +20,6 @@ export const loginReq = async ({email,password})=> {
         console.log("Something went wrong!!");
     }
 }
-
 
 export const signupReq = async ({name,email,password,cPassword})=> {
 	const data = { name, email, password, cPassword }

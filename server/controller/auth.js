@@ -9,6 +9,17 @@ const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require('../config/keys');
 
 class Auth {
+
+    async isAdmin(req,res){
+        let {loggedInUserId} = req.body
+        try{        
+            let loggedInUserRole = await userModel.findById(loggedInUserId)
+            res.status(200).json({role:loggedInUserRole.userRole})
+        }catch{
+            res.status(404)
+        }
+    }
+
     async allUser(req,res){
         try{        
             let allUser = await userModel.find({})
@@ -46,7 +57,8 @@ class Auth {
                             let newUser = new userModel({
                                 name,
                                 email,
-                                password
+                                password,
+                                userRole:1
                             })
                             newUser.save()
                                 .then(data => {
@@ -81,7 +93,7 @@ class Auth {
             } else {
                 const login = await bcrypt.compare(password, data.password)
                 if (login) {
-                    const token = jwt.sign({ _id: data._id }, JWT_SECRET);
+                    const token = jwt.sign({ _id: data._id, role:data.userRole }, JWT_SECRET);
                     const encode = jwt.verify(token, JWT_SECRET)
                     return res.status(200).json({
                         token: token,

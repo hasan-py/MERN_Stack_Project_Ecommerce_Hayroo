@@ -1,5 +1,5 @@
 import React,{Fragment,useContext} from 'react';
-import {LayoutContext} from '../layout';
+import {LayoutContext} from '../index';
 
 const CartModal = (props) => {
 	const {data,dispatch} = useContext(LayoutContext);

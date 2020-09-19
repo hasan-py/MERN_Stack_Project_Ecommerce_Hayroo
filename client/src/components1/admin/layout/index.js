@@ -12,7 +12,7 @@ const AdminLayout = ({ children }) => {
         <Fragment>
 		   	<AdminNavber/>
 	    	<section class="flex bg-gray-100">
-	    		<AdminSidebar/>
+	    		{ isAdmin() ? <AdminSidebar/> : <UserSidebar/>}
 	    		<div class="w-full md:w-11/12 h-full">
 	    			{/* All Children pass from here */}
 					{children}

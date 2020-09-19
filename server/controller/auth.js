@@ -57,8 +57,7 @@ class Auth {
                             let newUser = new userModel({
                                 name,
                                 email,
-                                password,
-                                userRole:1
+                                password
                             })
                             newUser.save()
                                 .then(data => {

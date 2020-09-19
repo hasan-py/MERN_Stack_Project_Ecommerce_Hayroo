@@ -1,6 +1,6 @@
 import React,{Fragment} from 'react';
 import {Home,WishList,ProtectedRoute,AdminProtectedRoute,PageNotFound} from "./shop";
-import {DashboardAdmin,DashboardUser} from "./admin";
+import {DashboardAdmin,DashboardUser,Categories} from "./admin";
 
 import {
     BrowserRouter as Router,
@@ -9,20 +9,27 @@ import {
 } from "react-router-dom";
 
 /* Routing All page will be here */
-const Main = (props) => {
+const Routes = (props) => {
   return (
     <Router>
 	    <Switch>
 
-        {/* Shop Routes */}
+        {/* Shop & Public Routes */}
 	    	<Route exact path="/" component={Home} />
 	    	<Route exact path="/wish-list" component={WishList} />
-        {/* Shop Routes */}
+        {/* Shop & Public Routes */}
+
 
         {/* Admin Routes */}
         <AdminProtectedRoute exact={true} path="/admin/dashboard" component={DashboardAdmin} />
-        <ProtectedRoute exact={true} path="/user/dashboard" component={DashboardUser} />
+        <AdminProtectedRoute exact={true} path="/admin/dashboard/categories" component={Categories} />
         {/* Admin Routes */}
+        
+
+        {/* User Dashboard */}
+        <ProtectedRoute exact={true} path="/user/dashboard" component={DashboardUser} />
+        {/* User Dashboard */}
+
 
         {/* 404 Page */}
         <Route component={PageNotFound} />
@@ -32,4 +39,4 @@ const Main = (props) => {
   )
 }
 
-export default Main;
+export default Routes;

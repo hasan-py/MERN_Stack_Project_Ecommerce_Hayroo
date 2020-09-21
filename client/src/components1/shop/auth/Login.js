@@ -26,15 +26,15 @@ const Login = (props) => {
             localStorage.setItem("jwt",JSON.stringify(responseData))
             window.location.href = "/admin/dashboard";
         }
-    } catch {
-        console.log("Something went wrong!!");
+    } catch(error) {
+        console.log(error);
     }
   }
 
   return (
     <Fragment>
           <div className="text-center text-2xl mb-6">Login</div>
-          <form className="space-y-4" action>
+          <form className="space-y-4">
             <div className="flex flex-col">
               <label htmlFor="name">Username or email address<span className="text-sm text-gray-600 ml-1">*</span></label>
               <input onChange={e=> setData({...data,email:e.target.value,error:false})} value={data.email} type="text" id="name" className={`${!data.error ? "" : "border-red-500"} px-4 py-2 focus:outline-none border`} />

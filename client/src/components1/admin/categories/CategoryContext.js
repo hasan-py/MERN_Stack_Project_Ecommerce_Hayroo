@@ -1,5 +1,6 @@
 export const categoryState = {
-    addCategoryModal:false
+    addCategoryModal:false,
+    categories:[]
 }
 
 export const categoryReducer = (state, action) => {
@@ -8,6 +9,11 @@ export const categoryReducer = (state, action) => {
             return {
                 ...state,
                 addCategoryModal: action.payload
+            }
+        case 'fetchCategoryAndChangeState':
+            return {
+                ...state,
+                categories: action.payload
             }
         default:
             return state

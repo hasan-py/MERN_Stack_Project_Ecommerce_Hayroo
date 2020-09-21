@@ -31,8 +31,8 @@ const Signup = (props) => {
         } else if (responseData.success) {
             setData({ success:responseData.success, name:"", email: "",password: "", cPassword:"", loading: false, error: false})
         }
-    } catch {
-        console.log("Something went wrong!!");
+    } catch(error) {
+        console.log(error);
     }
   }
 

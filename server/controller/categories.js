@@ -7,7 +7,7 @@ class Category {
     	try {
             let Categories = await categoryModel.find({}).sort({ _id: -1 })
             if (Categories) {
-                return res.status(200).json({ Categories })
+                return res.json({ Categories })
             }
         } catch (err) {
             console.log(err)
@@ -17,15 +17,14 @@ class Category {
     async postAddCategory(req, res) {
     	let { cName, cDescription, cStatus } = req.body
         let cImage = req.file.filename
-        console.log(req.file);
         if (!cName || !cDescription || !cStatus || !cImage) {
-            return res.status(400).json({ error: "All filled must be required" })
+            return res.json({ error: "All filled must be required" })
         } else {
             cName = toTitleCase(cName)
             try {
                 let checkCategoryExists = await categoryModel.findOne({ cName: cName })
                 if (checkCategoryExists) {
-                    return res.status(400).json({ error: "Category already exists" })
+                    return res.json({ error: "Category already exists" })
                 } else {
                     let newCategory = new categoryModel({
                         cName,
@@ -33,10 +32,11 @@ class Category {
                         cStatus,
                         cImage
                     })
-                    let save = await newCategory.save();
-                    if (save) {
-                        return res.status(200).json({ success: "Category created successfully" })
-                    }
+                    await newCategory.save(err=> {
+                        if (!err) {
+                            return res.json({ success: "Category created successfully" })
+                        }
+                    });
                 }
             } catch (err) {
                 console.log(err)
@@ -47,7 +47,7 @@ class Category {
     async postEditCategory(req, res) {
     	let { cId, cDescription, cStatus } = req.body
         if (!cId || !cDescription || !cStatus) {
-            return res.status(400).json({ error: "All filled must be required" })
+            return res.json({ error: "All filled must be required" })
         }
         try {
             let editCategory = categoryModel.findByIdAndUpdate(cId, {
@@ -57,7 +57,7 @@ class Category {
             })
             let edit = await editCategory.exec()
             if (edit) {
-                return res.status(200).json({ error: "Category edit successfully" })
+                return res.json({ error: "Category edit successfully" })
             }
         } catch (err) {
             console.log(err)
@@ -67,12 +67,12 @@ class Category {
     async getDeleteCategory(req, res) {
     	let { cId } = req.body
         if (!cId) {
-            return res.status(400).json({ error: "All filled must be required" })
+            return res.json({ error: "All filled must be required" })
         } else {
             try {
                 let deleteCategory = await categoryModel.findByIdAndDelete(cId)
                 if (deleteCategory) {
-                    return res.status(200).json({ success: "Category deleted successfully" })
+                    return res.json({ success: "Category deleted successfully" })
                 }
             } catch (err) {
                 console.log(err)

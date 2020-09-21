@@ -1,11 +1,14 @@
-import React,{Fragment,useContext,useState} from 'react';
+import React,{Fragment,useContext,useState,useEffect} from 'react';
 import {CategoryContext} from "./index";
-import {createCategroy} from "./FetchApi";
+import {createCategroy,getAllCategory} from "./FetchApi";
 
 const AddCategoryModal = (props) => {
+  
 	const {data,dispatch} = useContext(CategoryContext);
 	
-	const [fData,setFdata] = useState({
+  const alert = (msg,type)=> <div className={`bg-${type}-200 py-2 px-4 w-full`}>{msg}</div>
+	
+  const [fData,setFdata] = useState({
 		cName:"",
 		cDescription:"",
 		cImage:"",
@@ -15,14 +18,31 @@ const AddCategoryModal = (props) => {
 		loading:false
 	})
 
-	const submitForm = ()=> {
-		let responseData = createCategroy(data);
-		console.log(responseData);
-		if(responseData.error){
-			setFdata({...fData,error:responseData.error})
-		}else if(responseData.success){
-			setFdata({...fData,success:responseData.success})
-		}
+  const fetchData = async () => {
+      let responseData = await getAllCategory();
+      if (responseData.Categories) {
+          dispatch({type:"fetchCategoryAndChangeState",payload:responseData.Categories})
+      }
+  }
+
+	const submitForm = async ()=> {
+
+    if(!fData.cImage){
+      setFdata({...fData,error:"Please upload a category image"})
+    }
+
+    try {
+  		let responseData = await createCategroy(fData);
+      if(responseData.success){
+        setFdata({...fData,cName:"",cDescription:"",cImage:"",cStatus:"Active",success:responseData.success,error:false,loading:false})
+        fetchData();
+        dispatch({type:"addCategoryModal",payload:false})
+      }else if(responseData.error){
+        setFdata({...fData,success:false,error:responseData.error,loading:false})
+      }
+    } catch(error){
+      console.log(error);
+    }
 	}
 
   return (
@@ -39,23 +59,25 @@ const AddCategoryModal = (props) => {
             {/* Close Modal */}
             <span onClick={e=> dispatch({type:"addCategoryModal",payload:false})} className="cursor-pointer hover:bg-gray-300 py-2 px-2 rounded-lg"><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg></span>
           </div>
-          { fData.error ? <div>{fData.error}</div> : ""}
+          { fData.error ? alert(fData.error,"red") : ""}
+          { fData.success ? alert(fData.success,"green") : ""}
           {/* <hr class="border border-gray-300 w-full"> */}
           <div className="flex flex-col space-y-1 w-full py-4">
             <label htmlFor="name">Category Name</label>
-            <input onChange={e=> setFdata({...fData,error:false,loading:false,cName:e.target.value})} value={fData.cName} className="px-4 py-2 border focus:outline-none" type="text" />
+            <input onChange={e=> setFdata({...fData,success:false,error:false,loading:false,cName:e.target.value})} value={fData.cName} className="px-4 py-2 border focus:outline-none" type="text" />
           </div>
           <div className="flex flex-col space-y-1 w-full">
             <label htmlFor="description">Category Description</label>
-            <textarea onChange={e=> setFdata({...fData,error:false,loading:false,cDescription:e.target.value})} value={fData.cDescription} className="px-4 py-2 border focus:outline-none" name="description" id="description" cols={5} rows={5} defaultValue={""} />
+            <textarea onChange={e=> setFdata({...fData,success:false,error:false,loading:false,cDescription:e.target.value})} value={fData.cDescription} className="px-4 py-2 border focus:outline-none" name="description" id="description" cols={5} rows={5} />
           </div>
+          {/* Image Field & function */}
           <div className="flex flex-col space-y-1 w-full">
             <label htmlFor="name">Category Image</label>
-            <input onChange={e=> setFdata({...fData,error:false,loading:false,cImage:e.target.files[0]})} className="px-4 py-2 border focus:outline-none" type="file" />
+            <input onChange={e=> {setFdata({...fData,success:false,error:false,loading:false,cImage:e.target.files[0]}); e.target.value = "";}} className="px-4 py-2 border focus:outline-none" type="file" />
           </div>
           <div className="flex flex-col space-y-1 w-full">
             <label htmlFor="status">Category Status</label>
-            <select name="status" onChange={e=> setFdata({...fData,error:false,loading:false,cStatus:e.target.value})} className="px-4 py-2 border focus:outline-none" id="status">
+            <select value={fData.cStatus} name="status" onChange={e=> setFdata({...fData,success:false,error:false,loading:false,cStatus:e.target.value})} className="px-4 py-2 border focus:outline-none" id="status">
               <option name="status" value="Active">Active</option>
               <option name="status" value="Disabled">Disabled</option>
             </select>

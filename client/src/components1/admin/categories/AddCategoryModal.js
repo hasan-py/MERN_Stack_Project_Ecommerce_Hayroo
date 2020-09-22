@@ -1,4 +1,4 @@
-import React,{Fragment,useContext,useState,useEffect} from 'react';
+import React,{Fragment,useContext,useState} from 'react';
 import {CategoryContext} from "./index";
 import {createCategroy,getAllCategory} from "./FetchApi";
 
@@ -29,19 +29,25 @@ const AddCategoryModal = (props) => {
 
     if(!fData.cImage){
       setFdata({...fData,error:"Please upload a category image"})
+      setTimeout(()=> {
+        setFdata({...fData,error:false})
+      },2000)
     }
-
-    try {
-  		let responseData = await createCategroy(fData);
-      if(responseData.success){
-        setFdata({...fData,cName:"",cDescription:"",cImage:"",cStatus:"Active",success:responseData.success,error:false,loading:false})
-        fetchData();
-        dispatch({type:"addCategoryModal",payload:false})
-      }else if(responseData.error){
-        setFdata({...fData,success:false,error:responseData.error,loading:false})
+    if(!fData.error){
+      try {
+    		let responseData = await createCategroy(fData);
+        if(responseData.success){
+          setFdata({...fData,cName:"",cDescription:"",cImage:"",cStatus:"Active",success:responseData.success,error:false,loading:false})
+          fetchData();
+          setTimeout(()=> {
+            setFdata({...fData,cName:"",cDescription:"",cImage:"",cStatus:"Active",success:false,error:false,loading:false})
+          },2000)
+        }else if(responseData.error){
+          setFdata({...fData,success:false,error:responseData.error,loading:false})
+        }
+      } catch(error){
+        console.log(error);
       }
-    } catch(error){
-      console.log(error);
     }
 	}
 
@@ -61,7 +67,6 @@ const AddCategoryModal = (props) => {
           </div>
           { fData.error ? alert(fData.error,"red") : ""}
           { fData.success ? alert(fData.success,"green") : ""}
-          {/* <hr class="border border-gray-300 w-full"> */}
           <div className="flex flex-col space-y-1 w-full py-4">
             <label htmlFor="name">Category Name</label>
             <input onChange={e=> setFdata({...fData,success:false,error:false,loading:false,cName:e.target.value})} value={fData.cName} className="px-4 py-2 border focus:outline-none" type="text" />

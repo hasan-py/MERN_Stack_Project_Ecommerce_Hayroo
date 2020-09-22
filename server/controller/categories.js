@@ -1,5 +1,7 @@
 const { toTitleCase } = require('../config/function');
 const categoryModel = require("../models/categories");
+const fs = require('fs');
+
 
 class Category {
 
@@ -17,14 +19,24 @@ class Category {
     async postAddCategory(req, res) {
     	let { cName, cDescription, cStatus } = req.body
         let cImage = req.file.filename
+        const filePath = `../server/public/categories/${req.file.filename}`;
+        console.log(filename);
         if (!cName || !cDescription || !cStatus || !cImage) {
-            return res.json({ error: "All filled must be required" })
+            // Delete Image from tem folder
+            fs.unlink(filePath, (err) => {
+                if (err) { console.log(err) }
+                return res.json({ error: "All filled must be required" })
+            })
         } else {
             cName = toTitleCase(cName)
             try {
                 let checkCategoryExists = await categoryModel.findOne({ cName: cName })
                 if (checkCategoryExists) {
-                    return res.json({ error: "Category already exists" })
+                    // Delete Image from tem folder
+                    fs.unlink(filePath, (err) => {
+                        if (err) { console.log(err) }
+                        return res.json({ error: "Category already exists" })
+                    })
                 } else {
                     let newCategory = new categoryModel({
                         cName,
@@ -57,7 +69,7 @@ class Category {
             })
             let edit = await editCategory.exec()
             if (edit) {
-                return res.json({ error: "Category edit successfully" })
+                return res.json({ success: "Category edit successfully" })
             }
         } catch (err) {
             console.log(err)
@@ -70,10 +82,19 @@ class Category {
             return res.json({ error: "All filled must be required" })
         } else {
             try {
+
+                let deletedCategoryFile = await categoryModel.findById(cId)
+                const filePath = `../server/public/categories/${deletedCategoryFile.cImage}`;
+                
                 let deleteCategory = await categoryModel.findByIdAndDelete(cId)
                 if (deleteCategory) {
-                    return res.json({ success: "Category deleted successfully" })
+                    // Delete Image from tem folder
+                    fs.unlink(filePath, (err) => {
+                        if (err) { console.log(err) }
+                        return res.json({ success: "Category deleted successfully" })
+                    })
                 }
+
             } catch (err) {
                 console.log(err)
             }

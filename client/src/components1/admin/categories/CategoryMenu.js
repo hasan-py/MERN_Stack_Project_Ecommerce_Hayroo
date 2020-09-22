@@ -1,6 +1,7 @@
 import React,{Fragment,useContext} from 'react';
 import {CategoryContext} from "./index";
 import AddCategoryModal from "./AddCategoryModal";
+import EditCategoryModal from "./EditCategoryModal";
 
 const CategoryMenu = (props) => {
 	const {data,dispatch} = useContext(CategoryContext);
@@ -16,6 +17,7 @@ const CategoryMenu = (props) => {
 				</span>
 			</div>
 			<AddCategoryModal/>
+			<EditCategoryModal/>
 		</div>
     </Fragment>
   )

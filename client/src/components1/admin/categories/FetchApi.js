@@ -20,10 +20,28 @@ export const createCategroy = async ({cName,cImage,cDescription,cStatus})=> {
 export const getAllCategory = async ()=> {
 
 	try {	
-		let res = await axios.get(`${apiURL}/api//all-category`)
+		let res = await axios.get(`${apiURL}/api/all-category`)
 		return res.data;
 	}catch(error){
 		console.log(error);
 	}
 
+}
+
+export const editCategory = async (cId,des,status)=> {
+	try {	
+		let res = await axios.post(`${apiURL}/api/edit-category`,{cId:cId,cDescription:des,cStatus:status})
+		return res.data;
+	}catch(error){
+		console.log(error);
+	}
+}
+
+export const deleteCategory = async (cId)=> {
+	try {	
+		let res = await axios.post(`${apiURL}/api/delete-category`,{cId})
+		return res.data;
+	}catch(error){
+		console.log(error);
+	}
 }

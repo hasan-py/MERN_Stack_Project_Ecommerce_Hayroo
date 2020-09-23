@@ -1,10 +1,12 @@
-import React,{Fragment,useContext,useEffect} from 'react';
+import React,{Fragment,useContext,useEffect,useState} from 'react';
 import { getAllCategory, deleteCategory } from "./FetchApi";
 import {CategoryContext} from "./index";
 const apiURL = process.env.REACT_APP_API_URL
 
 const AllCategory = (props) => {
     
+    const [loading,setLoading] = useState(false);
+
     const {data,dispatch} = useContext(CategoryContext);
     const {categories} = data;
 
@@ -13,9 +15,11 @@ const AllCategory = (props) => {
     },[])
 
     const fetchData = async () => {
+        setLoading(true);
         let responseData = await getAllCategory();
-        if (responseData.Categories) {
+        if (responseData && responseData.Categories) {
             dispatch({type:"fetchCategoryAndChangeState",payload:responseData.Categories})
+            setLoading(false);
         }
     }
 
@@ -29,10 +33,15 @@ const AllCategory = (props) => {
       }
     }
 
+    /* This method call the editmodal & dispatch category context */
     const editCategory = (cId,type,des,status)=> {
       if(type){
         dispatch({type:"editCategoryModalOpen",cId:cId,des:des,status:status})
       }
+    }
+
+    if(loading){
+      return <div className="flex items-center justify-center p-8"><svg class="w-12 h-12 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg></div>
     }
 
     return (
@@ -70,6 +79,7 @@ const AllCategory = (props) => {
 /* Single Category Component */
 const CategoryTable = ({ category, deleteCat, editCat }) => {
 
+  /* This fuction return a organize date */
   const dateArange = (date)=> {
     const currentDate = new Date(date);
     let arangeDate = `${currentDate.getDate()}-${currentDate.getMonth()}-${currentDate.getFullYear()}`;
@@ -79,9 +89,9 @@ const CategoryTable = ({ category, deleteCat, editCat }) => {
   return (
     <Fragment>
       <tr>
-        <td className="p-2 text-left">{category.cName}
+        <td className="p-2 text-left">{category.cName.length>15 ? category.cDescription.substring(1,15)+"..." : category.cName}
         </td>
-        <td className="p-2 text-left truncate">{category.cDescription}</td>
+        <td className="p-2 text-left">{category.cDescription.substring(1,15)}...</td>
         <td className="p-2 text-center">
           <img className="w-12 h-12 object-cover object-center" src={`${apiURL}/categories/${category.cImage}`} alt="" />
         </td>

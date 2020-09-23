@@ -2,7 +2,6 @@ const { toTitleCase } = require('../config/function');
 const categoryModel = require("../models/categories");
 const fs = require('fs');
 
-
 class Category {
 
     async getAllCategory(req, res) {
@@ -19,10 +18,9 @@ class Category {
     async postAddCategory(req, res) {
     	let { cName, cDescription, cStatus } = req.body
         let cImage = req.file.filename
-        const filePath = `../server/public/categories/${req.file.filename}`;
-        console.log(filename);
+        const filePath = `../server/public/categories/${cImage}`;
+        
         if (!cName || !cDescription || !cStatus || !cImage) {
-            // Delete Image from tem folder
             fs.unlink(filePath, (err) => {
                 if (err) { console.log(err) }
                 return res.json({ error: "All filled must be required" })
@@ -32,7 +30,6 @@ class Category {
             try {
                 let checkCategoryExists = await categoryModel.findOne({ cName: cName })
                 if (checkCategoryExists) {
-                    // Delete Image from tem folder
                     fs.unlink(filePath, (err) => {
                         if (err) { console.log(err) }
                         return res.json({ error: "Category already exists" })
@@ -84,6 +81,7 @@ class Category {
             try {
 
                 let deletedCategoryFile = await categoryModel.findById(cId)
+                console.log(deletedCategoryFile);
                 const filePath = `../server/public/categories/${deletedCategoryFile.cImage}`;
                 
                 let deleteCategory = await categoryModel.findByIdAndDelete(cId)

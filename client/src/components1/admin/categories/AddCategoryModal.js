@@ -5,7 +5,7 @@ import {createCategroy,getAllCategory} from "./FetchApi";
 const AddCategoryModal = (props) => {
   
 	const {data,dispatch} = useContext(CategoryContext);
-	
+
   const alert = (msg,type)=> <div className={`bg-${type}-200 py-2 px-4 w-full`}>{msg}</div>
 	
   const [fData,setFdata] = useState({
@@ -14,8 +14,7 @@ const AddCategoryModal = (props) => {
 		cImage:"",
 		cStatus:"Active",
 		success:false,
-		error:false,
-		loading:false
+		error:false
 	})
 
   const fetchData = async () => {
@@ -25,30 +24,36 @@ const AddCategoryModal = (props) => {
       }
   }
 
-	const submitForm = async ()=> {
+	const submitForm = async (e)=> {
+    // Reset and prevent the form
+    e.preventDefault();
+    e.target.reset();
 
     if(!fData.cImage){
-      setFdata({...fData,error:"Please upload a category image"})
+      return setFdata({...fData,error:"Please upload a category image"})
       setTimeout(()=> {
-        setFdata({...fData,error:false})
+        return setFdata({...fData,error:false})
       },2000)
     }
-    if(!fData.error){
-      try {
-    		let responseData = await createCategroy(fData);
-        if(responseData.success){
-          setFdata({...fData,cName:"",cDescription:"",cImage:"",cStatus:"Active",success:responseData.success,error:false,loading:false})
-          fetchData();
-          setTimeout(()=> {
-            setFdata({...fData,cName:"",cDescription:"",cImage:"",cStatus:"Active",success:false,error:false,loading:false})
-          },2000)
-        }else if(responseData.error){
-          setFdata({...fData,success:false,error:responseData.error,loading:false})
-        }
-      } catch(error){
-        console.log(error);
+
+    try {
+  		let responseData = await createCategroy(fData);
+      if(responseData.success){
+        fetchData();
+        setFdata({...fData,cName:"",cDescription:"",cImage:"",cStatus:"Active",success:responseData.success,error:false})
+        setTimeout(()=> {
+          setFdata({...fData,cName:"",cDescription:"",cImage:"",cStatus:"Active",success:false,error:false})
+        },2000)
+      }else if(responseData.error){
+        setFdata({...fData,success:false,error:responseData.error})
+        setTimeout(()=> {
+          return setFdata({...fData,error:false,success:false})
+        },2000)
       }
+    } catch(error){
+      console.log(error);
     }
+
 	}
 
   return (
@@ -67,29 +72,31 @@ const AddCategoryModal = (props) => {
           </div>
           { fData.error ? alert(fData.error,"red") : ""}
           { fData.success ? alert(fData.success,"green") : ""}
-          <div className="flex flex-col space-y-1 w-full py-4">
-            <label htmlFor="name">Category Name</label>
-            <input onChange={e=> setFdata({...fData,success:false,error:false,loading:false,cName:e.target.value})} value={fData.cName} className="px-4 py-2 border focus:outline-none" type="text" />
-          </div>
-          <div className="flex flex-col space-y-1 w-full">
-            <label htmlFor="description">Category Description</label>
-            <textarea onChange={e=> setFdata({...fData,success:false,error:false,loading:false,cDescription:e.target.value})} value={fData.cDescription} className="px-4 py-2 border focus:outline-none" name="description" id="description" cols={5} rows={5} />
-          </div>
-          {/* Image Field & function */}
-          <div className="flex flex-col space-y-1 w-full">
-            <label htmlFor="name">Category Image</label>
-            <input onChange={e=> {setFdata({...fData,success:false,error:false,loading:false,cImage:e.target.files[0]}); e.target.value = "";}} className="px-4 py-2 border focus:outline-none" type="file" />
-          </div>
-          <div className="flex flex-col space-y-1 w-full">
-            <label htmlFor="status">Category Status</label>
-            <select value={fData.cStatus} name="status" onChange={e=> setFdata({...fData,success:false,error:false,loading:false,cStatus:e.target.value})} className="px-4 py-2 border focus:outline-none" id="status">
-              <option name="status" value="Active">Active</option>
-              <option name="status" value="Disabled">Disabled</option>
-            </select>
-          </div>
-          <div className="flex flex-col space-y-1 w-full pb-4 md:pb-6">
-            <button onClick={e=> submitForm()} className="bg-gray-800 text-gray-100 text-lg font-medium py-2">Create category</button>
-          </div>
+          <form className="w-full" onSubmit={e=> submitForm(e)}>
+            <div className="flex flex-col space-y-1 w-full py-4">
+              <label htmlFor="name">Category Name</label>
+              <input onChange={e=> setFdata({...fData,success:false,error:false,cName:e.target.value})} value={fData.cName} className="px-4 py-2 border focus:outline-none" type="text" />
+            </div>
+            <div className="flex flex-col space-y-1 w-full">
+              <label htmlFor="description">Category Description</label>
+              <textarea onChange={e=> setFdata({...fData,success:false,error:false,cDescription:e.target.value})} value={fData.cDescription} className="px-4 py-2 border focus:outline-none" name="description" id="description" cols={5} rows={5} />
+            </div>
+            {/* Image Field & function */}
+            <div className="flex flex-col space-y-1 w-full">
+              <label htmlFor="name">Category Image</label>
+              <input onChange={e=> {setFdata({...fData,success:false,error:false,cImage:e.target.files[0]});}} className="px-4 py-2 border focus:outline-none" type="file" />
+            </div>
+            <div className="flex flex-col space-y-1 w-full">
+              <label htmlFor="status">Category Status</label>
+              <select name="status" onChange={e=> setFdata({...fData,success:false,error:false,cStatus:e.target.value})} className="px-4 py-2 border focus:outline-none" id="status">
+                <option name="status" value="Active">Active</option>
+                <option name="status" value="Disabled">Disabled</option>
+              </select>
+            </div>
+            <div className="flex flex-col space-y-1 w-full pb-4 md:pb-6 mt-4">
+              <button type="submit" className="bg-gray-800 text-gray-100 text-lg font-medium py-2">Create category</button>
+            </div>
+          </form>
         </div>
       </div>
 

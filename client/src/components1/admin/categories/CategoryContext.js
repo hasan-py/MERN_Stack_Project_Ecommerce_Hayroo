@@ -1,45 +1,48 @@
 export const categoryState = {
-    addCategoryModal:false,
-    editCategoryModal:{
-        modal:false,
-        cId:null,
-        des:"",
-        status:"",
-    },
-    categories:[]
+    categories: [],
+    addCategoryModal: false,
+    editCategoryModal: {
+        modal: false,
+        cId: null,
+        des: "",
+        status: "",
+    }
 }
 
 export const categoryReducer = (state, action) => {
     switch (action.type) {
+        /* Get all category */
+        case 'fetchCategoryAndChangeState':
+            return {
+                ...state,
+                categories: action.payload
+            }
+            /* Create a category */
         case 'addCategoryModal':
             return {
                 ...state,
                 addCategoryModal: action.payload
             }
+            /* Edit a category */
         case 'editCategoryModalOpen':
             return {
                 ...state,
-                editCategoryModal:{
-                    modal:true,
-                    cId:action.cId,
-                    des:action.des,
-                    status:action.status
+                editCategoryModal: {
+                    modal: true,
+                    cId: action.cId,
+                    des: action.des,
+                    status: action.status
                 }
             }
         case 'editCategoryModalClose':
             return {
                 ...state,
-                editCategoryModal:{
-                    modal:false,
-                    cId:null,
-                    des:"",
-                    status:""
+                editCategoryModal: {
+                    modal: false,
+                    cId: null,
+                    des: "",
+                    status: ""
                 }
-            }
-        case 'fetchCategoryAndChangeState':
-            return {
-                ...state,
-                categories: action.payload
             }
         default:
             return state

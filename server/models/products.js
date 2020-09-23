@@ -26,14 +26,6 @@ const productSchema = new mongoose.Schema({
         type: ObjectId,
         ref: "categories"
     },
-    pSubCategory: {
-        type: ObjectId,
-        ref: "subCategories"
-    },
-    pBrand: {
-        type: ObjectId,
-        ref: "brands"
-    },
     pImages: {
         type: String,
         required: true

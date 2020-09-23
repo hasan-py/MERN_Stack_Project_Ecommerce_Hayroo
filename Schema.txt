@@ -2,19 +2,6 @@
 
 *Schema Design
 
-==Brands==
-1. Bname
-2. Bdescription
-3. Bimage
-4. Btimestamp
-5. BtotalRating
-6. BtotalReviews
-
-==SubCategories==
-1. SCname
-2. SCdescription
-3. timestamp
-
 ==Categories==
 1. Cname
 2. Cdescription
@@ -52,5 +39,3 @@
 12. PReviews
 13. Pstatus
 14. timestamp
-
-

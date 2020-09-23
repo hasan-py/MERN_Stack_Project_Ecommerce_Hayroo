@@ -25,7 +25,7 @@ mongoose.connect(process.env.DATABASE, {
     useCreateIndex: true,
 })
 .then(()=> console.log("==============Mongodb Database Connected Successfully=============="))
-.catch(err=> console.log("==========Database Not Connected=========="))
+.catch(err=> console.log("Database Not Connected !!!"))
 
 // Middleware
 app.use(morgan('dev'));
@@ -38,7 +38,7 @@ app.use(express.json());
 // Routes
 app.use('/api', authRouter)
 app.use('/api', brandRouter)
-app.use('/api', categoryRouter)
+app.use('/api', loginCheck, categoryRouter)
 app.use('/api', attributeRouter)
 app.use('/api', subCategoryRouter)
 app.use('/api', attributeValueRouter)

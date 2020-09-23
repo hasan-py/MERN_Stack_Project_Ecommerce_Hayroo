@@ -15,21 +15,21 @@ class Product {
     }
 
     async postAddProduct(req, res) {
-        let {pName,pDescription,pPrice,pQuantity,pCategory,pSubCategory,pBrand,pOffer,pStatus} = req.body
-        if(!pName | !pDescription | !pPrice | !pQuantity | !pCategory | !pSubCategory | !pBrand | !pOffer | !pStatus){
-            return res.json({message:"All filled must be required"})
+        let {pName,pDescription,pPrice,pQuantity,pCategory,pOffer,pStatus} = req.body
+        if(!pName | !pDescription | !pPrice | !pQuantity | !pCategory | !pOffer | !pStatus){
+            return res.json({error:"All filled must be required"})
         }
         if(pName.length>255 || pDescription.length>3000){
-            return res.json({message:"Name 255 & Description must not be 3000 charecter long"})
+            return res.json({error:"Name 255 & Description must not be 3000 charecter long"})
         }
         try {
             let productAlreadyExist = await productModel.findOne({pName:pName})
             if (productAlreadyExist){
-                return res.json({message:"Product name must be uniqe. Name already exist"})
+                return res.json({error:"Product name must be uniqe. Name already exist"})
             }else{
                 let newProduct =  new productModel({
                     pImages:"not given",
-                    pName,pDescription,pPrice,pQuantity,pCategory,pSubCategory,pBrand,pOffer,pStatus
+                    pName,pDescription,pPrice,pQuantity,pCategory,pOffer,pStatus
                 })
                 let save = await newProduct.save()
                 if (save){
@@ -48,7 +48,7 @@ class Product {
     async getDeleteProduct(req, res) {
         let { pId } = req.body
         if (!pId) {
-            return res.json({ message: "All filled must be required" })
+            return res.json({ error: "All filled must be required" })
         } else {
             try {
                 let deleteProduct = await productModel.findByIdAndDelete(pId)

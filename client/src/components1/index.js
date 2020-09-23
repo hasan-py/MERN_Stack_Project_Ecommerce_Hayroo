@@ -1,6 +1,6 @@
 import React,{Fragment} from 'react';
 import {Home,WishList,ProtectedRoute,AdminProtectedRoute,PageNotFound} from "./shop";
-import {DashboardAdmin,DashboardUser,Categories} from "./admin";
+import {DashboardAdmin,DashboardUser,Categories,Products} from "./admin";
 
 import {
     BrowserRouter as Router,
@@ -23,6 +23,7 @@ const Routes = (props) => {
         {/* Admin Routes */}
         <AdminProtectedRoute exact={true} path="/admin/dashboard" component={DashboardAdmin} />
         <AdminProtectedRoute exact={true} path="/admin/dashboard/categories" component={Categories} />
+        <AdminProtectedRoute exact={true} path="/admin/dashboard/products" component={Products} />
         {/* Admin Routes */}
         
 

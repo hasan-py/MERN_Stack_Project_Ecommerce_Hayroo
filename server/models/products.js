@@ -27,7 +27,7 @@ const productSchema = new mongoose.Schema({
         ref: "categories"
     },
     pImages: {
-        type: String,
+        type: Array,
         required: true
     },
     pOffer: {

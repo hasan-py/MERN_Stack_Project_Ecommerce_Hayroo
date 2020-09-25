@@ -6,7 +6,7 @@ const multer = require('multer');
 // Image Upload setting
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './public/categories')
+    cb(null, './public/uploads/categories')
   },
   filename: function (req, file, cb) {
     cb(null, Date.now()+ "_" +file.originalname)

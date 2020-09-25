@@ -95,7 +95,7 @@ const CategoryTable = ({ category, deleteCat, editCat }) => {
         </td>
         <td className="p-2 text-left">{category.cDescription.slice(0,15)}...</td>
         <td className="p-2 text-center">
-          <img className="w-12 h-12 object-cover object-center" src={`${apiURL}/categories/${category.cImage}`} alt="" />
+          <img className="w-12 h-12 object-cover object-center" src={`${apiURL}/uploads/categories/${category.cImage}`} alt="" />
         </td>
         <td className="p-2 text-center">
           { category.cStatus == "Active"

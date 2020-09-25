@@ -38,11 +38,11 @@ app.use(express.json());
 // Routes
 app.use('/api', authRouter)
 app.use('/api', brandRouter)
-app.use('/api', loginCheck, categoryRouter)
+app.use('/api/category', loginCheck , categoryRouter)
 app.use('/api', attributeRouter)
 app.use('/api', subCategoryRouter)
 app.use('/api', attributeValueRouter)
-app.use('/api', productRouter)
+app.use('/api/product', productRouter)
 
 // Run Server
 const PORT = process.env.PORT || 8000

@@ -1,5 +1,6 @@
 const productModel = require("../models/products");
 const { toTitleCase } = require('../config/function');
+const fs = require('fs');
 
 class Product {
 
@@ -15,8 +16,24 @@ class Product {
     }
 
     async postAddProduct(req, res) {
-        let {pName,pDescription,pPrice,pQuantity,pCategory,pOffer,pStatus} = req.body
-        if(!pName | !pDescription | !pPrice | !pQuantity | !pCategory | !pOffer | !pStatus){
+        // let {pName,pDescription,pPrice,pQuantity,pCategory,pOffer,pStatus} = req.body
+        let images = req.files
+        console.log(req.files);
+        if(images.length !== 3){
+            for (var i = 0;  i<images.length; i++) {
+                let filePath = `../server/public/uploads/products/${images[i].filename}`;
+                fs.unlink(filePath, (err) => {
+                    if (err) { console.log(err) }
+                    console.log("Deleted",filePath);
+                })
+            }
+            return res.json({ error: "Please provide only 3 images" })
+        }else {
+            return res.json({success:"Upload sucess",images})
+        }
+
+
+/*        if(!pName | !pDescription | !pPrice | !pQuantity | !pCategory | !pOffer | !pStatus){
             return res.json({error:"All filled must be required"})
         }
         if(pName.length>255 || pDescription.length>3000){
@@ -38,7 +55,7 @@ class Product {
             }
         }catch(err){
             console.log(err)
-        }
+        }*/
     }
 
     async postEditProduct(req,res){

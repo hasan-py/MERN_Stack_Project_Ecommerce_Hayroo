@@ -12,7 +12,7 @@ const Headers = ()=> {
 
 export const getAllProduct = async () => {
     try {
-        let res = await axios.get(`${apiURL}/api/all-category`)
+        let res = await axios.get(`${apiURL}/api/product/all-product`)
         return res.data;
     } catch (error) {
         console.log(error);
@@ -20,15 +20,12 @@ export const getAllProduct = async () => {
 
 }
 
-export const createProduct = async ({ cName, cImage, cDescription, cStatus }) => {
+export const createProduct = async ({ pImage }) => {
     let formData = new FormData();
-    formData.append("cImage", cImage)
-    formData.append("cName", cName)
-    formData.append("cDescription", cDescription)
-    formData.append("cStatus", cStatus)
+    formData.append("pImage", pImage)
 
     try {
-        let res = await axios.post(`${apiURL}/api/add-category`, formData)
+        let res = await axios.post(`${apiURL}/api/product/add-product`, formData)
         return res.data;
     } catch (error) {
         console.log(error);
@@ -37,7 +34,7 @@ export const createProduct = async ({ cName, cImage, cDescription, cStatus }) =>
 
 export const editProduct = async (cId, des, status) => {
     try {
-        let res = await axios.post(`${apiURL}/api/edit-category`, { cId: cId, cDescription: des, cStatus: status })
+        let res = await axios.post(`${apiURL}/api/product/edit-product`, { cId: cId, cDescription: des, cStatus: status })
         return res.data;
     } catch (error) {
         console.log(error);
@@ -46,7 +43,7 @@ export const editProduct = async (cId, des, status) => {
 
 export const deleteProduct = async (cId) => {
     try {
-        let res = await axios.post(`${apiURL}/api/delete-category`, { cId })
+        let res = await axios.post(`${apiURL}/api/product/delete-product`, { cId })
         return res.data;
     } catch (error) {
         console.log(error);

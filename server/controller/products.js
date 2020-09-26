@@ -4,6 +4,18 @@ const fs = require('fs');
 
 class Product {
 
+    deleteImage(images) {
+        for (var i = 0;  i<images.length; i++) {
+            let filePath = `../server/public/uploads/products/${images[i].filename}`;
+            fs.unlink(filePath, (err) => {
+                if (err) { 
+                    return false 
+                }
+                return true
+            })
+        }
+    }
+
     async getAllProduct(req, res) {
         try {
             let Products = await productModel.find({}).sort({ _id: -1 })
@@ -16,26 +28,23 @@ class Product {
     }
 
     async postAddProduct(req, res) {
-        // let {pName,pDescription,pPrice,pQuantity,pCategory,pOffer,pStatus} = req.body
+        let {pName,pDescription,pPrice,pQuantity,pCategory,pOffer,pStatus} = req.body
         let images = req.files
         console.log(req.files);
-        if(images.length !== 3){
-            for (var i = 0;  i<images.length; i++) {
-                let filePath = `../server/public/uploads/products/${images[i].filename}`;
-                fs.unlink(filePath, (err) => {
-                    if (err) { console.log(err) }
-                    console.log("Deleted",filePath);
-                })
+        // Validate Images
+        if(images.length !== 2){
+            if(this.deleteImage(images)){
+                return res.json({ error: "Must need to provide 2 images" })
             }
-            return res.json({ error: "Please provide only 3 images" })
-        }else {
-            return res.json({success:"Upload sucess",images})
         }
-
-
-/*        if(!pName | !pDescription | !pPrice | !pQuantity | !pCategory | !pOffer | !pStatus){
+        // Validate other fileds
+        if(!pName | !pDescription | !pPrice | !pQuantity | !pCategory | !pOffer | !pStatus){
+            if(images) {
+                this.deleteImage(images)
+            }
             return res.json({error:"All filled must be required"})
         }
+        // Validate Name and description
         if(pName.length>255 || pDescription.length>3000){
             return res.json({error:"Name 255 & Description must not be 3000 charecter long"})
         }
@@ -55,7 +64,7 @@ class Product {
             }
         }catch(err){
             console.log(err)
-        }*/
+        }
     }
 
     async postEditProduct(req,res){

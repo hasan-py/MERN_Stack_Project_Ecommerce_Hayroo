@@ -12,7 +12,7 @@ const AddProductModal = (props) => {
     pName:"",
     pDescription:"",
     pStatus:"Active",
-    pImage:[],
+    pImage:null, // Initial value will be null or empty array
     pCategory:"",
     pQuantity:"",
     pPrice:"",
@@ -29,18 +29,10 @@ const AddProductModal = (props) => {
       }
   }
 */
-  
-  /* Handle Multiple image */
-  const imageHandle = (e)=> {
-    let imageArray = []
-    for (var i = 0; i<e.target.files.length; i++) {
-      imageArray.push(e.target.files[i])
-    }
-    setFdata({...fData,pImage:imageArray})
-  }
+
 
   const submitForm = async (e)=> {
-    // Reset and prevent the form
+
     e.preventDefault();
     e.target.reset();
 
@@ -106,18 +98,19 @@ const AddProductModal = (props) => {
                 name="description" 
                 id="description" cols={5} rows={2} />
             </div>
-            {/* Image Field & function */}
+            {/* Most Important part for uploading multiple image */}
             <div className="flex flex-col mt-4">
               <label htmlFor="image">Product Images *</label>
               <span className="text-gray-600 text-xs">Must need three images</span>
               <input 
-                onChange={e=> imageHandle(e)} 
+                onChange={e=> setFdata({...fData,error:false,success:false,pImage:[...e.target.files]})} 
                 type="file" 
+                accept=".jpg, .jpeg, .png"
                 className="px-4 py-2 border focus:outline-none" 
                 id="image" 
-                accept=".jpg, .jpeg, .png"
                 multiple />
             </div>
+            {/* Most Important part for uploading multiple image */}
             <div className="flex space-x-1 py-4">
               <div className="w-1/2 flex flex-col space-y-1">
                 <label htmlFor="status">Product Status *</label>

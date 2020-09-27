@@ -1,9 +1,11 @@
-import React,{Fragment,useContext,useState} from 'react';
+import React,{Fragment,useContext,useState,useEffect} from 'react';
 import {ProductContext} from "./index";
 import {createProduct,getAllProduct} from "./FetchApi";
+import {getAllCategory} from "../categories/FetchApi";
 
-const AddProductModal = (props) => {
-  
+
+const AddProductDetail = ({categories})=> {
+
   const {data,dispatch} = useContext(ProductContext);
 
   const alert = (msg,type)=> <div className={`bg-${type}-200 py-2 px-4 w-full`}>{msg}</div>
@@ -14,7 +16,6 @@ const AddProductModal = (props) => {
     pStatus:"Active",
     pImage:null, // Initial value will be null or empty array
     pCategory:"",
-    pQuantity:"",
     pPrice:"",
     pOffer:0,
     pQuantity:"",
@@ -22,27 +23,34 @@ const AddProductModal = (props) => {
     error:false
   })
 
-/*  const fetchData = async () => {
-      let responseData = await getAllProduct();
-      if (responseData.Categories) {
-          dispatch({type:"fetchProductAndChangeState",payload:responseData.Categories})
-      }
-  }
-*/
 
+  const fetchData = async () => {
+      let responseData = await getAllProduct()
+      setTimeout(()=> {
+        if (responseData && responseData.Products) {
+            dispatch({type:"fetchProductsAndChangeState",payload:responseData.Products})
+        }
+      },1000)
+  }
 
   const submitForm = async (e)=> {
-
     e.preventDefault();
     e.target.reset();
+
+    if(!fData.pImage){
+      setFdata({...fData,error:"Please upload at least 2 image"})
+      setTimeout(()=> {
+          setFdata({...fData,error:false})
+      },2000)
+    }
 
     try {
       let responseData = await createProduct(fData);
       if(responseData.success){
-        // fetchData();
-        setFdata({...fData,cName:"",cDescription:"",cImage:"",cStatus:"Active",success:responseData.success,error:false})
+        fetchData();
+        setFdata({...fData,pName:"",pDescription:"",pImage:"",pStatus:"Active",pCategory:"",pPrice:"",pQuantity:"",pOffer:0,success:responseData.success,error:false})
         setTimeout(()=> {
-          setFdata({...fData,cName:"",cDescription:"",cImage:"",cStatus:"Active",success:false,error:false})
+          setFdata({...fData,pName:"",pDescription:"",pImage:"",pStatus:"Active",pCategory:"",pPrice:"",pQuantity:"",pOffer:0,success:false,error:false})
         },2000)
       }else if(responseData.error){
         setFdata({...fData,success:false,error:responseData.error})
@@ -131,8 +139,16 @@ const AddProductModal = (props) => {
                   onChange={e=> setFdata({...fData,error:false,success:false,pCategory:e.target.value})}
                   name="status" 
                   className="px-4 py-2 border focus:outline-none" id="status">
-                  <option name="status" value="Active">Active</option>
-                  <option name="status" value="Disabled">Disabled</option>
+                  <option disabled value="">Select a category</option>
+                  {
+                    categories.length>0
+                    ? categories.map(function(elem) {
+                      return (
+                        <option name="status" value={elem._id}>{elem.cName}</option>
+                      )
+                    })
+                    : ""
+                  }
                 </select>
               </div>
             </div>
@@ -162,9 +178,31 @@ const AddProductModal = (props) => {
           </form>
         </div>
       </div>
-
     </Fragment>
   )
+}
+
+const AddProductModal = (props) => {
+
+  useEffect(()=> {
+    fetchCategoryData()
+  },[])
+  
+  const [allCat,setAllCat] = useState({})
+
+  const fetchCategoryData = async () => {
+      let responseData = await getAllCategory();
+      if (responseData.Categories) {
+          setAllCat(responseData.Categories)
+      }
+  }
+
+  return (
+    <Fragment>
+      <AddProductDetail categories={allCat} />
+    </Fragment>
+  )
+
 }
 
 export default AddProductModal;

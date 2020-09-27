@@ -20,13 +20,30 @@ export const getAllProduct = async () => {
 
 }
 
-export const createProduct = async ({ pImage }) => {
+export const createPorductImage = async ({pImage})=> {
     /* Most important part for uploading multiple image  */
     let formData = new FormData();
     for (const file of pImage) {
         formData.append("pImage", file)   
     }
     /* Most important part for uploading multiple image  */
+}
+
+export const createProduct = async ({ pName,pDescription,pImage,pStatus,pCategory,pQuantity,pPrice,pOffer }) => {
+    /* Most important part for uploading multiple image  */
+    let formData = new FormData();
+    for (const file of pImage) {
+        formData.append("pImage", file)   
+    }
+    /* Most important part for uploading multiple image  */
+    formData.append("pName",pName)
+    formData.append("pDescription",pDescription)
+    formData.append("pStatus",pStatus)
+    formData.append("pCategory",pCategory)
+    formData.append("pQuantity",pQuantity)
+    formData.append("pPrice",pPrice)
+    formData.append("pOffer",pOffer)
+    
     try {
         let res = await axios.post(`${apiURL}/api/product/add-product`, formData)
         return res.data;
@@ -44,9 +61,9 @@ export const editProduct = async (cId, des, status) => {
     }
 }
 
-export const deleteProduct = async (cId) => {
+export const deleteProduct = async (pId) => {
     try {
-        let res = await axios.post(`${apiURL}/api/product/delete-product`, { cId })
+        let res = await axios.post(`${apiURL}/api/product/delete-product`, { pId })
         return res.data;
     } catch (error) {
         console.log(error);

@@ -1,26 +1,26 @@
 import React,{Fragment,useContext,useEffect,useState} from 'react';
 import { getAllCategory, deleteCategory } from "./FetchApi";
 import {CategoryContext} from "./index";
+import moment from "moment";
+
 const apiURL = process.env.REACT_APP_API_URL
 
 const AllCategory = (props) => {
     
-    const [loading,setLoading] = useState(false);
-
     const {data,dispatch} = useContext(CategoryContext);
-    const {categories} = data;
+    const {categories,loading} = data;
 
     useEffect(() => {
         fetchData();
     },[])
 
     const fetchData = async () => {
-        setLoading(true);
+        dispatch({type:"loading",payload:true})
         let responseData = await getAllCategory();
         setTimeout(()=> {
           if (responseData && responseData.Categories) {
               dispatch({type:"fetchCategoryAndChangeState",payload:responseData.Categories})
-              setLoading(false);
+              dispatch({type:"loading",payload:false})
           }
         },1000)
     }
@@ -49,7 +49,7 @@ const AllCategory = (props) => {
     return (
     <Fragment>
       <div className="col-span-1 overflow-auto bg-white shadow-lg p-4">
-        <table className="table-auto border w-full">
+        <table className="table-auto border w-full my-2">
           <thead>
             <tr>
               <th className="px-4 py-2 border">Category</th>
@@ -73,6 +73,7 @@ const AllCategory = (props) => {
             }
           </tbody>
         </table>
+         <div className="text-sm text-gray-600 mt-2">Total {categories && categories.length} category found</div>
       </div>
     </Fragment>
     )
@@ -80,20 +81,13 @@ const AllCategory = (props) => {
 
 /* Single Category Component */
 const CategoryTable = ({ category, deleteCat, editCat }) => {
-
-  /* This fuction return a organize date */
-  const dateArange = (date)=> {
-    const currentDate = new Date(date);
-    let arangeDate = `${currentDate.getDate()}-${currentDate.getMonth()}-${currentDate.getFullYear()}`;
-    return arangeDate;
-  }
   
   return (
     <Fragment>
       <tr>
-        <td className="p-2 text-left">{category.cName.length>30 ? category.cDescription.slice(0,30)+"..." : category.cName}
+        <td className="p-2 text-left">{category.cName.length>20 ? category.cName.slice(0,20)+"..." : category.cName}
         </td>
-        <td className="p-2 text-left">{category.cDescription.slice(0,15)}...</td>
+        <td className="p-2 text-left">{category.cDescription.length>30 ? category.cDescription.slice(0,30)+"..." : category.cDescription}</td>
         <td className="p-2 text-center">
           <img className="w-12 h-12 object-cover object-center" src={`${apiURL}/uploads/categories/${category.cImage}`} alt="" />
         </td>
@@ -103,8 +97,8 @@ const CategoryTable = ({ category, deleteCat, editCat }) => {
             : <span className="bg-red-200 rounded-full text-center text-xs px-2 font-semibold">{category.cStatus}</span>
           }
         </td>
-        <td className="p-2 text-center">{dateArange(category.createdAt)}</td>     
-        <td className="p-2 text-center">{dateArange(category.updatedAt)}</td>     
+        <td className="p-2 text-center">{moment(category.createdAt).format('lll')}</td>     
+        <td className="p-2 text-center">{moment(category.updatedAt).format('lll')}</td>     
         <td className="p-2 flex items-center justify-center">
           <span onClick={e=> editCat(category._id,true,category.cDescription,category.cStatus)}  className="cursor-pointer hover:bg-gray-200 rounded-lg p-2 mx-1">
             <svg className="w-6 h-6 fill-current text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" /><path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd" /></svg>

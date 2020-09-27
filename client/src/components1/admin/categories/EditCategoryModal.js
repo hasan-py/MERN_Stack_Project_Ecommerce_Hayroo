@@ -18,18 +18,23 @@ const EditCategoryModal = (props) => {
 	const fetchData = async () => {
         let responseData = await getAllCategory();
         if (responseData.Categories) {
-            dispatch({type:"fetchCategoryAndChangeState",payload:responseData.Categories})
+          dispatch({type:"fetchCategoryAndChangeState",payload:responseData.Categories})  
         }
     }
 
 	const submitForm = async ()=> {
+      dispatch({type:"loading",payload:true})
 	  	let edit = await editCategory(cId,des,status)
 	  	if(edit.error){
 	  		console.log(edit.error);
+        dispatch({type:"loading",payload:false})
 	  	}else if(edit.success){
 	  		console.log(edit.success);
 	  		dispatch({type:"editCategoryModalClose"})
-	  		fetchData();
+        setTimeout(()=> {        
+  	  		fetchData();
+          dispatch({type:"loading",payload:false})
+        },1000)
 	  	}
 	}
 

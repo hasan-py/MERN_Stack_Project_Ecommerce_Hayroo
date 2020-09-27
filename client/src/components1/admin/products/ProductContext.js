@@ -1,5 +1,5 @@
 export const productState = {
-    products: [],
+    products: null,
     addProductModal: false,
     editProductModal: {
         modal: false,

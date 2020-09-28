@@ -52,9 +52,19 @@ export const createProduct = async ({ pName,pDescription,pImage,pStatus,pCategor
     }
 }
 
-export const editProduct = async (cId, des, status) => {
+export const editProduct = async (product) => {
+    console.log(product);
     try {
-        let res = await axios.post(`${apiURL}/api/product/edit-product`, { cId: cId, cDescription: des, cStatus: status })
+        let res = await axios.post(`${apiURL}/api/product/edit-product`, {
+            pId:product.pId,
+            pName:product.pName,
+            pDescription:product.pDescription,
+            pStatus:product.pStatus,
+            pCategory:product.pCategory,
+            pQuantity:product.pQuantity,
+            pPrice:product.pPrice,
+            pOffer:product.pOffer,
+        })
         return res.data;
     } catch (error) {
         console.log(error);

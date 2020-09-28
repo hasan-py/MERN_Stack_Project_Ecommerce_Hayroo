@@ -76,7 +76,7 @@ const AddProductDetail = ({categories})=> {
           <div className="flex items-center justify-between w-full pt-4">
             <span className="text-left font-semibold text-2xl tracking-wider">Add Product</span>
             {/* Close Modal */}
-            <span onClick={e=> dispatch({type:"addProductModal",payload:false})} className="cursor-pointer hover:bg-gray-300 py-2 px-2 rounded-lg"><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg></span>
+            <span style={{background: '#303031'}} onClick={e=> dispatch({type:"addProductModal",payload:false})} className="cursor-pointer text-gray-100 py-2 px-2 rounded-full"><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg></span>
           </div>
           { fData.error ? alert(fData.error,"red") : ""}
           { fData.success ? alert(fData.success,"green") : ""}
@@ -109,7 +109,7 @@ const AddProductDetail = ({categories})=> {
             {/* Most Important part for uploading multiple image */}
             <div className="flex flex-col mt-4">
               <label htmlFor="image">Product Images *</label>
-              <span className="text-gray-600 text-xs">Must need three images</span>
+              <span className="text-gray-600 text-xs">Must need 2 images</span>
               <input 
                 onChange={e=> setFdata({...fData,error:false,success:false,pImage:[...e.target.files]})} 
                 type="file" 
@@ -144,7 +144,7 @@ const AddProductDetail = ({categories})=> {
                     categories.length>0
                     ? categories.map(function(elem) {
                       return (
-                        <option name="status" value={elem._id}>{elem.cName}</option>
+                        <option name="status" value={elem._id} key={elem._id}>{elem.cName}</option>
                       )
                     })
                     : ""
@@ -173,7 +173,7 @@ const AddProductDetail = ({categories})=> {
               </div>
             </div>
             <div className="flex flex-col space-y-1 w-full pb-4 md:pb-6 mt-4">
-              <button type="submit" className="bg-gray-800 text-gray-100 text-lg font-medium py-2">Create product</button>
+              <button style={{background: '#303031'}} type="submit" className="rounded-full bg-gray-800 text-gray-100 text-lg font-medium py-2">Create product</button>
             </div>
           </form>
         </div>

@@ -47,24 +47,17 @@ class Product {
         }
         else{
             try {
-                // Validate name already exists
-                let productAlreadyExist = await productModel.findOne({pName:pName})
-                if (productAlreadyExist){
-                    Product.deleteImages(images)
-                    return res.json({error:"Product name must be uniqe. Name already exist"})
-                }else{
-                    let allImages = [];
-                    for (const img of images){
-                        allImages.push(img.filename)
-                    }
-                    let newProduct =  new productModel({
-                        pImages:allImages,
-                        pName,pDescription,pPrice,pQuantity,pCategory,pOffer,pStatus
-                    })
-                    let save = await newProduct.save()
-                    if (save){
-                        return res.json({success:"Product created successfully"})
-                    }
+                let allImages = [];
+                for (const img of images){
+                    allImages.push(img.filename)
+                }
+                let newProduct =  new productModel({
+                    pImages:allImages,
+                    pName,pDescription,pPrice,pQuantity,pCategory,pOffer,pStatus
+                })
+                let save = await newProduct.save()
+                if (save){
+                    return res.json({success:"Product created successfully"})
                 }
             }catch(err){
                 console.log(err)
@@ -74,7 +67,30 @@ class Product {
     }
 
     async postEditProduct(req,res){
-        return res.json("Hello")
+        let {pId,pName,pDescription,pPrice,pQuantity,pCategory,pOffer,pStatus} = req.body
+        
+         // Validate other fileds
+        if(!pId | !pName | !pDescription | !pPrice | !pQuantity | !pCategory | !pOffer | !pStatus){
+            return res.json({error:"All filled must be required"})
+        }
+        // Validate Name and description
+        else if(pName.length>255 || pDescription.length>3000){
+            return res.json({error:"Name 255 & Description must not be 3000 charecter long"})
+        }
+        else{
+            try {
+                let editProduct =  productModel.findByIdAndUpdate(pId,{
+                    pName,pDescription,pPrice,pQuantity,pCategory,pOffer,pStatus
+                })
+                editProduct.exec(err=>{
+                    if(err) console.log(err);
+                    return res.json({success:"Product edit successfully"})
+                })
+                
+            }catch(err){
+                console.log(err)
+            }
+        }
     }
 
     async getDeleteProduct(req, res) {

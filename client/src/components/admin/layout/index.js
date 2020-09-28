@@ -5,7 +5,7 @@ import AdminSidebar from "../partials/AdminSidebar";
 import UserSidebar from "../partials/UserSidebar";
 import AdminFooter from "../partials/AdminFooter";
 
-import {isAdmin} from "../../shop";
+import { isAdmin } from "../../shop";
 
 const AdminLayout = ({ children }) => {
     return (

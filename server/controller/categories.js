@@ -5,7 +5,7 @@ const fs = require('fs');
 class Category {
 
     async getAllCategory(req, res) {
-    	try {
+        try {
             let Categories = await categoryModel.find({}).sort({ _id: -1 })
             if (Categories) {
                 return res.json({ Categories })
@@ -16,10 +16,10 @@ class Category {
     }
 
     async postAddCategory(req, res) {
-    	let { cName, cDescription, cStatus } = req.body
+        let { cName, cDescription, cStatus } = req.body
         let cImage = req.file.filename
         const filePath = `../server/public/uploads/categories/${cImage}`;
-        
+
         if (!cName || !cDescription || !cStatus || !cImage) {
             fs.unlink(filePath, (err) => {
                 if (err) { console.log(err) }
@@ -41,7 +41,7 @@ class Category {
                         cStatus,
                         cImage
                     })
-                    await newCategory.save(err=> {
+                    await newCategory.save(err => {
                         if (!err) {
                             return res.json({ success: "Category created successfully" })
                         }
@@ -54,7 +54,7 @@ class Category {
     }
 
     async postEditCategory(req, res) {
-    	let { cId, cDescription, cStatus } = req.body
+        let { cId, cDescription, cStatus } = req.body
         if (!cId || !cDescription || !cStatus) {
             return res.json({ error: "All filled must be required" })
         }
@@ -74,7 +74,7 @@ class Category {
     }
 
     async getDeleteCategory(req, res) {
-    	let { cId } = req.body
+        let { cId } = req.body
         if (!cId) {
             return res.json({ error: "All filled must be required" })
         } else {
@@ -83,7 +83,7 @@ class Category {
                 let deletedCategoryFile = await categoryModel.findById(cId)
                 console.log(deletedCategoryFile);
                 const filePath = `../server/public/uploads/categories/${deletedCategoryFile.cImage}`;
-                
+
                 let deleteCategory = await categoryModel.findByIdAndDelete(cId)
                 if (deleteCategory) {
                     // Delete Image from tem folder

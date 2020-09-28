@@ -1,8 +1,8 @@
 .userDropdown {
-	display: none;
+    display: none;
 }
 
 .userDropdownBtn:hover .userDropdown {
-	display: block;
-	transition:all 1s;
+    display: block;
+    transition: all 1s;
 }

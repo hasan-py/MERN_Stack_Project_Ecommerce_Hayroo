@@ -3,8 +3,8 @@ const attributeValueModel = require("../models/attributeValues");
 class attributeValues {
 
     async getAllAttributeValues(req, res) {
-    	try {
-            let attributeValues = await attributeValueModel.find({}).populate("attributeName","aName").sort({ _id: -1 })
+        try {
+            let attributeValues = await attributeValueModel.find({}).populate("attributeName", "aName").sort({ _id: -1 })
             if (attributeValues) {
                 return res.json({ attributeValues })
             }
@@ -14,7 +14,7 @@ class attributeValues {
     }
 
     async postAddAttributeValues(req, res) {
-    	let { attributeName,aValue } = req.body
+        let { attributeName, aValue } = req.body
         if (!aValue) {
             return res.json({ message: "All filled must be required" })
         } else {
@@ -39,13 +39,13 @@ class attributeValues {
     }
 
     async postEditAttributeValues(req, res) {
-    	let { avId, aValue, attributeName} = req.body
+        let { avId, aValue, attributeName } = req.body
         if (!avId || !aValue) {
             return res.json({ message: "All filled must be required" })
         }
         try {
-            let currentattributeValues = await attributeValueModel.findOne({_id:avId})
-            if(currentattributeValues.aValue === aValue){
+            let currentattributeValues = await attributeValueModel.findOne({ _id: avId })
+            if (currentattributeValues.aValue === aValue) {
                 let editattributeValues = attributeValueModel.findByIdAndUpdate(avId, {
                     aValue,
                     attributeName,
@@ -55,7 +55,7 @@ class attributeValues {
                 if (edit) {
                     return res.json({ message: "AttributeValue edit successfully" })
                 }
-            }else{
+            } else {
                 let checkAttributeValuesExists = await attributeValueModel.findOne({ aValue: aValue })
                 if (checkAttributeValuesExists) {
                     return res.json({ message: "AttributeValue's name already exists" })
@@ -77,7 +77,7 @@ class attributeValues {
     }
 
     async getDeleteAttributeValues(req, res) {
-    	let { avId } = req.body
+        let { avId } = req.body
         if (!avId) {
             return res.json({ message: "All filled must be required" })
         } else {

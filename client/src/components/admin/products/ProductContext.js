@@ -3,15 +3,15 @@ export const productState = {
     addProductModal: false,
     editProductModal: {
         modal: false,
-        pId:"",
-        pName:"",
-        pDescription:"",
-        pImages:null,
-        pStatus:"",
-        pCategory:"",
-        pQuantity:"",
-        pPrice:"",
-        pOffer:"" 
+        pId: "",
+        pName: "",
+        pDescription: "",
+        pImages: null,
+        pStatus: "",
+        pCategory: "",
+        pQuantity: "",
+        pPrice: "",
+        pOffer: ""
     }
 }
 
@@ -51,15 +51,15 @@ export const productReducer = (state, action) => {
                 ...state,
                 editProductModal: {
                     modal: false,
-                    pId:"",
-                    pName:"",
-                    pDescription:"",
-                    pImages:null,
-                    pStatus:"",
-                    pCategory:"",
-                    pQuantity:"",
-                    pPrice:"",
-                    pOffer:"" 
+                    pId: "",
+                    pName: "",
+                    pDescription: "",
+                    pImages: null,
+                    pStatus: "",
+                    pCategory: "",
+                    pQuantity: "",
+                    pPrice: "",
+                    pOffer: ""
                 }
             }
         default:

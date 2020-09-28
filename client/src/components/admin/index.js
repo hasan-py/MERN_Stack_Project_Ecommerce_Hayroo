@@ -4,8 +4,8 @@ import Categories from "./categories";
 import Products from "./products";
 
 export {
-	DashboardAdmin,
-	DashboardUser,
-	Categories,
-	Products,
+    DashboardAdmin,
+    DashboardUser,
+    Categories,
+    Products,
 }

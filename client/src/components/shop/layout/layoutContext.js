@@ -1,7 +1,7 @@
 export const layoutState = {
     navberHamburger: false,
     loginSignupModal: false,
-    cartModal:false,
+    cartModal: false,
 }
 
 export const layoutReducer = (state, action) => {

@@ -1,38 +1,38 @@
-import React,{Fragment,useState} from 'react';
-import {useHistory} from 'react-router-dom';
-import {loginReq} from "./fetchApi";
+import React, { Fragment, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { loginReq } from "./fetchApi";
 
 const Login = (props) => {
 
-  const history = useHistory();
+    const history = useHistory();
 
-  const [data,setData] = useState({
-      email:"",
-      password:"",
-      error:false,
-      loading:true
-  })
+    const [data, setData] = useState({
+        email: "",
+        password: "",
+        error: false,
+        loading: true
+    })
 
-  const alert = (msg)=> <div className="text-xs text-red-500">{msg}</div>
+    const alert = (msg) => <div className="text-xs text-red-500">{msg}</div>
 
-  const formSubmit = async ()=> {
-    setData({...data,loading:true});
-    try {
-        let responseData = await loginReq({email:data.email,password:data.password});
-        if (responseData.error) {
-            setData({ ...data, loading: false, error: responseData.error, password: "" })
-        } else if (responseData.token) {
-            setData({ email: "",password: "", loading: false, error: false})
-            localStorage.setItem("jwt",JSON.stringify(responseData))
-            window.location.href = "/admin/dashboard";
+    const formSubmit = async () => {
+        setData({ ...data, loading: true });
+        try {
+            let responseData = await loginReq({ email: data.email, password: data.password });
+            if (responseData.error) {
+                setData({ ...data, loading: false, error: responseData.error, password: "" })
+            } else if (responseData.token) {
+                setData({ email: "", password: "", loading: false, error: false })
+                localStorage.setItem("jwt", JSON.stringify(responseData))
+                window.location.href = "/admin/dashboard";
+            }
+        } catch (error) {
+            console.log(error);
         }
-    } catch(error) {
-        console.log(error);
     }
-  }
 
-  return (
-    <Fragment>
+    return (
+        <Fragment>
           <div className="text-center text-2xl mb-6">Login</div>
           <form className="space-y-4">
             <div className="flex flex-col">
@@ -55,7 +55,7 @@ const Login = (props) => {
             <div onClick={e=> formSubmit()} style={{background: '#303031'}} className="font-medium px-4 py-2 text-white text-center cursor-pointer">Login</div>
           </form>
     </Fragment>
-  )
+    )
 }
 
 export default Login;

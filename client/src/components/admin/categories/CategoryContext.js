@@ -7,7 +7,7 @@ export const categoryState = {
         des: "",
         status: "",
     },
-    loading:false,
+    loading: false,
 }
 
 export const categoryReducer = (state, action) => {
@@ -48,7 +48,7 @@ export const categoryReducer = (state, action) => {
         case 'loading':
             return {
                 ...state,
-                loading:action.payload
+                loading: action.payload
             }
         default:
             return state

@@ -4,7 +4,7 @@ const attributeModel = require("../models/attributes");
 class Attribute {
 
     async getAllAttribute(req, res) {
-    	try {
+        try {
             let Attributes = await attributeModel.find({}).sort({ _id: -1 })
             if (Attributes) {
                 return res.json({ Attributes })
@@ -15,7 +15,7 @@ class Attribute {
     }
 
     async postAddAttribute(req, res) {
-    	let { aName } = req.body
+        let { aName } = req.body
         if (!aName) {
             return res.json({ message: "All filled must be required" })
         } else {
@@ -40,14 +40,14 @@ class Attribute {
     }
 
     async postEditAttribute(req, res) {
-    	let { aId, aName} = req.body
+        let { aId, aName } = req.body
         aName = toTitleCase(aName)
         if (!aId || !aName) {
             return res.json({ message: "All filled must be required" })
         }
         try {
-            let currentAttribute = attributeModel.findOne({_id:aId})
-            if(currentAttribute.aName === aName){
+            let currentAttribute = attributeModel.findOne({ _id: aId })
+            if (currentAttribute.aName === aName) {
                 let editAttribute = attributeModel.findByIdAndUpdate(aId, {
                     aName,
                     updatedAt: Date.now()
@@ -56,7 +56,7 @@ class Attribute {
                 if (edit) {
                     return res.json({ message: "Attribute edit successfully" })
                 }
-            }else{
+            } else {
                 let checkAttributeExists = await attributeModel.findOne({ aName: aName })
                 if (checkAttributeExists) {
                     return res.json({ message: "Attribute's name already exists" })
@@ -77,7 +77,7 @@ class Attribute {
     }
 
     async getDeleteAttribute(req, res) {
-    	let { aId } = req.body
+        let { aId } = req.body
         if (!aId) {
             return res.json({ message: "All filled must be required" })
         } else {

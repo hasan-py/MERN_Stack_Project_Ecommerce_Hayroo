@@ -6,11 +6,11 @@ class Product {
 
     // Delete image from static folder
     static deleteImages(images) {
-        for (var i = 0;  i<images.length; i++) {
+        for (var i = 0; i < images.length; i++) {
             let filePath = `../server/public/uploads/products/${images[i].filename}`;
             fs.unlink(filePath, (err) => {
-                if (err) { 
-                    return err 
+                if (err) {
+                    return err
                 }
             })
         }
@@ -28,66 +28,76 @@ class Product {
     }
 
     async postAddProduct(req, res) {
-        let {pName,pDescription,pPrice,pQuantity,pCategory,pOffer,pStatus} = req.body
+        let { pName, pDescription, pPrice, pQuantity, pCategory, pOffer, pStatus } = req.body
         let images = req.files
         // Validate other fileds
-        if(!pName | !pDescription | !pPrice | !pQuantity | !pCategory | !pOffer | !pStatus){
+        if (!pName | !pDescription | !pPrice | !pQuantity | !pCategory | !pOffer | !pStatus) {
             Product.deleteImages(images)
-            return res.json({error:"All filled must be required"})
+            return res.json({ error: "All filled must be required" })
         }
         // Validate Name and description
-        else if(pName.length>255 || pDescription.length>3000){
+        else if (pName.length > 255 || pDescription.length > 3000) {
             Product.deleteImages(images)
-            return res.json({error:"Name 255 & Description must not be 3000 charecter long"})
+            return res.json({ error: "Name 255 & Description must not be 3000 charecter long" })
         }
         // Validate Images
-        else if(images.length !== 2){
+        else if (images.length !== 2) {
             Product.deleteImages(images)
             return res.json({ error: "Must need to provide 2 images" })
-        }
-        else{
+        } else {
             try {
                 let allImages = [];
-                for (const img of images){
+                for (const img of images) {
                     allImages.push(img.filename)
                 }
-                let newProduct =  new productModel({
-                    pImages:allImages,
-                    pName,pDescription,pPrice,pQuantity,pCategory,pOffer,pStatus
+                let newProduct = new productModel({
+                    pImages: allImages,
+                    pName,
+                    pDescription,
+                    pPrice,
+                    pQuantity,
+                    pCategory,
+                    pOffer,
+                    pStatus
                 })
                 let save = await newProduct.save()
-                if (save){
-                    return res.json({success:"Product created successfully"})
+                if (save) {
+                    return res.json({ success: "Product created successfully" })
                 }
-            }catch(err){
+            } catch (err) {
                 console.log(err)
             }
         }
 
     }
 
-    async postEditProduct(req,res){
-        let {pId,pName,pDescription,pPrice,pQuantity,pCategory,pOffer,pStatus} = req.body
-        
-         // Validate other fileds
-        if(!pId | !pName | !pDescription | !pPrice | !pQuantity | !pCategory | !pOffer | !pStatus){
-            return res.json({error:"All filled must be required"})
+    async postEditProduct(req, res) {
+        let { pId, pName, pDescription, pPrice, pQuantity, pCategory, pOffer, pStatus } = req.body
+
+        // Validate other fileds
+        if (!pId | !pName | !pDescription | !pPrice | !pQuantity | !pCategory | !pOffer | !pStatus) {
+            return res.json({ error: "All filled must be required" })
         }
         // Validate Name and description
-        else if(pName.length>255 || pDescription.length>3000){
-            return res.json({error:"Name 255 & Description must not be 3000 charecter long"})
-        }
-        else{
+        else if (pName.length > 255 || pDescription.length > 3000) {
+            return res.json({ error: "Name 255 & Description must not be 3000 charecter long" })
+        } else {
             try {
-                let editProduct =  productModel.findByIdAndUpdate(pId,{
-                    pName,pDescription,pPrice,pQuantity,pCategory,pOffer,pStatus
+                let editProduct = productModel.findByIdAndUpdate(pId, {
+                    pName,
+                    pDescription,
+                    pPrice,
+                    pQuantity,
+                    pCategory,
+                    pOffer,
+                    pStatus
                 })
-                editProduct.exec(err=>{
-                    if(err) console.log(err);
-                    return res.json({success:"Product edit successfully"})
+                editProduct.exec(err => {
+                    if (err) console.log(err);
+                    return res.json({ success: "Product edit successfully" })
                 })
-                
-            }catch(err){
+
+            } catch (err) {
                 console.log(err)
             }
         }
@@ -103,11 +113,11 @@ class Product {
                 let deleteProduct = await productModel.findByIdAndDelete(pId)
                 if (deleteProduct) {
                     // Deleting from static file
-                    for (const img of deleteProductObj.pImages){
+                    for (const img of deleteProductObj.pImages) {
                         let filePath = `../server/public/uploads/products/${img}`;
                         fs.unlink(filePath, (err) => {
-                            if (err) { 
-                                return err 
+                            if (err) {
+                                return err
                             }
                         })
                     }
@@ -119,8 +129,8 @@ class Product {
         }
     }
 
-    async getSingleProduct(req,res) {
-         return res.json({hello:"hi"})
+    async getSingleProduct(req, res) {
+        return res.json({ hello: "hi" })
     }
 
 

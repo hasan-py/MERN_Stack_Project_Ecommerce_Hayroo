@@ -130,7 +130,19 @@ class Product {
     }
 
     async getSingleProduct(req, res) {
-        return res.json({ hello: "hi" })
+        let {pId} = req.body
+        if(!pId){
+            return res.json({error:"All filled must be required"})
+        }else {
+            try {
+                let singleProduct = await productModel.findById(pId).populate('pCategory','cName')
+                if (singleProduct) {
+                    return res.json({ Product:singleProduct })
+                }
+            } catch (err) {
+                console.log(err)
+            }
+        }
     }
 
 

@@ -1,10 +1,13 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, useContext } from 'react'
 import {useHistory} from "react-router-dom";
 import {getAllProduct} from "../../admin/products/FetchApi"
+import {HomeContext} from "./index"
+
 const apiURL = process.env.REACT_APP_API_URL
 
 const SingleProduct = (props) => {
-	const [products,setProducts] = useState(null)
+	const {data,dispatch} = useContext(HomeContext)
+	const {products} = data
 	const history = useHistory()
 
 	useEffect(()=> {
@@ -15,7 +18,7 @@ const SingleProduct = (props) => {
 		try {
 			let responseData = await getAllProduct();
 			if(responseData && responseData.Products){
-				setProducts(responseData.Products)
+				dispatch({type:"setProducts",payload:responseData.Products})
 			}
 		}catch(error){
 			console.log(error)
@@ -26,9 +29,9 @@ const SingleProduct = (props) => {
         <Fragment>
         {
         	products && products.length > 0 
-        	? products.map(item=> {
+        	? products.map((item,index)=> {
         		return (
-        			<Fragment>
+        			<Fragment key={index}>
         				<div className="relative col-span-1 m-2">
 					        <img onClick={e=> history.push(`/products/${item._id}`)} className="w-full object-cover object-center cursor-pointer" src={`${apiURL}/uploads/products/${item.pImages[0]}`} alt="" />
 					        <div className="flex items-center justify-between mt-2">
@@ -50,7 +53,7 @@ const SingleProduct = (props) => {
         			</Fragment>
         		)
         	})
-        	: <div> No Product Found</div>
+        	: <div className="text-xl text-center my-8 w-full">No product found</div>
         }
 	    </Fragment>
     )

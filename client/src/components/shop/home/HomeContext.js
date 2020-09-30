@@ -1,7 +1,8 @@
 export const homeState = {
-    categoryListDropdown: true,
+    categoryListDropdown: false,
     filterListDropdown: false,
     searchDropdown: false,
+    products:null,
 }
 
 export const homeReducer = (state, action) => {
@@ -26,6 +27,20 @@ export const homeReducer = (state, action) => {
                 categoryListDropdown: false,
                 filterListDropdown: false,
                 searchDropdown: action.payload
+            }
+        case 'setProducts':
+            return {
+                ...state,
+                products:action.payload
+            }       
+        case 'searchHandleInReducer':
+            return {
+                ...state,
+                products: action.productArray && action.productArray.filter(item=> {
+                    if(item.pName.toUpperCase().indexOf(action.payload.toUpperCase()) !== -1 ){
+                        return item
+                    }
+                })
             }
         default:
             return state

@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { getSingleProduct } from "./FetchApi"
+import Submenu from "./Submenu";
 
 const apiURL = process.env.REACT_APP_API_URL
 
@@ -45,11 +46,12 @@ const ProductDetailsSection = (props) => {
 
 	if(!data){
 		return (
-			<div>No product</div>
+			<div className="text-2xl text-center my-8">No product</div>
 		)
 	}
     return (
         <Fragment>
+        	<Submenu value={{product:data.pName,category:data.pCategory.cName}} />
 		    <section className="m-4 md:mx-12 md:my-6">
 		        <div className="grid grid-cols-2 md:grid-cols-12">
 		          <div className="hidden md:block md:col-span-1 md:flex md:flex-col md:space-y-4 md:mr-2">

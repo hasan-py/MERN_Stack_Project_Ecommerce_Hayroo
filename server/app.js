@@ -38,7 +38,7 @@ app.use(express.json());
 // Routes
 app.use('/api', authRouter)
 app.use('/api', brandRouter)
-app.use('/api/category', loginCheck , categoryRouter)
+app.use('/api/category', categoryRouter)
 app.use('/api', attributeRouter)
 app.use('/api', subCategoryRouter)
 app.use('/api', attributeValueRouter)

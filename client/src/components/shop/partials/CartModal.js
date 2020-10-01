@@ -3,7 +3,7 @@ import { LayoutContext } from '../index';
 
 const CartModal = (props) => {
     const { data, dispatch } = useContext(LayoutContext);
-    const cartModalOpen = () => data.cartModal ? dispatch({ type: "cartModalToggle", payload: false }) : dispatch({ type: "cartModalToggle", payload: true })
+    const cartModalOpen = () => dispatch({ type: "cartModalToggle", payload: !data.cartModal })
 
     return (
         <Fragment>
@@ -46,7 +46,7 @@ const CartModal = (props) => {
 		            </div>
 		          </div>
 		          <div className="m-4 space-y-4">
-		            <div className="px-4 py-2 border border-gray-400 text-white text-center cursor-pointer">Continue shipping</div>
+		            <div onClick={e=> cartModalOpen()} className="cursor-pointer px-4 py-2 border border-gray-400 text-white text-center cursor-pointer">Continue shipping</div>
 		            <div className="px-4 py-2 bg-black text-white text-center cursor-pointer">Checkout</div>
 		          </div>
 		        </div>

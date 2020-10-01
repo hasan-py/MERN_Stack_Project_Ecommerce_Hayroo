@@ -17,6 +17,9 @@ class Product {
     }
 
     async getAllProduct(req, res) {
+        if(req.params){
+            console.log(req.params);
+        }
         try {
             let Products = await productModel.find({}).populate("pCategory", "_id cName").sort({ _id: -1 })
             if (Products) {
@@ -145,6 +148,37 @@ class Product {
         }
     }
 
+    async getProductByCategory(req, res) {
+        let {catId} = req.body
+        if(!catId){
+            return res.json({error:"All filled must be required"})
+        }else {
+            try {
+                let products = await productModel.find({pCategory:catId}).populate('pCategory','cName')
+                if (products) {
+                    return res.json({ Products:products })
+                }
+            } catch (err) {
+                return res.json({error:"Search product wrong"})
+            }
+        }
+    }
+
+    async getProductByPrice(req, res) {
+        let {price} = req.body
+        if(!price){
+            return res.json({error:"All filled must be required"})
+        }else {
+            try {
+                let products = await productModel.find({pPrice:{ $lt: price}}).populate('pCategory','cName').sort({pPrice:-1})
+                if (products) {
+                    return res.json({ Products:products })
+                }
+            } catch (err) {
+                return res.json({error:"Filter product wrong"})
+            }
+        }
+    }
 
 }
 

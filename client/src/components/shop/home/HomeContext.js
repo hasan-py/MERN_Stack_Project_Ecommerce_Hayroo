@@ -3,6 +3,7 @@ export const homeState = {
     filterListDropdown: false,
     searchDropdown: false,
     products:null,
+    loading:false,
 }
 
 export const homeReducer = (state, action) => {
@@ -41,6 +42,11 @@ export const homeReducer = (state, action) => {
                         return item
                     }
                 })
+            }
+        case 'loading':
+            return {
+                ...state,
+                loading:action.payload
             }
         default:
             return state

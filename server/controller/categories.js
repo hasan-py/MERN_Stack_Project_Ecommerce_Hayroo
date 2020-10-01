@@ -81,7 +81,6 @@ class Category {
             try {
 
                 let deletedCategoryFile = await categoryModel.findById(cId)
-                console.log(deletedCategoryFile);
                 const filePath = `../server/public/uploads/categories/${deletedCategoryFile.cImage}`;
 
                 let deleteCategory = await categoryModel.findByIdAndDelete(cId)

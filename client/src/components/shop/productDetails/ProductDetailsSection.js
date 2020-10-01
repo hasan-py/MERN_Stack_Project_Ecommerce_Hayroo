@@ -102,7 +102,11 @@ const ProductDetailsSection = (props) => {
 		                  <span><svg className="w-5 h-5 fill-current cursor-pointer" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" /></svg></span>
 		                </div>
 		              </div>
-		              <div style={{background: '#303031'}} className="px-4 py-2 text-white text-center cursor-pointer">Add to cart</div>
+		              {
+		              	sProduct.pQuantity > 0 
+		              	? <div style={{background: '#303031'}} className="px-4 py-2 text-white text-center cursor-pointer">Add to cart</div>
+		              	: <div style={{background: '#303031'}} disabled={true} className="px-4 py-2 text-white opacity-50 cursor-not-allowed text-center">Out of stock</div>
+		              }
 		            </div>
 		          </div>
 		        </div>

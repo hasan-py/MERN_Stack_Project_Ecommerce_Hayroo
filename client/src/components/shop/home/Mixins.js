@@ -6,7 +6,6 @@ export const isWish = (id,wList)=> {
 }
 
 export const isWishReq = (e,id,setWlist)=> {
-	console.log("wish click",id)
 	let list = localStorage.getItem("wishList") ? JSON.parse(localStorage.getItem("wishList")) : []
 	if(list.length > 0){
 		if(list.includes(id) !== true){
@@ -22,7 +21,6 @@ export const isWishReq = (e,id,setWlist)=> {
 }
 
 export const unWishReq = (e,id,setWlist)=> {
-	console.log("Unwish click",id)
 	let list = localStorage.getItem("wishList") ? JSON.parse(localStorage.getItem("wishList")) : []
 	if(list.length > 0){
 		if(list.includes(id) === true){

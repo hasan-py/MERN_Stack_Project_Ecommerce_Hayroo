@@ -3,16 +3,23 @@ import { useParams, useHistory, Redirect } from 'react-router-dom';
 import { getSingleProduct } from "./FetchApi"
 import Submenu from "./Submenu";
 import {ProductDetailsContext} from "./index"
+
 import {isWishReq,unWishReq,isWish} from "../home/Mixins";
+import {updateQuantity,slideImage,inCart} from './Mixins';
 
 const apiURL = process.env.REACT_APP_API_URL
 
 const ProductDetailsSection = (props) => {
 
 	const {data,dispatch} = useContext(ProductDetailsContext)
-	const [sProduct,setSproduct] = useState(null)
+	const sProduct = data.singleProduct
 	const [pImages,setPimages] = useState(null)
 	const [count,setCount] = useState(0)
+
+	const [quantitiy,setQuantitiy] = useState(1)
+	const [alertQ,setAlertq] = useState(false)
+
+
 	// This State control wishlist
 	const [wList,setWlist] = useState(JSON.parse(localStorage.getItem("wishList")))
 
@@ -29,7 +36,7 @@ const ProductDetailsSection = (props) => {
 			let responseData = await getSingleProduct(id);
 			setTimeout(()=> {
 				if(responseData.Product){
-					setSproduct(responseData.Product);
+					dispatch({type:"singleProduct",payload:responseData.Product});
 					setPimages(responseData.Product.pImages);
 					dispatch({type:"loading",payload:false})
 				}
@@ -42,18 +49,24 @@ const ProductDetailsSection = (props) => {
 		}
 	}
 
-	const slideImage = (type,active)=> {
-		if(active === count){
-			return true
-		}
-		if(type == "increase"){		
-			if(count === pImages.length-1){
-				setCount(0)
+	const addToCart = (id,quantitiy)=> {
+		console.log(id,quantitiy);
+		let list = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : []
+		if(list.length > 0){
+			for (let product of list){
+				if(product.id === id){
+					return false
+				}
+				else{
+					list.push({id,quantitiy})
+					localStorage.setItem("cart",JSON.stringify(list))
+				}
 			}
-			else if(count < pImages.length){
-				setCount(count+1)
-			}
+		}else{
+			list.push({id,quantitiy})
+			localStorage.setItem("cart",JSON.stringify(list))
 		}
+		fetchData()
 	}
 
 	if(data.loading){
@@ -67,15 +80,15 @@ const ProductDetailsSection = (props) => {
 		    <section className="m-4 md:mx-12 md:my-6">
 		        <div className="grid grid-cols-2 md:grid-cols-12">
 		          <div className="hidden md:block md:col-span-1 md:flex md:flex-col md:space-y-4 md:mr-2">
-		            <img onClick={e=> slideImage('increase',0)} className={`${count === 0 ? "" : "opacity-25"} cursor-pointer w-20 h-20 object-cover object-center`} src={`${apiURL}/uploads/products/${sProduct.pImages[0]}`} alt="pic" />
-		            <img onClick={e=> slideImage('increase',1)} className={`${count === 1 ? "" : "opacity-25"} cursor-pointer w-20 h-20 object-cover object-center`} src={`${apiURL}/uploads/products/${sProduct.pImages[1]}`} alt="pic" />
+		            <img onClick={e=> slideImage('increase',0,count,setCount,pImages)} className={`${count === 0 ? "" : "opacity-25"} cursor-pointer w-20 h-20 object-cover object-center`} src={`${apiURL}/uploads/products/${sProduct.pImages[0]}`} alt="pic" />
+		            <img onClick={e=> slideImage('increase',1,count,setCount,pImages)} className={`${count === 1 ? "" : "opacity-25"} cursor-pointer w-20 h-20 object-cover object-center`} src={`${apiURL}/uploads/products/${sProduct.pImages[1]}`} alt="pic" />
 		          </div>
 		          <div className="col-span-2 md:col-span-7">
 		            <div className="relative">
 		              <img className="w-full" src={`${apiURL}/uploads/products/${sProduct.pImages[count]}`} alt="Pic" />
 		              <div className="absolute inset-0 flex justify-between items-center mb-4">
-		                <svg onClick={e=> slideImage('increase')} className="flex justify-center  w-12 h-12 text-gray-700 opacity-25 cursor-pointer hover:text-yellow-700 hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-		                <svg onClick={e=> slideImage('increase')} className="flex justify-center  w-12 h-12 text-gray-700 opacity-25 cursor-pointer hover:text-yellow-700 hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+		                <svg onClick={e=> slideImage('increase',null,count,setCount,pImages)} className="flex justify-center  w-12 h-12 text-gray-700 opacity-25 cursor-pointer hover:text-yellow-700 hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+		                <svg onClick={e=> slideImage('increase',null,count,setCount,pImages)} className="flex justify-center  w-12 h-12 text-gray-700 opacity-25 cursor-pointer hover:text-yellow-700 hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
 		              </div>
 		            </div>
 		          </div>
@@ -94,17 +107,34 @@ const ProductDetailsSection = (props) => {
 		              {sProduct.pDescription}
 		            </div>
 		            <div className="my-4 md:my-6">
-		              <div className="flex justify-between items-center px-4 py-2 border">
-		                <div>Quantity</div>
-		                <div className="flex items-center space-x-2">
-		                  <span><svg className="w-5 h-5 fill-current cursor-pointer" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" /></svg></span>
-		                  <span className="font-semibold">1</span>
-		                  <span><svg className="w-5 h-5 fill-current cursor-pointer" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" /></svg></span>
-		                </div>
+			            {
+			            	quantitiy===sProduct.pQuantity && <span className="text-xs text-red-500">Stock limited</span>
+			            }
+		              <div className={`flex justify-between items-center px-4 py-2 border ${quantitiy===sProduct.pQuantity && "border-red-500"}`}>
+		                <div className={`${quantitiy===sProduct.pQuantity && "text-red-500"}`}>Quantity</div>
+		                {
+		                	sProduct.pQuantity > 0 
+		                	? 	<div className="flex items-center space-x-2">
+				                  <span onClick={e=> updateQuantity('decrease',sProduct.pQuantity,quantitiy,setQuantitiy,setAlertq)}><svg className="w-5 h-5 fill-current cursor-pointer" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" /></svg></span>
+				                  <span className="font-semibold">{quantitiy}</span>
+				                  <span onClick={e=> updateQuantity('increase',sProduct.pQuantity,quantitiy,setQuantitiy,setAlertq)}><svg className="w-5 h-5 fill-current cursor-pointer" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" /></svg></span>
+				                </div>
+				            : 	<div className="flex items-center space-x-2">
+				                  <span><svg className="w-5 h-5 fill-current cursor-not-allowed" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" /></svg></span>
+				                  <span className="font-semibold">0</span>
+				                  <span><svg className="w-5 h-5 fill-current cursor-not-allowed" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" /></svg></span>
+		                		</div>
+		                }
 		              </div>
 		              {
 		              	sProduct.pQuantity > 0 
-		              	? <div style={{background: '#303031'}} className="px-4 py-2 text-white text-center cursor-pointer">Add to cart</div>
+		              	? <Fragment>
+		              		{
+		              			inCart(id) 
+		              			? <div style={{background: '#303031'}} className={`px-4 py-2 text-white text-center cursor-not-allowed`}>In cart</div>
+		              			: <div onClick={e=> addToCart(sProduct._id,quantitiy)} style={{background: '#303031'}} className={`px-4 py-2 text-white text-center cursor-pointer`}>Add to cart</div>	
+		              		}
+		              	  </Fragment>
 		              	: <div style={{background: '#303031'}} disabled={true} className="px-4 py-2 text-white opacity-50 cursor-not-allowed text-center">Out of stock</div>
 		              }
 		            </div>

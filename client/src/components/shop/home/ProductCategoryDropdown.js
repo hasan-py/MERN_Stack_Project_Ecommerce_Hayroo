@@ -64,7 +64,6 @@ const FilterList = () => {
 			try {
 				let responseData = await getAllProduct();
 				if(responseData && responseData.Products){
-					console.log(responseData.Products)
 					dispatch({type:"setProducts",payload:responseData.Products})
 				}
 			}catch(error){

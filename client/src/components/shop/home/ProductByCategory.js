@@ -80,7 +80,6 @@ const PageComponent = () => {
 			let responseData = await productByCategory(catId);
 			if(responseData && responseData.Products){
 				setProducts(responseData.Products)
-				console.log(responseData.Products);
 			}
 		}catch(error){
 			console.log(error)

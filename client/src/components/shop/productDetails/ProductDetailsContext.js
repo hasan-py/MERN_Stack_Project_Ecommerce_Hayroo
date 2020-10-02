@@ -1,6 +1,6 @@
 export const productDetailsState = {
     singleProduct:null,
-    loading:false,
+    loading:false
 }
 
 export const productDetailsReducer = (state, action) => {
@@ -14,6 +14,11 @@ export const productDetailsReducer = (state, action) => {
             return {
                 ...state,
                 loading: action.payload
+            }
+        case 'cartState':
+            return {
+                ...state,
+                cartState: action.payload
             }
         default:
             return state

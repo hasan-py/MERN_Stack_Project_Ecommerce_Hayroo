@@ -5,11 +5,14 @@ import Submenu from "./Submenu";
 import {ProductDetailsContext} from "./index"
 
 import {isWishReq,unWishReq,isWish} from "../home/Mixins";
-import {updateQuantity,slideImage,inCart} from './Mixins';
+import {updateQuantity,slideImage,inCart,addToCart} from './Mixins';
 
 const apiURL = process.env.REACT_APP_API_URL
 
 const ProductDetailsSection = (props) => {
+
+    let { id } = useParams()
+	const history = useHistory()
 
 	const {data,dispatch} = useContext(ProductDetailsContext)
 	const sProduct = data.singleProduct
@@ -18,13 +21,10 @@ const ProductDetailsSection = (props) => {
 
 	const [quantitiy,setQuantitiy] = useState(1)
 	const [alertQ,setAlertq] = useState(false)
-
+	const [cartState,setCartstate] = useState(inCart(id))
 
 	// This State control wishlist
 	const [wList,setWlist] = useState(JSON.parse(localStorage.getItem("wishList")))
-
-    let { id } = useParams()
-	const history = useHistory()
 
 	useEffect(()=> {
 		fetchData()
@@ -47,26 +47,6 @@ const ProductDetailsSection = (props) => {
 		}catch(error){
 			console.log(error)
 		}
-	}
-
-	const addToCart = (id,quantitiy)=> {
-		console.log(id,quantitiy);
-		let list = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : []
-		if(list.length > 0){
-			for (let product of list){
-				if(product.id === id){
-					return false
-				}
-				else{
-					list.push({id,quantitiy})
-					localStorage.setItem("cart",JSON.stringify(list))
-				}
-			}
-		}else{
-			list.push({id,quantitiy})
-			localStorage.setItem("cart",JSON.stringify(list))
-		}
-		fetchData()
 	}
 
 	if(data.loading){
@@ -114,14 +94,24 @@ const ProductDetailsSection = (props) => {
 		                <div className={`${quantitiy===sProduct.pQuantity && "text-red-500"}`}>Quantity</div>
 		                {
 		                	sProduct.pQuantity > 0 
-		                	? 	<div className="flex items-center space-x-2">
-				                  <span onClick={e=> updateQuantity('decrease',sProduct.pQuantity,quantitiy,setQuantitiy,setAlertq)}><svg className="w-5 h-5 fill-current cursor-pointer" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" /></svg></span>
-				                  <span className="font-semibold">{quantitiy}</span>
-				                  <span onClick={e=> updateQuantity('increase',sProduct.pQuantity,quantitiy,setQuantitiy,setAlertq)}><svg className="w-5 h-5 fill-current cursor-pointer" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" /></svg></span>
-				                </div>
+		                	? 	<Fragment>
+		                			{
+		                				!cartState
+		                				? 	<div className="flex items-center space-x-2">
+							                  <span onClick={e=> updateQuantity('decrease',sProduct.pQuantity,quantitiy,setQuantitiy,setAlertq)}><svg className="w-5 h-5 fill-current cursor-pointer" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" /></svg></span>
+							                  <span className="font-semibold">{quantitiy}</span>
+							                  <span onClick={e=> updateQuantity('increase',sProduct.pQuantity,quantitiy,setQuantitiy,setAlertq)}><svg className="w-5 h-5 fill-current cursor-pointer" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" /></svg></span>
+							                </div>
+							            : 	<div className="flex items-center space-x-2">
+							                  <span><svg className="w-5 h-5 fill-current cursor-not-allowed" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" /></svg></span>
+							                  <span className="font-semibold">{quantitiy}</span>
+							                  <span><svg className="w-5 h-5 fill-current cursor-not-allowed" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" /></svg></span>
+							                </div>
+		                			}
+		                	 	</Fragment>
 				            : 	<div className="flex items-center space-x-2">
 				                  <span><svg className="w-5 h-5 fill-current cursor-not-allowed" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" /></svg></span>
-				                  <span className="font-semibold">0</span>
+				                  <span className="font-semibold">{quantitiy}</span>
 				                  <span><svg className="w-5 h-5 fill-current cursor-not-allowed" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" /></svg></span>
 		                		</div>
 		                }
@@ -129,13 +119,20 @@ const ProductDetailsSection = (props) => {
 		              {
 		              	sProduct.pQuantity > 0 
 		              	? <Fragment>
-		              		{
-		              			inCart(id) 
-		              			? <div style={{background: '#303031'}} className={`px-4 py-2 text-white text-center cursor-not-allowed`}>In cart</div>
-		              			: <div onClick={e=> addToCart(sProduct._id,quantitiy)} style={{background: '#303031'}} className={`px-4 py-2 text-white text-center cursor-pointer`}>Add to cart</div>	
-		              		}
+			              	{
+			              		cartState
+			              		? <div style={{background: '#303031'}} className={`px-4 py-2 text-white text-center cursor-not-allowed uppercase opacity-75`}>In cart</div>	
+			              		: <div onClick={e=> addToCart(sProduct._id,quantitiy,setCartstate,setQuantitiy,setAlertq)} style={{background: '#303031'}} className={`px-4 py-2 text-white text-center cursor-pointer uppercase`}>Add to cart</div>	
+			              	}
 		              	  </Fragment>
-		              	: <div style={{background: '#303031'}} disabled={true} className="px-4 py-2 text-white opacity-50 cursor-not-allowed text-center">Out of stock</div>
+
+		              	: <Fragment>
+			              	{
+			              		cartState
+			              		? <div style={{background: '#303031'}} className={`px-4 py-2 text-white text-center cursor-not-allowed uppercase opacity-75`}>In cart</div>	
+			              		: <div style={{background: '#303031'}} disabled={true} className="px-4 py-2 text-white opacity-50 cursor-not-allowed text-center uppercase">Out of stock</div>
+			              	}
+		              	  </Fragment> 
 		              }
 		            </div>
 		          </div>

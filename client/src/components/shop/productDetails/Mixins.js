@@ -3,11 +3,9 @@ export const updateQuantity = (type,totalQuantitiy,quantitiy,setQuantitiy,setAle
 	if(type === 'increase'){
 		if(quantitiy === totalQuantitiy){
 			setAlertq(true)
-			console.log("alert show");
 		}else{
 			setQuantitiy(quantitiy+1)
 		}
-		console.log('increase click',totalQuantitiy);
 	}else if(type === 'decrease'){
 		if(quantitiy===0){
 			setQuantitiy(0)
@@ -37,11 +35,31 @@ export const inCart = (id)=> {
 		let cartProducts = JSON.parse(localStorage.getItem("cart"))
 		for(let product of cartProducts){
 			if(product.id === id){
-				console.log("in cart call");
 				return true
 			}
-			return false
 		}
 	}
 	return false
+}
+
+export const addToCart = (id,quantitiy,setCartstate,setQuantitiy,setAlertq)=> {
+	let isObj = false
+	let cart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : []
+	if(cart.length > 0){
+		cart.forEach((item)=> {
+			if(item.id === id ){
+				isObj = true
+			}
+		});
+		if(!isObj){
+			cart.push({id,quantitiy})
+			localStorage.setItem("cart",JSON.stringify(cart))
+		}
+	}else{
+		cart.push({id,quantitiy})
+		localStorage.setItem("cart",JSON.stringify(cart))
+	}
+	setCartstate(inCart(id))
+	setQuantitiy(1)
+	setAlertq(false)
 }

@@ -2,6 +2,10 @@ export const layoutState = {
     navberHamburger: false,
     loginSignupModal: false,
     cartModal: false,
+    cartProduct:null,
+    singleProductDetail:null,
+    inCart:null,
+    cartTotalCost:null,
 }
 
 export const layoutReducer = (state, action) => {
@@ -20,6 +24,26 @@ export const layoutReducer = (state, action) => {
             return {
                 ...state,
                 cartModal: action.payload
+            }
+        case 'cartProduct':
+            return {
+                ...state,
+                cartProduct: action.payload
+            }
+        case 'singleProductDetail':
+            return {
+                ...state,
+                singleProductDetail: action.payload
+            }
+        case 'inCart':
+            return {
+                ...state,
+                inCart: action.payload
+            }
+        case 'cartTotalCost':
+            return {
+                ...state,
+                cartTotalCost: action.payload
             }
         default:
             return state

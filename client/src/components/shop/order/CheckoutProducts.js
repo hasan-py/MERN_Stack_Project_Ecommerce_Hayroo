@@ -4,7 +4,7 @@ import Layout, { LayoutContext } from '../layout';
 import { subTotal, quantity, totalCost } from '../partials/Mixins'
 
 import { cartListProduct } from '../partials/FetchApi';
-import { getBrainTreeToken } from './FetchApi';
+import { getBrainTreeToken, getPaymentProcess } from './FetchApi';
 
 import DropIn from "braintree-web-drop-in-react";
 
@@ -12,6 +12,7 @@ const apiURL = process.env.REACT_APP_API_URL
 
 export const CheckoutComponent = (props) => {
 
+	const history = useHistory()
 	const {data,dispatch} = useContext(LayoutContext)
 	const [state,setState] = useState({
 		error:false,
@@ -48,8 +49,44 @@ export const CheckoutComponent = (props) => {
         }
     }
 
+    const fetchTransaction = async () => {
+        try {
+            let responseData = await getBrainTreeToken();
+            if (responseData && responseData) {
+            	setState({clientToken:responseData.clientToken, success:responseData.success})
+                console.log(responseData);
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     const pay = ()=> {
-    	console.log("pay");
+    	let nonce;
+    	console.log(state.instance);
+    	let getNonce = state.instance.requestPaymentMethod()
+    	.then(data=> {
+    		nonce = data.nonce;
+    		let paymentData = {
+	    		amountTotal:totalCost(),
+	    		paymentMethod:nonce
+    		}
+    		getPaymentProcess(paymentData)
+    		.then(res=> {
+    			console.log(res);
+    			localStorage.setItem('cart',JSON.stringify([]))
+    			dispatch({type:"cartProduct",payload:null})
+    			dispatch({type:"cartTotalCost",payload:null})
+    			return history.push('/')
+    		})
+    		.catch(err=> {
+    			console.log(err);
+    		})
+    	})
+    	.catch(error=> {
+    		console.log(error);
+    		setState({...state,error:error.message})
+    	})
     }
 
     return (
@@ -68,7 +105,7 @@ export const CheckoutComponent = (props) => {
 	            	 		<div className="p-4 md:p-8">
 		            	 		<DropIn
 					            options={{ authorization: state.clientToken }}
-					            onInstance={(instance) => instance = instance}
+					            onInstance={(instance) => state.instance = instance}
 					          	/>
 		            	 		<div onClick={e=> pay()} className="w-full px-4 py-2 text-center text-white font-semibold cursor-pointer" style={{background: '#303031'}}>Pay now</div>
 	            	 		</div>

@@ -6,6 +6,8 @@ export const cartList = () => {
             list.push(cart.id)
         }
         return list
+    }else{
+        return list = null
     }
 }
 

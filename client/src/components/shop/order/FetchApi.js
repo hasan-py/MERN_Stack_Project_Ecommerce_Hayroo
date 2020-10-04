@@ -10,3 +10,12 @@ export const getBrainTreeToken = async () => {
         console.log(error);
     }
 }
+
+export const getPaymentProcess = async (paymentData) => {
+    try {
+        let res = await axios.post(`${apiURL}/api/braintree/payment`,paymentData)
+        return res.data;
+    } catch (error) {
+        console.log(error);
+    }
+}

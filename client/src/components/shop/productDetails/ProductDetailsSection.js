@@ -112,10 +112,10 @@ const ProductDetailsSection = (props) => {
 			                <div className={`${quantitiy === sProduct.pQuantity && "text-red-500"}`}>Quantity</div>
 			                {/* Quantity Button */}
 				                {
-				                	sProduct.pQuantity > 0 
+				                	sProduct.pQuantity !== 0
 				                	? 	<Fragment>
 				                			{
-				                				layoutData.inCart!==null && layoutData.inCart.includes(sProduct._id) === false
+				                				layoutData.inCart === null || layoutData.inCart !== null && layoutData.inCart.includes(sProduct._id) === false
 				                				? 	<div className="flex items-center space-x-2">
 									                  <span onClick={e=> updateQuantity('decrease',sProduct.pQuantity,quantitiy,setQuantitiy,setAlertq)}><svg className="w-5 h-5 fill-current cursor-pointer" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" /></svg></span>
 									                  <span className="font-semibold">{quantitiy}</span>
@@ -138,7 +138,7 @@ const ProductDetailsSection = (props) => {
 			              </div>
 			          	  {/* Incart and out of stock button */}
 				              {
-				              	sProduct.pQuantity > 0 
+				              	sProduct.pQuantity !== 0 
 				              	? <Fragment>
 					              	{
 					              	layoutData.inCart!==null && layoutData.inCart.includes(sProduct._id) === true

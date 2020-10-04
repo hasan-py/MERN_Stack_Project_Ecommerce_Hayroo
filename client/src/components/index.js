@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Home, WishList, ProtectedRoute, AdminProtectedRoute, PageNotFound, ProductDetails, ProductByCategory } from "./shop";
+import { Home, WishList, ProtectedRoute, AdminProtectedRoute, CartProtectedRoute, PageNotFound, ProductDetails, ProductByCategory, CheckoutPage } from "./shop";
 import { DashboardAdmin, DashboardUser, Categories, Products } from "./admin";
 
 import {
@@ -19,6 +19,7 @@ const Routes = (props) => {
                 <Route exact path="/wish-list" component={WishList} />
                 <Route exact path="/products/:id" component={ProductDetails} />
                 <Route exact path="/products/category/:catId" component={ProductByCategory} />
+                <CartProtectedRoute exact path="/checkout" component={CheckoutPage} />
                 {/* Shop & Public Routes */}
 
 

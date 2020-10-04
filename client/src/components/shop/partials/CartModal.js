@@ -1,12 +1,17 @@
 import React, { Fragment, useContext, useEffect, useState } from 'react';
+import {useHistory} from 'react-router-dom';
 import { LayoutContext } from '../index';
 import { cartListProduct } from './FetchApi';
+import { isAuthenticate } from "../auth/fetchApi";
 import { cartList } from "../productDetails/Mixins"
 import { subTotal, quantity, totalCost } from './Mixins'
 
 const apiURL = process.env.REACT_APP_API_URL
 
 const CartModal = (props) => {
+
+	const history = useHistory()
+
     const { data, dispatch } = useContext(LayoutContext);
     const products = data.cartProduct
 
@@ -41,7 +46,6 @@ const CartModal = (props) => {
             dispatch({ type: "cartProduct", payload: null })
             fetchData()
             dispatch({ type: "inCart", payload: cartList() })
-            dispatch({ type: "cartTotalCost", payload: totalCost() })
         }
     }
 
@@ -101,8 +105,14 @@ const CartModal = (props) => {
 		            <div onClick={e=> cartModalOpen()} className="cursor-pointer px-4 py-2 border border-gray-400 text-white text-center cursor-pointer">Continue shipping</div>
 		            {
 		            	data.cartTotalCost
-		            	? <div className="px-4 py-2 bg-black text-white text-center cursor-pointer">Checkout ${data.cartTotalCost}.00</div>
-		            	: <div className="px-4 py-2 bg-black text-white text-center cursor-pointer">Checkout</div>
+		            	? <Fragment>
+		            		 {
+		            		 	isAuthenticate()
+		            		 	? <div className="px-4 py-2 bg-black text-white text-center cursor-pointer" onClick={e=> { history.push('/checkout'); cartModalOpen() }}>Checkout ${data.cartTotalCost}.00</div>
+		            		 	: <div className="px-4 py-2 bg-black text-white text-center cursor-pointer" onClick={e=> { history.push('/'); cartModalOpen(); dispatch({type:"loginSignupError",payload:!data.loginSignupError}); dispatch({type:"loginSignupModalToggle",payload:!data.loginSignupModal}) }}>Checkout ${data.cartTotalCost}.00</div>
+		            		 }
+		            	  </Fragment>
+		            	: <div className="px-4 py-2 bg-black text-white text-center cursor-not-allowed">Checkout</div>
 		            }
 		          </div>
 		        </div>

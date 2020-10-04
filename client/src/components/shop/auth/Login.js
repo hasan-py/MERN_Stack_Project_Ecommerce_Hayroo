@@ -1,10 +1,12 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { loginReq } from "./fetchApi";
+import { LayoutContext } from "../index";
 
 const Login = (props) => {
 
     const history = useHistory();
+    const { data:layoutData, dispatch:layoutDispatch } = useContext(LayoutContext);
 
     const [data, setData] = useState({
         email: "",
@@ -24,7 +26,7 @@ const Login = (props) => {
             } else if (responseData.token) {
                 setData({ email: "", password: "", loading: false, error: false })
                 localStorage.setItem("jwt", JSON.stringify(responseData))
-                window.location.href = "/admin/dashboard";
+                window.location.href = "/";
             }
         } catch (error) {
             console.log(error);
@@ -34,15 +36,16 @@ const Login = (props) => {
     return (
         <Fragment>
           <div className="text-center text-2xl mb-6">Login</div>
+          { layoutData.loginSignupError ? <div className="bg-red-200 py-2 px-4 rounded">You need to login for checkout. Haven't accont? Create new one.</div> : "" }
           <form className="space-y-4">
             <div className="flex flex-col">
               <label htmlFor="name">Username or email address<span className="text-sm text-gray-600 ml-1">*</span></label>
-              <input onChange={e=> setData({...data,email:e.target.value,error:false})} value={data.email} type="text" id="name" className={`${!data.error ? "" : "border-red-500"} px-4 py-2 focus:outline-none border`} />
+              <input onChange={e=> {setData({...data,email:e.target.value,error:false}); layoutDispatch({type:"loginSignupError", payload:false})}} value={data.email} type="text" id="name" className={`${!data.error ? "" : "border-red-500"} px-4 py-2 focus:outline-none border`} />
               { !data.error ? "" : alert(data.error) }
             </div>
             <div className="flex flex-col">
               <label htmlFor="password">Password<span className="text-sm text-gray-600 ml-1">*</span></label>
-              <input onChange={e=> setData({...data,password:e.target.value,error:false})} value={data.password} type="password" id="password" className={`${!data.error ? "" : "border-red-500"} px-4 py-2 focus:outline-none border`} />
+              <input onChange={e=> { setData({...data,password:e.target.value,error:false}); layoutDispatch({type:"loginSignupError", payload:false}) }} value={data.password} type="password" id="password" className={`${!data.error ? "" : "border-red-500"} px-4 py-2 focus:outline-none border`} />
               { !data.error ? "" : alert(data.error) }
             </div>
             <div className="flex flex-col space-y-2 md:flex-row md:justify-between md:items-center">

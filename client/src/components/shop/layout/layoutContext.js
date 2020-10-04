@@ -1,6 +1,7 @@
 export const layoutState = {
     navberHamburger: false,
     loginSignupModal: false,
+    loginSignupError:false,
     cartModal: false,
     cartProduct:null,
     singleProductDetail:null,
@@ -44,6 +45,11 @@ export const layoutReducer = (state, action) => {
             return {
                 ...state,
                 cartTotalCost: action.payload
+            }
+        case 'loginSignupError':
+            return {
+                ...state,
+                loginSignupError: action.payload
             }
         default:
             return state

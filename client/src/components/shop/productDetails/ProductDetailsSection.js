@@ -9,6 +9,7 @@ import { cartListProduct } from "../partials/FetchApi";
 
 import { isWishReq, unWishReq, isWish } from "../home/Mixins";
 import { updateQuantity, slideImage, inCart, addToCart, cartList } from './Mixins';
+import { totalCost } from '../partials/Mixins'
 
 
 const apiURL = process.env.REACT_APP_API_URL
@@ -142,7 +143,7 @@ const ProductDetailsSection = (props) => {
 					              	{
 					              	layoutData.inCart!==null && layoutData.inCart.includes(sProduct._id) === true
 					              		? <div style={{background: '#303031'}} className={`px-4 py-2 text-white text-center cursor-not-allowed uppercase opacity-75`}>In cart</div>	
-					              		: <div onClick={e=> addToCart(sProduct._id,quantitiy,sProduct.pPrice,layoutDispatch,setQuantitiy,setAlertq,fetchData)} style={{background: '#303031'}} className={`px-4 py-2 text-white text-center cursor-pointer uppercase`}>Add to cart</div>	
+					              		: <div onClick={e=> addToCart(sProduct._id,quantitiy,sProduct.pPrice,layoutDispatch,setQuantitiy,setAlertq,fetchData,totalCost)} style={{background: '#303031'}} className={`px-4 py-2 text-white text-center cursor-pointer uppercase`}>Add to cart</div>	
 					              	}
 				              	  </Fragment>
 

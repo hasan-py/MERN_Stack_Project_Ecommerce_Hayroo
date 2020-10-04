@@ -50,7 +50,7 @@ export const inCart = (id) => {
     return false
 }
 
-export const addToCart = (id, quantitiy, price, layoutDispatch, setQuantitiy, setAlertq, fetchData) => {
+export const addToCart = (id, quantitiy, price, layoutDispatch, setQuantitiy, setAlertq, fetchData, totalCost) => {
     let isObj = false
     let cart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : []
     if (cart.length > 0) {
@@ -68,6 +68,7 @@ export const addToCart = (id, quantitiy, price, layoutDispatch, setQuantitiy, se
         localStorage.setItem("cart", JSON.stringify(cart))
     }
     layoutDispatch({ type: "inCart", payload: cartList() })
+    layoutDispatch({ type: "cartTotalCost", payload: totalCost() })
     setQuantitiy(1)
     setAlertq(false)
     fetchData()

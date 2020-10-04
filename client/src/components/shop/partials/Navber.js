@@ -29,9 +29,9 @@ const Navber = (props) => {
 			<nav className="fixed top-0 w-full z-10 shadow-lg lg:shadow-none bg-white">
 		        <div className="m-4 md:mx-12 md:my-6 grid grid-cols-4 lg:grid-cols-3">
 		          <div className="hidden lg:block col-span-1 flex text-gray-600 mt-1">
-		            <a className="hover:bg-gray-200 px-2 py-2 rounded-lg font-light tracking-widest hover:text-gray-800 cursor-pointer" href="">Shop</a>
-		            <a className="hover:bg-gray-200 px-2 py-2 rounded-lg font-light tracking-widest hover:text-gray-800 cursor-pointer" href="">Pages</a>
-		            <a className="hover:bg-gray-200 px-2 py-2 rounded-lg font-light tracking-widest hover:text-gray-800 cursor-pointer" href="">Elements</a>
+		            <a className="hover:bg-gray-200 px-4 py-3 rounded-lg font-light tracking-widest hover:text-gray-800 cursor-pointer" onClick={e=> history.push('/')}>Shop</a>
+		            <a className="hover:bg-gray-200 px-4 py-3 rounded-lg font-light tracking-widest hover:text-gray-800 cursor-pointer" onClick={e=> history.push('/blog')}>Blog</a>
+		            <a className="hover:bg-gray-200 px-4 py-3 rounded-lg font-light tracking-widest hover:text-gray-800 cursor-pointer" onClick={e=> history.push('/contact-us')}>Contact us</a>
 		          </div>
 		          <div className="col-span-2 lg:hidden flex justify-items-stretch	 items-center">
 		            <svg onClick={e=> navberToggleOpen()} className="col-span-1 lg:hidden w-8 h-8 cursor-pointer text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -91,9 +91,9 @@ const Navber = (props) => {
 		        </div>
 		        <div className={ data.navberHamburger && data.navberHamburger ? "px-1 pb-2 md:pb-0 md:px-10 lg:hidden" : "hidden px-1 pb-2 md:pb-0 md:px-10 lg:hidden"}>
 		          <div className="col-span-1 flex flex-col text-gray-600">
-		            <a className="font-medium text-lg tracking-widest hover:text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer" href="">Shop</a>
-		            <a className="font-medium text-lg tracking-widest hover:text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer" href="">Pages</a>
-		            <a className="font-medium text-lg tracking-widest hover:text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer" href="">Elements</a>
+		            <a className="font-medium text-lg tracking-widest hover:text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer" onClick={e=> history.push('/')}>Shop</a>
+		            <a className="font-medium text-lg tracking-widest hover:text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer" onClick={e=> history.push('/blog')}>Blog</a>
+		            <a className="font-medium text-lg tracking-widest hover:text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer" onClick={e=> history.push('/contact-us')}>Contact us</a>
 		          </div>
 		        </div>
 	      	</nav>

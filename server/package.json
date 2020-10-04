@@ -18,6 +18,7 @@
   "homepage": "https://github.com/hasan-py/MERN_Stack_Project_Hayroo_Ecommerce#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "braintree": "^3.0.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",

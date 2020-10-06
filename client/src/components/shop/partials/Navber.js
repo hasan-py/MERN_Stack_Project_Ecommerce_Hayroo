@@ -44,8 +44,8 @@ const Navber = (props) => {
 		          </div>
 		        <div className="flex items-right col-span-2 lg:col-span-1 flex justify-end">
 		      	  	{/*  WishList Page Button */}
-		            <div className="hover:bg-gray-200 rounded-lg px-2 py-2" title="Wishlist">
-		              <svg onClick={e=> history.push('/wish-list')} className={`${location.pathname == '/wish-list' ? "fill-current" : ""} cursor-pointer w-8 h-8 text-gray-600 hover:text-gray-800`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+		            <div onClick={e=> history.push('/wish-list')} className="hover:bg-gray-200 rounded-lg px-2 py-2 cursor-pointer" title="Wishlist">
+		              <svg className={`${location.pathname == '/wish-list' ? "fill-current" : ""} w-8 h-8 text-gray-600 hover:text-gray-800`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 		                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
 		              </svg>
 		            </div>

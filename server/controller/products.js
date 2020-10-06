@@ -130,14 +130,14 @@ class Product {
     }
 
     async getSingleProduct(req, res) {
-        let {pId} = req.body
-        if(!pId){
-            return res.json({error:"All filled must be required"})
-        }else {
+        let { pId } = req.body
+        if (!pId) {
+            return res.json({ error: "All filled must be required" })
+        } else {
             try {
-                let singleProduct = await productModel.findById(pId).populate('pCategory','cName')
+                let singleProduct = await productModel.findById(pId).populate('pCategory', 'cName')
                 if (singleProduct) {
-                    return res.json({ Product:singleProduct })
+                    return res.json({ Product: singleProduct })
                 }
             } catch (err) {
                 console.log(err)
@@ -146,65 +146,65 @@ class Product {
     }
 
     async getProductByCategory(req, res) {
-        let {catId} = req.body
-        if(!catId){
-            return res.json({error:"All filled must be required"})
-        }else {
+        let { catId } = req.body
+        if (!catId) {
+            return res.json({ error: "All filled must be required" })
+        } else {
             try {
-                let products = await productModel.find({pCategory:catId}).populate('pCategory','cName')
+                let products = await productModel.find({ pCategory: catId }).populate('pCategory', 'cName')
                 if (products) {
-                    return res.json({ Products:products })
+                    return res.json({ Products: products })
                 }
             } catch (err) {
-                return res.json({error:"Search product wrong"})
+                return res.json({ error: "Search product wrong" })
             }
         }
     }
 
     async getProductByPrice(req, res) {
-        let {price} = req.body
-        if(!price){
-            return res.json({error:"All filled must be required"})
-        }else {
+        let { price } = req.body
+        if (!price) {
+            return res.json({ error: "All filled must be required" })
+        } else {
             try {
-                let products = await productModel.find({pPrice:{ $lt: price}}).populate('pCategory','cName').sort({pPrice:-1})
+                let products = await productModel.find({ pPrice: { $lt: price } }).populate('pCategory', 'cName').sort({ pPrice: -1 })
                 if (products) {
-                    return res.json({ Products:products })
+                    return res.json({ Products: products })
                 }
             } catch (err) {
-                return res.json({error:"Filter product wrong"})
+                return res.json({ error: "Filter product wrong" })
             }
         }
     }
 
     async getWishProduct(req, res) {
         let { productArray } = req.body
-        if(productArray.length === 0) {
-            return res.json({error:"All filled must be required"})
-        }else {
+        if (productArray.length === 0) {
+            return res.json({ error: "All filled must be required" })
+        } else {
             try {
-                let wishProducts = await productModel.find({_id: {$in: productArray}});
-                if(wishProducts){
-                    return res.json({Products:wishProducts})
+                let wishProducts = await productModel.find({ _id: { $in: productArray } });
+                if (wishProducts) {
+                    return res.json({ Products: wishProducts })
                 }
             } catch (err) {
-                return res.json({error:"Filter product wrong"})
+                return res.json({ error: "Filter product wrong" })
             }
         }
     }
 
     async getCartProduct(req, res) {
         let { productArray } = req.body
-        if(productArray.length === 0) {
-            return res.json({error:"All filled must be required"})
-        }else {
+        if (productArray.length === 0) {
+            return res.json({ error: "All filled must be required" })
+        } else {
             try {
-                let cartProducts = await productModel.find({_id: {$in: productArray}});
-                if(cartProducts){
-                    return res.json({Products:cartProducts})
+                let cartProducts = await productModel.find({ _id: { $in: productArray } });
+                if (cartProducts) {
+                    return res.json({ Products: cartProducts })
                 }
             } catch (err) {
-                return res.json({error:"Cart product wrong"})
+                return res.json({ error: "Cart product wrong" })
             }
         }
     }

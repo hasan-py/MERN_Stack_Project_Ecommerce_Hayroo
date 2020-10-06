@@ -19,3 +19,12 @@ export const getPaymentProcess = async (paymentData) => {
         console.log(error);
     }
 }
+
+export const createOrder = async (orderData) => {
+    try {
+        let res = await axios.post(`${apiURL}/api/order/create-order`,orderData)
+        return res.data;
+    } catch (error) {
+        console.log(error);
+    }
+}

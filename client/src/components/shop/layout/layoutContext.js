@@ -7,6 +7,7 @@ export const layoutState = {
     singleProductDetail:null,
     inCart:null,
     cartTotalCost:null,
+    orderSuccess:false,
 }
 
 export const layoutReducer = (state, action) => {
@@ -50,6 +51,11 @@ export const layoutReducer = (state, action) => {
             return {
                 ...state,
                 loginSignupError: action.payload
+            }
+        case 'orderSuccess':
+            return {
+                ...state,
+                orderSuccess: action.payload
             }
         default:
             return state

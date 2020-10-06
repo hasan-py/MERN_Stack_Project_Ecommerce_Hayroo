@@ -187,7 +187,7 @@ const EditProductModal = (props) => {
                 </div>
                 <div className="flex space-x-1 py-4">
                   <div className="w-1/2 flex flex-col space-y-1">
-                    <label htmlFor="quantity">Product Quantitiy *</label>
+                    <label htmlFor="quantity">Product in Stock *</label>
                     <input 
                       value={editformData.pQuantity} 
                       onChange={e=> setEditformdata({...editformData,error:false,success:false,pQuantity:e.target.value})}

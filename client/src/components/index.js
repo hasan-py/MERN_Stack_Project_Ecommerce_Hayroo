@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Home, WishList, ProtectedRoute, AdminProtectedRoute, CartProtectedRoute, PageNotFound, ProductDetails, ProductByCategory, CheckoutPage } from "./shop";
 import { DashboardAdmin, Categories, Products, Orders } from "./admin";
-import {UserProfile,UserOrders} from './shop/dashboardUser';
+import { UserProfile, UserOrders } from './shop/dashboardUser';
 
 import {
     BrowserRouter as Router,
@@ -20,7 +20,7 @@ const Routes = (props) => {
                 <Route exact path="/wish-list" component={WishList} />
                 <Route exact path="/products/:id" component={ProductDetails} />
                 <Route exact path="/products/category/:catId" component={ProductByCategory} />
-                <CartProtectedRoute exact path="/checkout" component={CheckoutPage} />
+                <CartProtectedRoute exact={true} path="/checkout" component={CheckoutPage} />
                 {/* Shop & Public Routes */}
 
 

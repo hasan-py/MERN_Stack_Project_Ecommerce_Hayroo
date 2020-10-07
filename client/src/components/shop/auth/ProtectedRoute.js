@@ -1,12 +1,12 @@
 import React,{useContext} from 'react'
 import { Route,Redirect } from 'react-router-dom'
-import {isAuthenticate} from "./fetchApi";
+import {isAuthenticate, isAdmin} from "./fetchApi";
 
 const ProtectedRoute = ({ component:Component, ...rest }) => (
     <Route
       {...rest}
       render={props=> 
-      	isAuthenticate() ? (
+      	isAuthenticate() && !isAdmin() ? (
          	<Component {...props} />
         ) : (
           <Redirect

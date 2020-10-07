@@ -4,8 +4,10 @@ const apiURL = process.env.REACT_APP_API_URL
 export const cartListProduct = async () => {
     let carts = JSON.parse(localStorage.getItem("cart"))
     let productArray = []
-    for (const cart of carts) {
-        productArray.push(cart.id)
+    if(carts){
+        for (const cart of carts) {
+            productArray.push(cart.id)
+        }
     }
     try {
         let res = await axios.post(`${apiURL}/api/product/cart-product`, { productArray })

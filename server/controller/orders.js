@@ -14,6 +14,22 @@ class Order {
         }
     }
 
+    async getOrderByUser(req, res) {
+        let { uId } = req.body
+        if (!uId) {
+            return res.json({ message: "All filled must be required" })
+        }else{
+            try {
+                let Order = await orderModel.find({user:uId}).populate('allProduct.id', 'pName pImages pPrice').populate('user', 'name email').sort({ _id: -1 })
+                if (Order) {
+                    return res.json({ Order })
+                }
+            } catch (err) {
+                console.log(err)
+            }
+        }
+    }
+
     async postCreateOrder(req, res) {
         let { allProduct, user, amount, transactionId, address, phone } = req.body
         if (!allProduct || !user || !amount || !transactionId || !address || !phone) {

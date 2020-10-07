@@ -11,7 +11,7 @@ const AdminProtectedRoute = ({ component:Component, ...rest })  => (
         ) : (
           <Redirect
             to={{
-              pathname: "/user/dashboard",
+              pathname: "/user/profile",
               state: { from: props.location }
             }}
           />

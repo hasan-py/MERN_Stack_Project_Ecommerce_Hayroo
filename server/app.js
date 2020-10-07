@@ -16,6 +16,7 @@ const attributeValueRouter = require('./routes/attributeValues');
 const productRouter = require('./routes/products');
 const brainTreeRouter = require('./routes/braintree');
 const orderRouter = require('./routes/orders');
+const usersRouter = require('./routes/users');
 
 // Import Auth middleware
 const { loginCheck } = require('./middleware/auth')
@@ -47,6 +48,7 @@ app.use('/api', attributeValueRouter)
 app.use('/api/product', productRouter)
 app.use('/api', brainTreeRouter)
 app.use('/api/order', orderRouter)
+app.use('/api/user', usersRouter)
 
 // Run Server
 const PORT = process.env.PORT || 8000

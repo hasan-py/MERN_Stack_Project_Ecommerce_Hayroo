@@ -51,7 +51,6 @@ export const pay = async (data, dispatch, state, setState, getPaymentProcess, to
                         try {
                             let resposeData = await createOrder(orderData)
                             if (resposeData.success) {
-                                console.log(resposeData);
                                 localStorage.setItem('cart', JSON.stringify([]))
                                 dispatch({ type: "cartProduct", payload: null })
                                 dispatch({ type: "cartTotalCost", payload: null })

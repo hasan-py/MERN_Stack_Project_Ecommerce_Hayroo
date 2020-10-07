@@ -26,7 +26,6 @@ const AllCategory = (props) => {
             <thead>
               <tr>
                 <th className="px-4 py-2 border">Products</th>
-                <th className="px-4 py-2 border">Images</th>
                 <th className="px-4 py-2 border">Status</th>
                 <th className="px-4 py-2 border">Total</th>
                 <th className="px-4 py-2 border">Transaction Id</th>
@@ -47,7 +46,7 @@ const AllCategory = (props) => {
                     <CategoryTable key={i} order={item} editOrder={(oId,type,status)=> editOrderReq(oId,type,status,dispatch)} />
                   )
                 })
-                : <tr><td colSpan="7" className="text-xl text-center font-semibold py-8">No order found</td></tr>
+                : <tr><td colSpan="12" className="text-xl text-center font-semibold py-8">No order found</td></tr>
               }
             </tbody>
           </table>
@@ -63,20 +62,16 @@ const CategoryTable = ({ order, deleteOrder, editOrder }) => {
     return (
         <Fragment>
           <tr className="border-b">
-            <td className="hover:bg-gray-200 p-2">
+            <td className="w-48 hover:bg-gray-200 p-2 flex flex-col space-y-1">
+              
               {
                 order.allProduct.map((product,i)=> {
                   return (
-                    <span key={i} className="block">{product.id.pName}, </span>
-                  )
-                })
-              }
-            </td>
-            <td className="p-2 text-center flex flex-col items-center space-y-2">
-             {
-                order.allProduct.map((product,i)=> {
-                  return (
-                    <img key={i} className="w-8 h-8 object-cover object-center" src={`${apiURL}/uploads/products/${product.id.pImages[0]}`} alt="" />
+                    <span className="block flex items-center space-x-2"  key={i}>
+                      <img className="w-8 h-8 object-cover object-center" src={`${apiURL}/uploads/products/${product.id.pImages[0]}`} alt="productImage" />
+                      <span>{product.id.pName}</span>
+                      <span>{product.quantitiy}x</span>
+                    </span>
                   )
                 })
               }

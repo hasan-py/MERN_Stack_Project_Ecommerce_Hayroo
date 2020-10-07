@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Home, WishList, ProtectedRoute, AdminProtectedRoute, CartProtectedRoute, PageNotFound, ProductDetails, ProductByCategory, CheckoutPage } from "./shop";
-import { DashboardAdmin, DashboardUser, Categories, Products, Orders } from "./admin";
+import { DashboardAdmin, Categories, Products, Orders } from "./admin";
+import {UserProfile,UserOrders} from './shop/dashboardUser';
 
 import {
     BrowserRouter as Router,
@@ -32,7 +33,8 @@ const Routes = (props) => {
                 
 
                 {/* User Dashboard */}
-                <ProtectedRoute exact={true} path="/user/dashboard" component={DashboardUser} />
+                <ProtectedRoute exact={true} path="/user/profile" component={UserProfile} />
+                <ProtectedRoute exact={true} path="/user/orders" component={UserOrders} />
                 {/* User Dashboard */}
 
 

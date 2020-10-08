@@ -1,14 +1,14 @@
 export const productDetailsState = {
-    singleProduct:null,
-    loading:false
+    loading:false,
+    menu:true,
 }
 
 export const productDetailsReducer = (state, action) => {
     switch (action.type) {
-        case 'singleProduct':
+        case 'menu':
             return {
                 ...state,
-                singleProduct: action.payload
+                menu: action.payload,
             }
         case 'loading':
             return {

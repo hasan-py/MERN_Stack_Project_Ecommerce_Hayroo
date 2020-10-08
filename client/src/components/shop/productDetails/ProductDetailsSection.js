@@ -3,6 +3,7 @@ import { useParams, useHistory, Redirect } from 'react-router-dom';
 import { ProductDetailsContext } from "./index"
 import { LayoutContext } from "../layout";
 import Submenu from "./Submenu";
+import ProductDetailsSectionTwo from './ProductDetailsSectionTwo'
 
 import { getSingleProduct } from "./FetchApi"
 import { cartListProduct } from "../partials/FetchApi";
@@ -74,7 +75,7 @@ const ProductDetailsSection = (props) => {
     }
     return (
         <Fragment>
-        	<Submenu value={{product:sProduct.pName,category:sProduct.pCategory.cName}} />
+        	<Submenu value={{categoryId:sProduct.pCategory._id, product:sProduct.pName, category:sProduct.pCategory.cName}} />
 		    <section className="m-4 md:mx-12 md:my-6">
 		        <div className="grid grid-cols-2 md:grid-cols-12">
 		          <div className="hidden md:block md:col-span-1 md:flex md:flex-col md:space-y-4 md:mr-2">
@@ -160,6 +161,8 @@ const ProductDetailsSection = (props) => {
 		          </div>
 		        </div>
 		    </section>
+			{/* Product Details Section two */}
+			<ProductDetailsSectionTwo/>
 	    </Fragment>
     )
 }

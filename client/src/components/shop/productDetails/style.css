@@ -1,0 +1,72 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+fieldset,
+label {
+    margin: 0;
+    padding: 0;
+}
+
+/****** Style Star Rating Widget *****/
+
+.rating {
+    border: none;
+    float: left;
+}
+
+.rating>input {
+    display: none;
+}
+
+.rating>label:before {
+    margin: 5px;
+    font-size: 2.25em;
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f005";
+}
+
+/* Half Rating System */
+
+/*.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+*/
+
+/* 
+<input type="radio" id="star4half" name="rating" defaultValue={4.5} /><label className="half" htmlFor="star4half" title="Pretty good - 4.5 stars" />
+
+<input type="radio" id="star3half" name="rating" defaultValue={3.5} /><label className="half" htmlFor="star3half" title="Meh - 3.5 stars" />
+
+<input type="radio" id="star2half" name="rating" defaultValue={3.0} /><label className="half" htmlFor="star2half" title="Kinda bad - 2.5 stars" />
+
+<input type="radio" id="star1half" name="rating" defaultValue={2.5} /><label className="half" htmlFor="star1half" title="Meh - 1.5 stars" />
+
+<input type="radio" id="starhalf" name="rating" defaultValue={0.5} /><label className="half" htmlFor="starhalf" title="Sucks big time - 0.5 stars" />
+*/
+
+.rating>label {
+    color: #ddd;
+    float: right;
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating>input:checked~label,
+/* show gold star when clicked */
+.rating:not(:checked)>label:hover,
+/* hover current star */
+.rating:not(:checked)>label:hover~label {
+    color: #b7791f;
+}
+
+/* hover previous stars in list */
+
+.rating>input:checked+label:hover,
+/* hover current star when changing rating */
+.rating>input:checked~label:hover,
+.rating>label:hover~input:checked~label,
+/* lighten current selection */
+.rating>input:checked~label:hover~label {
+    color: #b7791f;
+}

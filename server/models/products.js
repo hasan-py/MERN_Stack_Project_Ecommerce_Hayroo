@@ -34,13 +34,14 @@ const productSchema = new mongoose.Schema({
         type: String,
         default: null
     },
-    pRatings: [{ 
-        type: ObjectId,
-        ref: "users"
-    }],
-    pReviews: [{
+    pRatingsReviews: [{
         review: String,
-        user: { type: ObjectId, ref: "users" }
+        user: { type: ObjectId, ref: "users" },
+        rating: String,
+        createdAt: {
+            type: Date,
+            default: Date.now()
+        }
     }],
     pStatus: {
         type: String,

@@ -135,7 +135,7 @@ class Product {
             return res.json({ error: "All filled must be required" })
         } else {
             try {
-                let singleProduct = await productModel.findById(pId).populate('pCategory', 'cName')
+                let singleProduct = await productModel.findById(pId).populate('pCategory', 'cName').populate('pRatingsReviews.user', 'name email userImage')
                 if (singleProduct) {
                     return res.json({ Product: singleProduct })
                 }
@@ -205,6 +205,46 @@ class Product {
                 }
             } catch (err) {
                 return res.json({ error: "Cart product wrong" })
+            }
+        }
+    }
+
+
+    async postAddReview(req, res) {
+        let { pId, uId, rating, review } = req.body
+        if (!pId || !rating || !review || !uId) {
+            return res.json({ error: "All filled must be required" })
+        } else {
+            let checkReviewRatingExists = await productModel.findOne({ _id: pId })
+            if(checkReviewRatingExists.pRatingsReviews.length > 0){
+                console.log("Dokse ckeck e ");
+                let check = ()=>{
+                    checkReviewRatingExists.pRatingsReviews.filter((item)=>{
+                        console.log("Dokse loope ");
+                        if(item.user === uId){
+                          return item
+                        }
+                    })
+                } 
+                if(check){
+                    return res.json({ success : "Your already reviewd the product"})
+                }
+            }else{
+                console.log("dokese succes");
+                return res.json({success:"Review Added success"})
+                /*try {
+                    let newRatingReview = productModel.findByIdAndUpdate(pId, {
+                        $push: { pRatingsReviews:{review:review, user:uId, rating:rating}, }
+                    })
+                    newRatingReview.exec((err,result)=> {
+                        if(err) {
+                            console.log(err);
+                        }
+                        return res.json({ success: "Review done"})
+                    })
+                } catch (err) {
+                    return res.json({ error: "Cart product wrong" })
+                }*/
             }
         }
     }

@@ -19,8 +19,8 @@ export const updateQuantity = (type, totalQuantitiy, quantitiy, setQuantitiy, se
             setQuantitiy(quantitiy + 1)
         }
     } else if (type === 'decrease') {
-        if (quantitiy === 0) {
-            setQuantitiy(0)
+        if (quantitiy === 1) {
+            setQuantitiy(1)
         } else {
             setQuantitiy(quantitiy - 1)
         }

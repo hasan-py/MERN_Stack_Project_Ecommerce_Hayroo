@@ -4,7 +4,7 @@ import AddProductModal from "./AddProductModal";
 import EditProductModal from "./EditProductModal";
 
 const ProductMenu = (props) => {
-    const { data, dispatch } = useContext(ProductContext);
+    const { dispatch } = useContext(ProductContext);
     return (
         <Fragment>
 			<div className="col-span-1 flex justify-between items-center">

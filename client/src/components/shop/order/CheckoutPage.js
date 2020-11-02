@@ -1,14 +1,14 @@
-import React,{Fragment, useEffect, useContext } from 'react';
+import React, { Fragment } from 'react';
 import Layout from '../layout';
-import {CheckoutComponent} from './CheckoutProducts';
+import { CheckoutComponent } from './CheckoutProducts';
 
 
 const CheckoutPage = (props) => {
-  return (
-    <Fragment>
+    return (
+        <Fragment>
     	<Layout children={<CheckoutComponent/>} />
     </Fragment>
-  )
+    )
 }
 
 export default CheckoutPage;

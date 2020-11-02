@@ -1,10 +1,7 @@
 import React, { Fragment, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { signupReq } from "./fetchApi";
 
 const Signup = (props) => {
-
-    const history = useHistory();
 
     const [data, setData] = useState({
         name: "",
@@ -66,7 +63,7 @@ const Signup = (props) => {
                     <input type="checkbox" id="rememberMe" className="px-4 py-2 focus:outline-none border mr-1" />
                     <label htmlFor="rememberMe">Remember me<span className="text-sm text-gray-600">*</span></label>
                   </div> 
-                  <a className="block text-gray-600" href="#">Lost your password?</a>
+                  <a className="block text-gray-600" href="/">Lost your password?</a>
                 </div>
                 <div onClick={e=> formSubmit()} style={{background: '#303031'}} className="px-4 py-2 text-white text-center cursor-pointer font-medium">Create an account</div>
               </form>

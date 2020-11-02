@@ -1,6 +1,6 @@
 import React,{Fragment, useEffect, useContext, useState } from 'react';
 import {useHistory} from "react-router-dom";
-import Layout, { LayoutContext } from '../layout';
+import { LayoutContext } from '../layout';
 import { subTotal, quantity, totalCost } from '../partials/Mixins'
 
 import { cartListProduct } from '../partials/FetchApi';

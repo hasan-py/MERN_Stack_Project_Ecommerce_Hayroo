@@ -1,7 +1,6 @@
 const {
     toTitleCase,
-    validateEmail,
-    emailCheckInDatabase
+    validateEmail
 } = require('../config/function');
 const bcrypt = require('bcryptjs');
 const userModel = require('../models/users');

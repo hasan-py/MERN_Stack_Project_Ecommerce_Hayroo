@@ -4,7 +4,7 @@ import AddCategoryModal from "./AddCategoryModal";
 import EditCategoryModal from "./EditCategoryModal";
 
 const CategoryMenu = (props) => {
-    const { data, dispatch } = useContext(CategoryContext);
+    const { dispatch } = useContext(CategoryContext);
 
     return (
 	    <Fragment>

@@ -49,7 +49,7 @@ const EditProductModal = (props) => {
             pPrice: data.editProductModal.pPrice,
             pOffer: data.editProductModal.pOffer,
         })
-    }, [data.editProductModal.modal])
+    }, [data.editProductModal])
 
     const fetchData = async () => {
         let responseData = await getAllProduct()
@@ -173,7 +173,7 @@ const EditProductModal = (props) => {
                         ? categories.map((elem)=> {
                           return (
                             <Fragment key={elem._id}>
-                              { editformData.pCategory._id && editformData.pCategory._id  == elem._id
+                              { editformData.pCategory._id && editformData.pCategory._id  === elem._id
                                 ? <option name="status" value={elem._id} key={elem._id} selected>{elem.cName}</option>
                                 : <option name="status" value={elem._id} key={elem._id}>{elem.cName}</option>
                               }

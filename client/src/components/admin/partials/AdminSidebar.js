@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { isAdmin } from "../../shop";
 import { useLocation, useHistory } from "react-router-dom";
 
 const AdminSidebar = (props) => {

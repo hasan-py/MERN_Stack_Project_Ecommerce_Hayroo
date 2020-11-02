@@ -1,31 +1,31 @@
 import React, { Fragment, useContext, useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import {HomeContext} from "./index"
-import {getAllCategory} from "../../admin/categories/FetchApi"
-import {getAllProduct,productByPrice} from "../../admin/products/FetchApi"
+import { HomeContext } from "./index"
+import { getAllCategory } from "../../admin/categories/FetchApi"
+import { getAllProduct, productByPrice } from "../../admin/products/FetchApi"
 import './style.css'
 
 const apiURL = process.env.REACT_APP_API_URL
 
 const CategoryList = () => {
-	const history = useHistory()
-	const {data} = useContext(HomeContext);
-	const [categories,setCategories] = useState(null)
+    const history = useHistory()
+    const { data } = useContext(HomeContext);
+    const [categories, setCategories] = useState(null)
 
-	useEffect(()=> {
-		fetchData()
-	},[])
+    useEffect(() => {
+        fetchData()
+    }, [])
 
-	const fetchData = async ()=> {
-		try {
-			let responseData = await getAllCategory();
-			if(responseData && responseData.Categories){
-				setCategories(responseData.Categories)
-			}
-		}catch(error){
-			console.log(error)
-		}
-	}
+    const fetchData = async () => {
+        try {
+            let responseData = await getAllCategory();
+            if (responseData && responseData.Categories) {
+                setCategories(responseData.Categories)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <div className={`${data.categoryListDropdown ? "" : "hidden"} my-4`}>
@@ -51,46 +51,46 @@ const CategoryList = () => {
 }
 
 const FilterList = () => {
-	const {data,dispatch} = useContext(HomeContext);
-	const [range,setRange] = useState(0)
+    const { data, dispatch } = useContext(HomeContext);
+    const [range, setRange] = useState(0)
 
-	const rangeHandle = (e)=> {
-		setRange(e.target.value)
-		fetchData(e.target.value)
-	}
+    const rangeHandle = (e) => {
+        setRange(e.target.value)
+        fetchData(e.target.value)
+    }
 
-	const fetchData = async (price)=> {
-		if(price == "all"){
-			try {
-				let responseData = await getAllProduct();
-				if(responseData && responseData.Products){
-					dispatch({type:"setProducts",payload:responseData.Products})
-				}
-			}catch(error){
-				console.log(error)
-			}
-		}else{
-			dispatch({type:"loading",payload:true})
-			try {
-				setTimeout(async ()=> {
-					let responseData = await productByPrice(price);
-					if(responseData && responseData.Products){
-						console.log(responseData.Products)
-						dispatch({type:"setProducts",payload:responseData.Products})
-						dispatch({type:"loading",payload:false})
-					}
-				},700)
-			}catch(error){
-				console.log(error)
-			}
-		}
-	}
+    const fetchData = async (price) => {
+        if (price === "all") {
+            try {
+                let responseData = await getAllProduct();
+                if (responseData && responseData.Products) {
+                    dispatch({ type: "setProducts", payload: responseData.Products })
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        } else {
+            dispatch({ type: "loading", payload: true })
+            try {
+                setTimeout(async () => {
+                    let responseData = await productByPrice(price);
+                    if (responseData && responseData.Products) {
+                        console.log(responseData.Products)
+                        dispatch({ type: "setProducts", payload: responseData.Products })
+                        dispatch({ type: "loading", payload: false })
+                    }
+                }, 700)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
 
-	const closeFilterBar = ()=> {
-		fetchData("all")
-		dispatch({type:"filterListDropdown",payload:!data.filterListDropdown})
-		setRange(0)
-	}
+    const closeFilterBar = () => {
+        fetchData("all")
+        dispatch({ type: "filterListDropdown", payload: !data.filterListDropdown })
+        setRange(0)
+    }
 
 
     return (
@@ -115,37 +115,37 @@ const FilterList = () => {
 
 const Search = () => {
 
-	const {data,dispatch} = useContext(HomeContext)
-	const [search,setSearch] = useState("") 
-	const [productArray,setPa] = useState(null)
+    const { data, dispatch } = useContext(HomeContext)
+    const [search, setSearch] = useState("")
+    const [productArray, setPa] = useState(null)
 
-	const searchHandle = (e)=> {
-		setSearch(e.target.value)
-		fetchData()
-		dispatch({type:"searchHandleInReducer",payload:e.target.value,productArray:productArray})
-	}
+    const searchHandle = (e) => {
+        setSearch(e.target.value)
+        fetchData()
+        dispatch({ type: "searchHandleInReducer", payload: e.target.value, productArray: productArray })
+    }
 
-	const fetchData = async ()=> {
-		dispatch({type:"loading",payload:true})
-		try {
-			setTimeout(async ()=> {
-				let responseData = await getAllProduct();
-				if(responseData && responseData.Products){
-					setPa(responseData.Products)
-					dispatch({type:"loading",payload:false})
-				}
-			},700)
-		}catch(error){
-			console.log(error)
-		}
-	}
+    const fetchData = async () => {
+        dispatch({ type: "loading", payload: true })
+        try {
+            setTimeout(async () => {
+                let responseData = await getAllProduct();
+                if (responseData && responseData.Products) {
+                    setPa(responseData.Products)
+                    dispatch({ type: "loading", payload: false })
+                }
+            }, 700)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
-	const closeSearchBar = ()=> {
-		dispatch({type:"searchDropdown",payload:!data.searchDropdown})
-		fetchData()
-		dispatch({type:"setProducts",payload:productArray})
-		setSearch("")
-	}
+    const closeSearchBar = () => {
+        dispatch({ type: "searchDropdown", payload: !data.searchDropdown })
+        fetchData()
+        dispatch({ type: "setProducts", payload: productArray })
+        setSearch("")
+    }
 
     return (
         <div className={`${data.searchDropdown ? "" : "hidden"} my-4 flex items-center justify-between`}>

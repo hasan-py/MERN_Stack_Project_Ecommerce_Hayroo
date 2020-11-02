@@ -1,4 +1,4 @@
-import React, { Fragment, useState, createContext } from 'react';
+import React, { Fragment, createContext } from 'react';
 import { Navber, Footer, CartModal } from "../partials";
 import LoginSignup from "../auth/LoginSignup";
 

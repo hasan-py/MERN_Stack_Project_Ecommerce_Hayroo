@@ -1,13 +1,11 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { LayoutContext } from '../layout';
 import moment from 'moment';
 
 const AllReviews = (props) => {
 
-	const { data,dispatch } = useContext(LayoutContext)
-	const { pRatingsReviews } = data.singleProductDetail
-
-	const [rating,setRating] = useState(0)
+    const { data } = useContext(LayoutContext)
+    const { pRatingsReviews } = data.singleProductDetail
 
     return (
         <Fragment>

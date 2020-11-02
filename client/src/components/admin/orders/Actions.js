@@ -1,4 +1,4 @@
-import { getAllOrder, deleteOrder } from "./FetchApi";
+import { getAllOrder } from "./FetchApi";
 
 export const fetchData = async (dispatch) => {
     dispatch({ type: "loading", payload: true })

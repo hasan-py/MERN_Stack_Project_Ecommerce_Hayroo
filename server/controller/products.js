@@ -227,12 +227,12 @@ class Product {
                     })
                 } 
                 if(check){
-                    return res.json({ success : "Your already reviewd the product"})
+                    return res.json({ error : "Your already reviewd the product"})
                 }
             }else{
                 console.log("dokese succes");
                 return res.json({success:"Review Added success"})
-                /*try {
+                try {
                     let newRatingReview = productModel.findByIdAndUpdate(pId, {
                         $push: { pRatingsReviews:{review:review, user:uId, rating:rating}, }
                     })
@@ -244,7 +244,23 @@ class Product {
                     })
                 } catch (err) {
                     return res.json({ error: "Cart product wrong" })
-                }*/
+                }
+            }
+        }
+    }
+
+    async deleteReview(req,res){
+        let { rId } = req.body
+        if (!rId) {
+            return res.json({ message: "All filled must be required" })
+        } else {
+            try {
+                let deleteReview = await brandModel.findByIdAndDelete(bId)
+                if (deleteReview) {
+                    return res.json({ success: "Brand deleted successfully" })
+                }
+            } catch (err) {
+                console.log(err)
             }
         }
     }

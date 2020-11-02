@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react';
-import { useParams, useHistory, Redirect } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { ProductDetailsContext } from "./index"
 import { LayoutContext } from "../layout";
 import Submenu from "./Submenu";
@@ -9,7 +9,7 @@ import { getSingleProduct } from "./FetchApi"
 import { cartListProduct } from "../partials/FetchApi";
 
 import { isWishReq, unWishReq, isWish } from "../home/Mixins";
-import { updateQuantity, slideImage, inCart, addToCart, cartList } from './Mixins';
+import { updateQuantity, slideImage, addToCart, cartList } from './Mixins';
 import { totalCost } from '../partials/Mixins'
 
 
@@ -18,7 +18,6 @@ const apiURL = process.env.REACT_APP_API_URL
 const ProductDetailsSection = (props) => {
 
     let { id } = useParams()
-    const history = useHistory()
 
     const { data, dispatch } = useContext(ProductDetailsContext)
     const { data: layoutData, dispatch: layoutDispatch } = useContext(LayoutContext) // Layout Context

@@ -5,6 +5,7 @@ export const subTotal = (id, price) => {
         if (item.id === id) {
             subTotalCost = item.quantitiy * price
         }
+        return null
     })
     return subTotalCost
 }
@@ -20,7 +21,7 @@ export const quantity = (id) => {
     return product
 }
 
-export const totalCost = ()=> {
+export const totalCost = () => {
     let totalCost = 0;
     let carts = JSON.parse(localStorage.getItem("cart"))
     carts.map(item => {

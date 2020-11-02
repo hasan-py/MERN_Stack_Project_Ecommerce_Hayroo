@@ -1,11 +1,9 @@
 import React, { Fragment, useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import { loginReq } from "./fetchApi";
 import { LayoutContext } from "../index";
 
 const Login = (props) => {
 
-    const history = useHistory();
     const { data:layoutData, dispatch:layoutDispatch } = useContext(LayoutContext);
 
     const [data, setData] = useState({
@@ -53,7 +51,7 @@ const Login = (props) => {
                 <input type="checkbox" id="rememberMe" className="px-4 py-2 focus:outline-none border mr-1" />
                 <label htmlFor="rememberMe">Remember me<span className="text-sm text-gray-600">*</span></label>
               </div> 
-              <a className="block text-gray-600" href="#">Lost your password?</a>
+              <a className="block text-gray-600" href="/">Lost your password?</a>
             </div>
             <div onClick={e=> formSubmit()} style={{background: '#303031'}} className="font-medium px-4 py-2 text-white text-center cursor-pointer">Login</div>
           </form>

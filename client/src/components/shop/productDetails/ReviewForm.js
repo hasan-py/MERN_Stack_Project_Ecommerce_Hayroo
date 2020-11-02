@@ -4,7 +4,7 @@ import { LayoutContext } from '../layout';
 
 const ReviewForm = (props) => {
 
-	const { data, dispatch } = useContext(LayoutContext)
+	const { data } = useContext(LayoutContext)
 
 	const [ fData,setFdata ] = useState({
 		rating:"",

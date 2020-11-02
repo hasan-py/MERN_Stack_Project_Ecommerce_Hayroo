@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 import {useHistory} from 'react-router-dom';
 import { LayoutContext } from '../index';
 import { cartListProduct } from './FetchApi';

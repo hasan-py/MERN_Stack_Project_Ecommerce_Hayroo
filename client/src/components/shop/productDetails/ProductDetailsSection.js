@@ -106,7 +106,7 @@ const ProductDetailsSection = (props) => {
 		            </div>
 		            <div className="my-4 md:my-6">
 				            {
-				            	alertQ && <span className="text-xs text-red-500">Stock limited</span>
+				            	quantitiy == sProduct.pQuantity  ? <span className="text-xs text-red-500">Stock limited</span> : ""
 				            }
 			              <div className={`flex justify-between items-center px-4 py-2 border ${quantitiy === sProduct.pQuantity && "border-red-500"}`}>
 			                <div className={`${quantitiy === sProduct.pQuantity && "text-red-500"}`}>Quantity</div>
@@ -149,7 +149,7 @@ const ProductDetailsSection = (props) => {
 
 				              	: <Fragment>
 					              	{
-					              	layoutData.inCart!==null && layoutData.inCart.includes(sProduct._id) === true
+					              	layoutData.inCart !==null && layoutData.inCart.includes(sProduct._id) === true
 					              		? <div style={{background: '#303031'}} className={`px-4 py-2 text-white text-center cursor-not-allowed uppercase opacity-75`}>In cart</div>	
 					              		: <div style={{background: '#303031'}} disabled={true} className="px-4 py-2 text-white opacity-50 cursor-not-allowed text-center uppercase">Out of stock</div>
 					              	}

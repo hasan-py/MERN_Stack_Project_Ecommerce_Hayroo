@@ -1,5 +1,4 @@
 const productModel = require("../models/products");
-const { toTitleCase } = require('../config/function');
 const fs = require('fs');
 
 class Product {
@@ -216,45 +215,60 @@ class Product {
             return res.json({ error: "All filled must be required" })
         } else {
             let checkReviewRatingExists = await productModel.findOne({ _id: pId })
-            if(checkReviewRatingExists.pRatingsReviews.length > 0){
-                let check = ()=>{
-                    checkReviewRatingExists.pRatingsReviews.filter((item)=>{
-                        if(item.user._id === uId){
-                          return item
+            if (checkReviewRatingExists.pRatingsReviews.length > 0) {
+                checkReviewRatingExists.pRatingsReviews.map((item) => {
+                    if (item.user === uId) {
+                        return res.json({ error: "Your already reviewd the product" })
+                    } else {
+                        try {
+                            let newRatingReview = productModel.findByIdAndUpdate(pId, {
+                                $push: { pRatingsReviews: { review: review, user: uId, rating: rating }, }
+                            })
+                            newRatingReview.exec((err, result) => {
+                                if (err) {
+                                    console.log(err);
+                                }
+                                return res.json({ success: "Thanks for your review" })
+                            })
+                        } catch (err) {
+                            return res.json({ error: "Cart product wrong" })
                         }
-                    })
-                } 
-                if(check){
-                    return res.json({ error : "Your already reviewd the product"})
-                }
-            }else{
+                    }
+                })
+            } else {
                 try {
                     let newRatingReview = productModel.findByIdAndUpdate(pId, {
-                        $push: { pRatingsReviews:{review:review, user:uId, rating:rating}, }
+                        $push: { pRatingsReviews: { review: review, user: uId, rating: rating }, }
                     })
-                    newRatingReview.exec((err,result)=> {
-                        if(err) {
+                    newRatingReview.exec((err, result) => {
+                        if (err) {
                             console.log(err);
                         }
-                        return res.json({success:"Review Added success"})
+                        return res.json({ success: "Thanks for your review" })
                     })
                 } catch (err) {
                     return res.json({ error: "Cart product wrong" })
                 }
             }
+
         }
     }
 
-    async deleteReview(req,res){
-        let { rId } = req.body
+    async deleteReview(req, res) {
+        let { rId, pId } = req.body
         if (!rId) {
             return res.json({ message: "All filled must be required" })
         } else {
             try {
-                let deleteReview = await brandModel.findByIdAndDelete(bId)
-                if (deleteReview) {
-                    return res.json({ success: "Brand deleted successfully" })
-                }
+                let reviewDelete = productModel.findByIdAndUpdate(pId, {
+                    $pull: { pRatingsReviews: { _id: rId } }
+                })
+                reviewDelete.exec((err, result) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                    return res.json({ success: "Your review is deleted" })
+                })
             } catch (err) {
                 console.log(err)
             }

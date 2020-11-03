@@ -21,6 +21,7 @@ export const updateQuantity = (type, totalQuantitiy, quantitiy, setQuantitiy, se
     } else if (type === 'decrease') {
         if (quantitiy === 1) {
             setQuantitiy(1)
+            setAlertq(false)
         } else {
             setQuantitiy(quantitiy - 1)
         }

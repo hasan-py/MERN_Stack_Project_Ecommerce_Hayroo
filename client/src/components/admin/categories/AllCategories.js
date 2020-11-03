@@ -92,7 +92,7 @@ const CategoryTable = ({ category, deleteCat, editCat }) => {
           <img className="w-12 h-12 object-cover object-center" src={`${apiURL}/uploads/categories/${category.cImage}`} alt="" />
         </td>
         <td className="p-2 text-center">
-          { category.cStatus == "Active"
+          { category.cStatus === "Active"
             ? <span className="bg-green-200 rounded-full text-center text-xs px-2 font-semibold">{category.cStatus}</span>
             : <span className="bg-red-200 rounded-full text-center text-xs px-2 font-semibold">{category.cStatus}</span>
           }

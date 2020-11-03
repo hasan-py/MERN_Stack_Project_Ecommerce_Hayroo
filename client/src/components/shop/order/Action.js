@@ -30,7 +30,7 @@ export const pay = async (data, dispatch, state, setState, getPaymentProcess, to
         setState({ ...state, error: "Please provide your phone number" })
     } else {
         let nonce;
-        let getNonce = state.instance.requestPaymentMethod()
+        state.instance.requestPaymentMethod()
         .then(data => {
             nonce = data.nonce;
             let paymentData = {

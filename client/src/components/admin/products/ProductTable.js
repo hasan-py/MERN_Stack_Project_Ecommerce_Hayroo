@@ -97,7 +97,7 @@ const ProductTable = ({ product, deleteProduct, editProduct }) => {
               <img className="w-12 h-12 object-cover object-center" src={`${apiURL}/uploads/products/${product.pImages[0]}`} alt="pic" />
             </td>
             <td className="p-2 text-center">
-              { product.pStatus == "Active"
+              { product.pStatus === "Active"
                 ? <span className="bg-green-200 rounded-full text-center text-xs px-2 font-semibold">{product.pStatus}</span>
                 : <span className="bg-red-200 rounded-full text-center text-xs px-2 font-semibold">{product.pStatus}</span>
               }

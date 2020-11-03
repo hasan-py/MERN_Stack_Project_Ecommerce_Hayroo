@@ -13,8 +13,8 @@ const Submenu = ({category}) => {
 		      <section className="mx-4 mt-24 md:mx-12 md:mt-32 lg:mt-24">
 		        <div className="flex justify-between items-center">
 		          <div className="text-sm flex space-x-3">
-		            <a className="hover:text-yellow-700 cursor-pointer" onClick={e=> history.push('/')}>Shop</a>
-		            <a className="text-yellow-700 cursor-default">{category}</a>
+		            <span className="hover:text-yellow-700 cursor-pointer" onClick={e=> history.push('/')}>Shop</span>
+		            <span className="text-yellow-700 cursor-default">{category}</span>
 		          </div>
 		          <div>
 		            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5l7 7-7 7M5 5l7 7-7 7" /></svg>
@@ -46,7 +46,7 @@ const AllProduct = ({products})=> {
 						            <span>
 						              <svg className="w-4 h-4 fill-current text-yellow-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /></svg>
 						            </span>
-						            <span className="text-gray-700">{item.pRatings.length}</span>
+						            <span className="text-gray-700">{item.pRatings ? item.pRatings.length : 0}</span>
 						          </div>
 						        </div>
 						        <div>

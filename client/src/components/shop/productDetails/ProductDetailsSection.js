@@ -31,8 +31,8 @@ const ProductDetailsSection = (props) => {
 
     const [wList, setWlist] = useState(JSON.parse(localStorage.getItem("wishList"))) // Wishlist State Control
 
-    useEffect(() => {
-        fetchData()
+    useEffect(()=>{
+    	fetchData()
     }, [])
 
     const fetchData = async () => {
@@ -106,7 +106,7 @@ const ProductDetailsSection = (props) => {
 		            </div>
 		            <div className="my-4 md:my-6">
 				            {
-				            	quantitiy === sProduct.pQuantity && <span className="text-xs text-red-500">Stock limited</span>
+				            	alertQ && <span className="text-xs text-red-500">Stock limited</span>
 				            }
 			              <div className={`flex justify-between items-center px-4 py-2 border ${quantitiy === sProduct.pQuantity && "border-red-500"}`}>
 			                <div className={`${quantitiy === sProduct.pQuantity && "text-red-500"}`}>Quantity</div>
@@ -115,7 +115,7 @@ const ProductDetailsSection = (props) => {
 				                	sProduct.pQuantity !== 0
 				                	? 	<Fragment>
 				                			{
-				                				layoutData.inCart === null || layoutData.inCart !== null && layoutData.inCart.includes(sProduct._id) === false
+				                				layoutData.inCart !== null && layoutData.inCart.includes(sProduct._id) === false
 				                				? 	<div className="flex items-center space-x-2">
 									                  <span onClick={e=> updateQuantity('decrease',sProduct.pQuantity,quantitiy,setQuantitiy,setAlertq)}><svg className="w-5 h-5 fill-current cursor-pointer" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" /></svg></span>
 									                  <span className="font-semibold">{quantitiy}</span>

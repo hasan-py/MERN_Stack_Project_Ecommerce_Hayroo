@@ -5,7 +5,6 @@ export const subTotal = (id, price) => {
         if (item.id === id) {
             subTotalCost = item.quantitiy * price
         }
-        return null
     })
     return subTotalCost
 }

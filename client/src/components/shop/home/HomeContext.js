@@ -41,6 +41,7 @@ export const homeReducer = (state, action) => {
                     if(item.pName.toUpperCase().indexOf(action.payload.toUpperCase()) !== -1 ){
                         return item
                     }
+                    return null
                 })
             }
         case 'loading':

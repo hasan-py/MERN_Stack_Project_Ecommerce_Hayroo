@@ -217,11 +217,9 @@ class Product {
         } else {
             let checkReviewRatingExists = await productModel.findOne({ _id: pId })
             if(checkReviewRatingExists.pRatingsReviews.length > 0){
-                console.log("Dokse ckeck e ");
                 let check = ()=>{
                     checkReviewRatingExists.pRatingsReviews.filter((item)=>{
-                        console.log("Dokse loope ");
-                        if(item.user === uId){
+                        if(item.user._id === uId){
                           return item
                         }
                     })
@@ -230,8 +228,6 @@ class Product {
                     return res.json({ error : "Your already reviewd the product"})
                 }
             }else{
-                console.log("dokese succes");
-                return res.json({success:"Review Added success"})
                 try {
                     let newRatingReview = productModel.findByIdAndUpdate(pId, {
                         $push: { pRatingsReviews:{review:review, user:uId, rating:rating}, }
@@ -240,7 +236,7 @@ class Product {
                         if(err) {
                             console.log(err);
                         }
-                        return res.json({ success: "Review done"})
+                        return res.json({success:"Review Added success"})
                     })
                 } catch (err) {
                     return res.json({ error: "Cart product wrong" })

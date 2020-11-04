@@ -1,8 +1,11 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
 import Layout from './Layout';
 import { handleChangePassword } from './Action';
+import { DashboardUserContext } from './Layout'
 
 const SettingComponent = () => {
+
+	const { data, dispatch } = useContext(DashboardUserContext)
 
     const [fData, setFdata] = useState({
         oldPassword: "",
@@ -20,6 +23,9 @@ const SettingComponent = () => {
         }, 1500)
     }
 
+    if (data.loading) {
+        return <div className="w-full md:w-9/12 flex items-center justify-center "><svg className="w-12 h-12 animate-spin text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg></div>
+    }
     return (
         <Fragment>
 			<div className="flex flex-col w-full my-4 md:my-0 md:w-9/12 md:px-8">
@@ -36,9 +42,9 @@ const SettingComponent = () => {
 						<div className="flex flex-col space-y-2">
 							<label htmlFor="oldPassword">Old Password</label>
 							<div className="relative">
-								<input onChange={e=> setFdata({...fData,oldPassword:e.target.value})} value={fData.oldPassword} type={fData.type} id="oldPassword" className="z-10 border px-4 py-2 w-full focus:outline-none" />
-								<span onClick={e=> setFdata({passwordView:false, type:"password"})} className={`${fData.passwordView ? "" : "hidden"} absolute right-0 m-2 box-border cursor-pointer`}><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg></span>
-								<span onClick={e=> setFdata({passwordView:true, type:"text"})} className={`${!fData.passwordView ? "" : "hidden"} absolute right-0 m-2 box-border cursor-pointer`}><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" /></svg></span>
+								<input onChange={e=> setFdata({...fData, oldPassword:e.target.value})} value={fData.oldPassword} type={fData.type} id="oldPassword" className="z-10 border px-4 py-2 w-full focus:outline-none" />
+								<span onClick={e=> setFdata({...fData, passwordView:false, type:"password"})} className={`${fData.passwordView ? "" : "hidden"} absolute right-0 m-2 box-border cursor-pointer`}><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg></span>
+								<span onClick={e=> setFdata({...fData, passwordView:true, type:"text"})} className={`${!fData.passwordView ? "" : "hidden"} absolute right-0 m-2 box-border cursor-pointer`}><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" /></svg></span>
 							</div>
 							</div>
 						<div className="flex flex-col space-y-2">
@@ -49,7 +55,7 @@ const SettingComponent = () => {
 							<label htmlFor="confirmPassword">Confirm Password</label>
 							<input onChange={e=> setFdata({...fData,confirmPassword:e.target.value})} value={fData.confirmPassword} type="password" id="confirmPassword" className="border px-4 py-2 w-full focus:outline-none" />
 						</div>
-						<div onClick={e=> handleChangePassword(fData, setFdata)} style={{background: '#303031'}} className="w-full text-center cursor-pointer px-4 py-2 text-gray-100">Change password</div>
+						<div onClick={e=> handleChangePassword(fData, setFdata, dispatch)} style={{background: '#303031'}} className="w-full text-center cursor-pointer px-4 py-2 text-gray-100">Change password</div>
 					</div>
 				</div>
 			</div>

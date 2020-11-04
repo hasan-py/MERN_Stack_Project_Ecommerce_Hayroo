@@ -1,4 +1,4 @@
-import { getUserById, updatePersonalInformationFetch, getOrderByUser } from './FetchApi';
+import { getUserById, updatePersonalInformationFetch, getOrderByUser, updatePassword } from './FetchApi';
 
 export const logout = () => {
     localStorage.removeItem("jwt")
@@ -60,26 +60,31 @@ export const updatePersonalInformationAction = async (dispatch, fData) => {
     }
 }
 
-export const handleChangePassword = async (fData, setFdata) => {
-    if(fData.newPassword !== fData.confirmPassword){
-        setFdata({error:"Password does't match"})
-    }else{
+export const handleChangePassword = async (fData, setFdata, dispatch) => {
+    if(!fData.newPassword || !fData.oldPassword || !fData.confirmPassword){
+        setFdata({...fData, error:"Please provide your all password and a new password"})
+    }
+    else if(fData.newPassword !== fData.confirmPassword){
+        setFdata({...fData, error:"Password does't match"})
+    }
+    else{
         const formData = {
+            uId:JSON.parse(localStorage.getItem("jwt")).user._id,
             oldPassword: fData.oldPassword,
             newPassword: fData.newPassword
         }
-        // dispatch({ type: "loading", payload: true })
-        setFdata({success:"Password match"})
-        /*try {
-            let responseData = await updatePersonalInformationFetch(formData);
-            setTimeout(() => {
-                if (responseData && responseData.success) {
-                    // dispatch({ type: "loading", payload: false })
-                    // fetchData(dispatch)
-                }
-            }, 500)
+        dispatch({ type: "loading", payload: true })
+        try {
+            let responseData = await updatePassword(formData);
+            if (responseData && responseData.success) {
+                setFdata({...fData, success: responseData.success, error: "", oldPassword: "", newPassword: "", confirmPassword:""})
+                dispatch({ type: "loading", payload: false })
+            }else if (responseData.error) {
+                dispatch({ type: "loading", payload: false })
+                setFdata({ ...fData, error: responseData.error, success:"", oldPassword: "", newPassword: "", confirmPassword:"" })
+            }
         } catch (error) {
             console.log(error)
-        }*/
+        }
     }
 }

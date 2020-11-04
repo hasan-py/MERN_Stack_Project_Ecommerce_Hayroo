@@ -27,3 +27,12 @@ export const getOrderByUser = async (uId) => {
         console.log(error);
     }
 }
+
+export const updatePassword = async (formData) => {
+    try {
+        let res = await axios.post(`${apiURL}/api/user/change-password`,formData)
+        return res.data;
+    } catch (error) {
+        console.log(error);
+    }
+}

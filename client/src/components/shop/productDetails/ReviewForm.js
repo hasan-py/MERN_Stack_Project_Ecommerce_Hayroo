@@ -40,7 +40,7 @@ const ReviewForm = (props) => {
     }
 
     const ratingUserList = data.singleProductDetail.pRatingsReviews.map(item => {
-        return item.user._id
+        return item.user ? item.user._id : ""
     })
 
 

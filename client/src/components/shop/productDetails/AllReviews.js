@@ -37,7 +37,7 @@ const AllReviews = (props) => {
             console.log(error)
         }
     }
-
+    console.log(pRatingsReviews);
     return (
         <Fragment>
 	        <div className="md:mx-16 lg:mx-20 xl:mx-24 flex flex-col">
@@ -55,7 +55,7 @@ const AllReviews = (props) => {
 						          <div className="mx-2 flex justify-between w-full">
 						            <div className="flex flex-col">
 						              <div className="flex flex-col">
-						                <span>{item.user.name}</span>
+						                <span>{item.user ? item.user.name : ""}</span>
 						                <span className="text-sm text-yellow-700">{moment(item.createdAt).format('lll')}</span>
 						              </div>
 						              <div className="leading-tight mt-3">{item.review}</div>
@@ -81,7 +81,7 @@ const AllReviews = (props) => {
 							              
 							            </div>
 							            {
-							            	isAuthenticate() && item.user._id === isAuthenticate().user._id
+							            	item.user && isAuthenticate() && item.user._id === isAuthenticate().user._id
 							            	?	 <div className="flex justify-center my-2">
 									            	<span onClick={e=> deleteReview(item._id, data.singleProductDetail._id, fetchData, setFdata)} className="hover:bg-gray-300 p-2 rounded-full cursor-pointer">
 									            		<svg className="w-6 h-6 text-yellow-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>

@@ -8,11 +8,7 @@ const cors = require("cors")
 
 // Import Router
 const authRouter = require('./routes/auth');
-const brandRouter = require('./routes/brands');
 const categoryRouter = require('./routes/categories');
-const attributeRouter = require('./routes/attributes');
-const subCategoryRouter = require('./routes/subCategories');
-const attributeValueRouter = require('./routes/attributeValues');
 const productRouter = require('./routes/products');
 const brainTreeRouter = require('./routes/braintree');
 const orderRouter = require('./routes/orders');
@@ -40,15 +36,12 @@ app.use(express.json());
 
 // Routes
 app.use('/api', authRouter)
-app.use('/api', brandRouter)
+app.use('/api/user', usersRouter)
+
 app.use('/api/category', categoryRouter)
-app.use('/api', attributeRouter)
-app.use('/api', subCategoryRouter)
-app.use('/api', attributeValueRouter)
 app.use('/api/product', productRouter)
 app.use('/api', brainTreeRouter)
 app.use('/api/order', orderRouter)
-app.use('/api/user', usersRouter)
 
 // Run Server
 const PORT = process.env.PORT || 8000

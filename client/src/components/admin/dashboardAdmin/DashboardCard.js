@@ -1,6 +1,12 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import { GetAllData } from './Action';
 
 const DashboardCard = (props) => {
+
+    useEffect(()=> {
+      GetAllData()
+    }, [])
+
     return (
         <Fragment>
           {/* Card Start */}

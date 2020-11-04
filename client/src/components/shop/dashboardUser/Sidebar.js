@@ -27,9 +27,9 @@ const Sidebar = (props) => {
                     <hr/>
                     <div onClick={e=> history.push('/wish-list')} className={` px-4 py-4 hover:bg-gray-200 cursor-pointer`}>My Wishlist</div>
                     <hr/>
-                    <div className={`${location.pathname === "/admin/dashboard/categories" ? "border-r-4 border-gray-800 bg-gray-200" : ""}  px-4 py-4 hover:bg-gray-200 cursor-pointer`}>Setting</div>
+                    <div onClick={e=> history.push('/user/setting')} className={`${location.pathname === "/user/setting" ? "border-r-4 border-yellow-700 bg-gray-200" : ""}  px-4 py-4 hover:bg-gray-200 cursor-pointer`}>Setting</div>
                     <hr/>
-                    <div onClick={e=> logout()}  className={`${location.pathname === "/admin/dashboard/categories" ? "border-r-4 border-gray-800 bg-gray-200" : ""}  px-4 py-4 hover:bg-gray-200 cursor-pointer`}>Logout</div>
+                    <div onClick={e=> logout()}  className={`${location.pathname === "/admin/dashboard/categories" ? "border-r-4 border-yellow-700 bg-gray-200" : ""}  px-4 py-4 hover:bg-gray-200 cursor-pointer`}>Logout</div>
                 </div>
             </div>
         </Fragment>

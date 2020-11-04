@@ -59,3 +59,27 @@ export const updatePersonalInformationAction = async (dispatch, fData) => {
         console.log(error)
     }
 }
+
+export const handleChangePassword = async (fData, setFdata) => {
+    if(fData.newPassword !== fData.confirmPassword){
+        setFdata({error:"Password does't match"})
+    }else{
+        const formData = {
+            oldPassword: fData.oldPassword,
+            newPassword: fData.newPassword
+        }
+        // dispatch({ type: "loading", payload: true })
+        setFdata({success:"Password match"})
+        /*try {
+            let responseData = await updatePersonalInformationFetch(formData);
+            setTimeout(() => {
+                if (responseData && responseData.success) {
+                    // dispatch({ type: "loading", payload: false })
+                    // fetchData(dispatch)
+                }
+            }, 500)
+        } catch (error) {
+            console.log(error)
+        }*/
+    }
+}

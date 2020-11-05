@@ -24,13 +24,14 @@ export const fetchbrainTree = async (getBrainTreeToken, setState) => {
 }
 
 export const pay = async (data, dispatch, state, setState, getPaymentProcess, totalCost, history) => {
+    console.log(state);
     if (!state.address) {
         setState({ ...state, error: "Please provide your address" })
     } else if (!state.phone) {
         setState({ ...state, error: "Please provide your phone number" })
     } else {
         let nonce;
-        state.instance.requestPaymentMethod()
+        let getNonce =  state.instance.requestPaymentMethod()
         .then(data => {
             nonce = data.nonce;
             let paymentData = {

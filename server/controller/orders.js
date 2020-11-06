@@ -46,7 +46,6 @@ class Order {
                 })
                 let save = await newOrder.save();
                 if (save) {
-
                     return res.json({ success: "Order created successfully" })
                 }
             } catch (err) {

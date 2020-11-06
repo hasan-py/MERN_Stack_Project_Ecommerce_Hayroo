@@ -4,6 +4,7 @@ export const homeState = {
     searchDropdown: false,
     products:null,
     loading:false,
+    sliderImages:[],
 }
 
 export const homeReducer = (state, action) => {
@@ -48,6 +49,11 @@ export const homeReducer = (state, action) => {
             return {
                 ...state,
                 loading:action.payload
+            }
+        case 'sliderImages':
+            return {
+                ...state,
+                sliderImages:action.payload
             }
         default:
             return state

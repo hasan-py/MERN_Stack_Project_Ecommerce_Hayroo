@@ -28,10 +28,6 @@ const AdminSidebar = (props) => {
               <span className="hover:text-gray-800">Order</span>
             </div>
             <hr className="border-b border-gray-200" />
-            <div onClick={e=> history.push('/admin/dashboard/customers')} className={`${location.pathname === "/admin/dashboard/customers" ? "border-r-4 border-gray-800 bg-gray-100" : ""} hover:bg-gray-200 cursor-pointer flex flex-col items-center justify-center py-6`}>
-              <span><svg className="w-8 h-8 text-gray-600 hover:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg></span>
-              <span className="hover:text-gray-800">Customer</span>
-            </div>
           </div>
         </Fragment>
     )

@@ -1,7 +1,9 @@
 export const dashboardState = {
-    totalData: {},
-    totalOrders: {},
-    uploadSliderBtn: false,
+    totalData: [],
+    totalOrders: [],
+    uploadSliderBtn: true,
+    imageUpload:false,
+    sliderImages:[],
 }
 
 export const dashboardReducer = (state, action) => {
@@ -20,6 +22,16 @@ export const dashboardReducer = (state, action) => {
             return {
                 ...state,
                 uploadSliderBtn: action.payload
+            }
+        case 'imageUpload':
+            return {
+                ...state,
+                imageUpload: action.payload
+            }
+        case 'sliderImages':
+            return {
+                ...state,
+                sliderImages: action.payload
             }
         default:
             return state

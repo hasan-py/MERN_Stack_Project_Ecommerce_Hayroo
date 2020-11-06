@@ -4,10 +4,10 @@ import { DashboardContext } from './';
 
 const DashboardCard = (props) => {
 
-    const {data, dispatch} = useContext(DashboardContext)
+    const { data, dispatch } = useContext(DashboardContext)
 
-    useEffect(()=> {
-      GetAllData(dispatch)
+    useEffect(() => {
+        GetAllData(dispatch)
     }, [])
 
     return (
@@ -43,7 +43,7 @@ const DashboardCard = (props) => {
               <div className="text-lg font-medium">Categories</div>
             </div>
           </div>
-        {/* End Card */}
+          {/* End Card */}
         </Fragment>
     )
 }

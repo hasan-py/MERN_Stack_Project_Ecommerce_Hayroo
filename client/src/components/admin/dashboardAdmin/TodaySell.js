@@ -21,7 +21,6 @@ const SellTable = () => {
       if(data.totalOrders.Orders !== undefined){
         data.totalOrders.Orders.forEach(function(elem) {
           if(moment(elem.createdAt).format('LL') === moment().format('LL')){
-            console.log(elem);
             newList = [...newList, elem]
           }
         });
@@ -71,7 +70,7 @@ const TodayOrderTable = ({ order }) => {
               {
                 order.allProduct.map((item,index)=> {
                   return (
-                    <div className="flex space-x-2">
+                    <div key={index} className="flex space-x-2">
                       <span>{item.id.pName}</span>
                       <span>{item.quantitiy}x</span>
                     </div>
@@ -83,13 +82,13 @@ const TodayOrderTable = ({ order }) => {
              {
                 order.allProduct.map((item,index)=> {
                   return (
-                    <img className="w-12 h-12 object-cover" src={`${apiURL}/uploads/products/${item.id.pImages[0]}`} alt="Pic" />
+                    <img key={index} className="w-12 h-12 object-cover" src={`${apiURL}/uploads/products/${item.id.pImages[0]}`} alt="Pic" />
                   )
                 })
               }
           </td>
 	        <td className="p-2 text-center">
-	           { order.status === 'Not processed' && <span className="block text-red-600 rounded-full text-center text-xs px-2 font-semibold">{order.status}</span>}
+	            { order.status === 'Not processed' && <span className="block text-red-600 rounded-full text-center text-xs px-2 font-semibold">{order.status}</span>}
               { order.status === 'Processing' && <span className="block text-yellow-600 rounded-full text-center text-xs px-2 font-semibold">{order.status}</span>}
               { order.status === 'Shipped' && <span className="block text-blue-600 rounded-full text-center text-xs px-2 font-semibold">{order.status}</span>}
               { order.status === 'Delivered' && <span className="block text-green-600 rounded-full text-center text-xs px-2 font-semibold">{order.status}</span>}

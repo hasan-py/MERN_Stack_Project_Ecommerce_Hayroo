@@ -5,7 +5,8 @@ const customizeSchema = new mongoose.Schema({
         type: String,
     },
     firstShow: {
-    	type:Number
+    	type:Number,
+    	default:0
     }
 },{timestamps:true})
 

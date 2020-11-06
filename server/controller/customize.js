@@ -3,20 +3,9 @@ const categoryModel = require("../models/categories");
 const productModel = require("../models/products");
 const orderModel = require("../models/orders");
 const userModel = require("../models/users");
-const customizeModel = require("../models/customizes");
+const customizeModel = require("../models/customize");
 
 class Customize {
-
-    async uploadSlideImage(req, res) {
-        try {
-            let Categories = await categoryModel.find({}).sort({ _id: -1 })
-            if (Categories) {
-                return res.json({ Categories })
-            }
-        } catch (err) {
-            console.log(err)
-        }
-    }
 
     async getImages(req, res) {
         try {
@@ -26,6 +15,50 @@ class Customize {
             }
         } catch (err) {
             console.log(err)
+        }
+    }
+
+    async uploadSlideImage(req, res) {
+        let image = req.file.filename
+        console.log(image);
+        if(!image) {
+            return res.json({ error:"All field required" })
+        }
+        try {
+            let newCustomzie = new customizeModel({
+                slideImage:image
+            })
+            let save = await newCustomzie.save()
+            if (save) {
+                return res.json({ success: "Image upload successfully" })
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    async deleteSlideImage(req, res) {
+        let { id } = req.body
+        if(!id) {
+            return res.json({ error:"All field required" })
+        }
+        else{   
+            try {
+                let deletedSlideImage = await customizeModel.findById(id)
+                const filePath = `../server/public/uploads/customize/${deletedSlideImage.slideImage}`;
+
+                let deleteImage = await customizeModel.findByIdAndDelete(id)
+                if (deleteImage) {
+                    // Delete Image from tem folder
+                    fs.unlink(filePath, (err) => {
+                        if (err) { console.log(err) }
+                        return res.json({ success: "Image deleted successfully" })
+                    })
+                }
+
+            } catch (err) {
+                console.log(err)
+            }
         }
     }
 

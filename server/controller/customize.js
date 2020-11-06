@@ -2,7 +2,8 @@ const fs = require('fs');
 const categoryModel = require("../models/categories");
 const productModel = require("../models/products");
 const orderModel = require("../models/orders");
-const userModel = require("../models/orders");
+const userModel = require("../models/users");
+const customizeModel = require("../models/customizes");
 
 class Customize {
 
@@ -11,6 +12,17 @@ class Customize {
             let Categories = await categoryModel.find({}).sort({ _id: -1 })
             if (Categories) {
                 return res.json({ Categories })
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    async getImages(req, res) {
+        try {
+            let Images = await customizeModel.find({})
+            if (Images) {
+                return res.json({ Images })
             }
         } catch (err) {
             console.log(err)

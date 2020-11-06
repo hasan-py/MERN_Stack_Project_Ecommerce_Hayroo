@@ -20,3 +20,13 @@ export const editCategory = async (oId, status) => {
         console.log(error);
     }
 }
+
+export const deleteOrder = async (oId) => {
+    let data = { oId: oId }
+    try {
+        let res = await axios.post(`${apiURL}/api/order/delete-order`,data)
+        return res.data;
+    } catch (error) {
+        console.log(error);
+    }
+}

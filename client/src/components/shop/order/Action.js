@@ -1,10 +1,14 @@
 import { createOrder } from './FetchApi'
 
 export const fetchData = async (cartListProduct, dispatch) => {
+    dispatch({type:"loading", payload:true})
     try {
         let responseData = await cartListProduct();
         if (responseData && responseData.Products) {
-            dispatch({ type: "cartProduct", payload: responseData.Products })
+            setTimeout(function() {
+                dispatch({ type: "cartProduct", payload: responseData.Products })
+                dispatch({type:"loading", payload:false})
+            }, 1000);
         }
     } catch (error) {
         console.log(error)
@@ -33,6 +37,7 @@ export const pay = async (data, dispatch, state, setState, getPaymentProcess, to
         let nonce;
         let getNonce =  state.instance.requestPaymentMethod()
         .then(data => {
+            dispatch({type:"loading", payload:true})
             nonce = data.nonce;
             let paymentData = {
                 amountTotal: totalCost(),
@@ -57,6 +62,7 @@ export const pay = async (data, dispatch, state, setState, getPaymentProcess, to
                                 dispatch({ type: "cartTotalCost", payload: null })
                                 dispatch({ type: "orderSuccess", payload: true })
                                 setState({ clientToken: "", instance: {} })
+                                dispatch({type:"loading", payload:false})
                                 return history.push('/')
                             } else if (resposeData.error) {
                                 console.log(resposeData.error);

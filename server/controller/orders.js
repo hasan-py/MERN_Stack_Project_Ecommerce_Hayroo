@@ -67,6 +67,22 @@ class Order {
             })
         }
     }
+
+    async postDeleteOrder(req, res){
+        let { oId } = req.body
+        if (!oId) {
+            return res.json({ error: "All filled must be required" })
+        } else {
+            try {
+                let deleteOrder = await orderModel.findByIdAndDelete(oId)
+                if(deleteOrder) {
+                    return res.json({ success: "Order deleted successfully" })
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
 }
 
 const ordersController = new Order

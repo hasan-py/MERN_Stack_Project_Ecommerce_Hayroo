@@ -1,6 +1,7 @@
 export const dashboardState = {
     totalData: {},
     totalOrders: {},
+    uploadSliderBtn: false,
 }
 
 export const dashboardReducer = (state, action) => {
@@ -14,6 +15,11 @@ export const dashboardReducer = (state, action) => {
             return {
                 ...state,
                 totalOrders: action.payload
+            }
+        case 'uploadSliderBtn':
+            return {
+                ...state,
+                uploadSliderBtn: action.payload
             }
         default:
             return state

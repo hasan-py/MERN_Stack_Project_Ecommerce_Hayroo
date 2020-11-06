@@ -7,5 +7,6 @@ router.post('/order-by-user', ordersController.getOrderByUser);
 
 router.post('/create-order', ordersController.postCreateOrder);
 router.post('/update-order', ordersController.postUpdateOrder);
+router.post('/delete-order', ordersController.postDeleteOrder);
 
 module.exports = router;

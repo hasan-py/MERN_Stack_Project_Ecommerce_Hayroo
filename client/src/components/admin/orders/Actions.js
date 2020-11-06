@@ -1,4 +1,4 @@
-import { getAllOrder } from "./FetchApi";
+import { getAllOrder, deleteOrder } from "./FetchApi";
 
 export const fetchData = async (dispatch) => {
     dispatch({ type: "loading", payload: true })
@@ -16,6 +16,14 @@ export const editOrderReq = (oId, type, status, dispatch) => {
     if (type) {
         console.log("click update");
         dispatch({ type: "updateOrderModalOpen", oId: oId, status: status })
+    }
+}
+
+export const deleteOrderReq = async (oId, dispatch) => {
+    let responseData = await deleteOrder(oId);
+    console.log(responseData);
+    if (responseData && responseData.success) {
+        fetchData(dispatch)
     }
 }
 

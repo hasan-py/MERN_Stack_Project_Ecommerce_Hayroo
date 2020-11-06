@@ -24,7 +24,7 @@ const LoginSignup = (props) => {
     return (
         <Fragment>
 			{/* Black Overlay  */}
-	    	<div className={` ${data.loginSignupModal ? "" : "hidden"} fixed top-0 z-30 w-full h-full bg-black opacity-50`}></div>
+	    	<div onClick={e=> loginSignupModalToggle()} className={` ${data.loginSignupModal ? "" : "hidden"} fixed top-0 z-40 w-full h-screen bg-black opacity-50 cursor-pointer`}></div>
 	    	{/* Signup Login Component Render */}
 	    	<section className={` ${data.loginSignupModal ? "" : "hidden"} fixed z-40 inset-0 my-8 md:my-20 flex items-start justify-center overflow-auto`}>
 		        <div className="w-11/12 md:w-3/5 lg:w-2/4 relative space-y-4 bg-white p-6 md:px-12 md:py-6">

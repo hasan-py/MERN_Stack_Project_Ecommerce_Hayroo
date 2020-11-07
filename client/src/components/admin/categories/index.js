@@ -19,7 +19,7 @@ const CategoryComponent = () => {
 const Categories = (props) => {
     const [data, dispatch] = useReducer(categoryReducer, categoryState);
     return (
-	    <Fragment>
+        <Fragment>
 			<CategoryContext.Provider value={{data,dispatch}}> 
 	    		<AdminLayout children={<CategoryComponent/>} />
 	    	</CategoryContext.Provider> 

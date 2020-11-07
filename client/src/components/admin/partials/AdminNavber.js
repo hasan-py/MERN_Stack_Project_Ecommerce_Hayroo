@@ -6,10 +6,10 @@ const AdminNavber = (props) => {
     const history = useHistory();
 
     const logout = () => {
-      localStorage.removeItem("jwt")
-      localStorage.removeItem("cart")
-      localStorage.removeItem("wishList")
-      window.location.href = "/";
+        localStorage.removeItem("jwt")
+        localStorage.removeItem("cart")
+        localStorage.removeItem("wishList")
+        window.location.href = "/";
     }
 
     return (

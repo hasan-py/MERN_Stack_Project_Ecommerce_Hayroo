@@ -18,9 +18,9 @@ class Order {
         let { uId } = req.body
         if (!uId) {
             return res.json({ message: "All filled must be required" })
-        }else{
+        } else {
             try {
-                let Order = await orderModel.find({user:uId}).populate('allProduct.id', 'pName pImages pPrice').populate('user', 'name email').sort({ _id: -1 })
+                let Order = await orderModel.find({ user: uId }).populate('allProduct.id', 'pName pImages pPrice').populate('user', 'name email').sort({ _id: -1 })
                 if (Order) {
                     return res.json({ Order })
                 }
@@ -67,14 +67,14 @@ class Order {
         }
     }
 
-    async postDeleteOrder(req, res){
+    async postDeleteOrder(req, res) {
         let { oId } = req.body
         if (!oId) {
             return res.json({ error: "All filled must be required" })
         } else {
             try {
                 let deleteOrder = await orderModel.findByIdAndDelete(oId)
-                if(deleteOrder) {
+                if (deleteOrder) {
                     return res.json({ success: "Order deleted successfully" })
                 }
             } catch (error) {

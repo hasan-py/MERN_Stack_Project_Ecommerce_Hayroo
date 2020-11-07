@@ -1,15 +1,14 @@
 import React, { Fragment, useState, useContext } from 'react';
 import { OrderContext } from "./index";
-// import AddCategoryModal from "./AddCategoryModal";
 import UpdateOrderModal from "./UpdateOrderModal";
 import SearchFilter from "./SearchFilter";
-import {filterOrder} from './Actions'
+import { filterOrder } from './Actions'
 
 const OrderMenu = (props) => {
     const { data, dispatch } = useContext(OrderContext);
-    const [dropdown,setDropdown] = useState(false)
+    const [dropdown, setDropdown] = useState(false)
     return (
-	    <Fragment>
+        <Fragment>
 			<div className="col-span-1 flex items-center">
 				<div className="flex flex-col space-y-4 md:flex-row md:justify-between md:items-center md:space-y-0 w-full">
 					{/* It's open the add order modal */}

@@ -20,12 +20,12 @@ const { loginCheck } = require('./middleware/auth')
 
 // Database Connection
 mongoose.connect(process.env.DATABASE, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-})
-.then(()=> console.log("==============Mongodb Database Connected Successfully=============="))
-.catch(err=> console.log("Database Not Connected !!!"))
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+    })
+    .then(() => console.log("==============Mongodb Database Connected Successfully=============="))
+    .catch(err => console.log("Database Not Connected !!!"))
 
 // Middleware
 app.use(morgan('dev'));
@@ -38,7 +38,6 @@ app.use(express.json());
 // Routes
 app.use('/api', authRouter)
 app.use('/api/user', usersRouter)
-
 app.use('/api/category', categoryRouter)
 app.use('/api/product', productRouter)
 app.use('/api', brainTreeRouter)

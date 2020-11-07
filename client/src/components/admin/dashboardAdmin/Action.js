@@ -15,29 +15,28 @@ export const todayAllOrders = async (dispatch) => {
     }
 }
 
-
 export const sliderImages = async (dispatch) => {
-    try{    
+    try {
         let responseData = await getSliderImages()
         if (responseData && responseData.Images) {
             dispatch({ type: "sliderImages", payload: responseData.Images })
         }
-    }catch (error) {
+    } catch (error) {
         console.log(error);
     }
 }
 
 export const deleteImage = async (id, dispatch) => {
     dispatch({ type: "imageUpload", payload: true })
-    try{    
+    try {
         let responseData = await postDeleteImage(id)
         if (responseData && responseData.success) {
-            setTimeout(function() { 
+            setTimeout(function() {
                 sliderImages(dispatch)
                 dispatch({ type: "imageUpload", payload: false })
             }, 1000);
         }
-    }catch (error) {
+    } catch (error) {
         console.log(error);
     }
 }
@@ -48,15 +47,15 @@ export const uploadImage = async (image, dispatch) => {
     let formData = new FormData();
     formData.append("image", image)
     console.log(formData.get("image"));
-    try{	
-	    let responseData = await postUploadImage(formData)
-	    if (responseData && responseData.success) {
-            setTimeout(function() { 
-    	        dispatch({ type: "imageUpload", payload: false })
+    try {
+        let responseData = await postUploadImage(formData)
+        if (responseData && responseData.success) {
+            setTimeout(function() {
+                dispatch({ type: "imageUpload", payload: false })
                 sliderImages(dispatch)
             }, 1000);
-	    }
-    }catch (error){
-    	console.log(error);
+        }
+    } catch (error) {
+        console.log(error);
     }
 }

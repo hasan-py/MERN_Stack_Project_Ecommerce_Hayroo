@@ -1,4 +1,3 @@
-const userModel = require('../models/users');
 var braintree = require('braintree')
 require('dotenv').config();
 
@@ -31,7 +30,7 @@ class brainTree {
             options: {
                 submitForSettlement: true
             }
-        },(err, result)=> {
+        }, (err, result) => {
             if (err) {
                 console.error(err);
                 return res.json(err);

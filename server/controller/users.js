@@ -15,10 +15,10 @@ class User {
     }
 
     async getSingleUser(req, res) {
-        let {uId} = req.body
-        if(!uId){
-            return res.json({error:"All filled must be required"})
-        }else{        
+        let { uId } = req.body
+        if (!uId) {
+            return res.json({ error: "All filled must be required" })
+        } else {
             try {
                 let User = await userModel.findById(uId).select('name email phoneNumber userImage updatedAt createdAt')
                 if (User) {
@@ -60,13 +60,13 @@ class User {
         if (!uId || !name || !phoneNumber) {
             return res.json({ message: "All filled must be required" })
         } else {
-            let currentUser = userModel.findByIdAndUpdate(uId, { name: name, phoneNumber:phoneNumber, updatedAt: Date.now() })
+            let currentUser = userModel.findByIdAndUpdate(uId, { name: name, phoneNumber: phoneNumber, updatedAt: Date.now() })
             currentUser.exec((err, result) => {
                 if (err) console.log(err);
                 return res.json({ success: "User updated successfully" })
             })
         }
-    } 
+    }
 
     async getDeleteUser(req, res) {
         let { oId, status } = req.body
@@ -83,10 +83,9 @@ class User {
 
     async changePassword(req, res) {
         let { uId, oldPassword, newPassword } = req.body
-        if(!uId || !oldPassword || !newPassword){
-            return res.json({message:"All filled must be required"})
-        }
-        else{
+        if (!uId || !oldPassword || !newPassword) {
+            return res.json({ message: "All filled must be required" })
+        } else {
             const data = await userModel.findOne({ _id: uId })
             if (!data) {
                 return res.json({
@@ -96,10 +95,10 @@ class User {
                 const oldPassCheck = await bcrypt.compare(oldPassword, data.password)
                 if (oldPassCheck) {
                     newPassword = bcrypt.hashSync(newPassword, 10)
-                    let passChange =  userModel.findByIdAndUpdate(uId,{
-                        password:newPassword
+                    let passChange = userModel.findByIdAndUpdate(uId, {
+                        password: newPassword
                     })
-                    passChange.exec((err,result)=> {
+                    passChange.exec((err, result) => {
                         if (err) console.log(err);
                         return res.json({ success: "Password updated successfully" })
                     })

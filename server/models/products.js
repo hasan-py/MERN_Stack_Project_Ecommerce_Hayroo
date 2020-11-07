@@ -16,11 +16,11 @@ const productSchema = new mongoose.Schema({
     },
     pSold: {
         type: Number,
-        default:0
+        default: 0
     },
     pQuantity: {
         type: Number,
-        default:0
+        default: 0
     },
     pCategory: {
         type: ObjectId,
@@ -48,7 +48,7 @@ const productSchema = new mongoose.Schema({
         required: true
     }
 
-},{timestamps:true})
+}, { timestamps: true })
 
 const productModel = mongoose.model("products", productSchema);
 module.exports = productModel;

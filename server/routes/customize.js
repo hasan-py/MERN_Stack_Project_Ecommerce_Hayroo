@@ -3,7 +3,6 @@ const router = express.Router();
 const customizeController = require('../controller/customize')
 const multer = require('multer');
 
-// Image Upload setting
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {
         cb(null, 'public/uploads/customize')

@@ -24,10 +24,10 @@ const AddCategoryModal = (props) => {
         }
     }
 
-    if(fData.error || fData.success){    
-      setTimeout(() => {
-          setFdata({ ...fData, success: false, error: false })
-      }, 2000)
+    if (fData.error || fData.success) {
+        setTimeout(() => {
+            setFdata({ ...fData, success: false, error: false })
+        }, 2000)
     }
 
     const submitForm = async (e) => {
@@ -63,7 +63,7 @@ const AddCategoryModal = (props) => {
     }
 
     return (
-      <Fragment>
+        <Fragment>
         {/* Black Overlay */}
         <div onClick={e=> dispatch({type:"addCategoryModal",payload:false})} className={`${data.addCategoryModal ? "" : "hidden"} fixed top-0 left-0 z-30 w-full h-full bg-black opacity-50`} />
         {/* End Black Overlay */}

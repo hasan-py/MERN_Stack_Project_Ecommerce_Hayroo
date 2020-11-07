@@ -1,12 +1,13 @@
 import React, { Fragment, useContext, useState, useEffect } from 'react';
 import { OrderContext } from "./index";
-import {getAllOrder, editCategory} from './FetchApi';
+import { getAllOrder, editCategory } from './FetchApi';
 
 const UpdateOrderModal = (props) => {
-  
+
     const { data, dispatch } = useContext(OrderContext);
 
     const [status, setStatus] = useState("")
+    
     const [oId, setOid] = useState("")
 
     useEffect(() => {
@@ -35,7 +36,7 @@ const UpdateOrderModal = (props) => {
     }
 
     return (
-      <Fragment>
+        <Fragment>
         {/* Black Overlay */}
         <div onClick={e=> dispatch({type:"updateOrderModalClose"})} className={`${data.updateOrderModal.modal ? "" : "hidden"} fixed top-0 left-0 z-30 w-full h-full bg-black opacity-50`} />
         {/* End Black Overlay */}

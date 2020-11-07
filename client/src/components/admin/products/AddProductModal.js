@@ -23,7 +23,6 @@ const AddProductDetail = ({ categories }) => {
         error: false
     })
 
-
     const fetchData = async () => {
         let responseData = await getAllProduct()
         setTimeout(() => {

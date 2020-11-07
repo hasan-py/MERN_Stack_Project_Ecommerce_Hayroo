@@ -3,7 +3,7 @@ import { CategoryContext } from "./index";
 import { editCategory, getAllCategory } from "./FetchApi";
 
 const EditCategoryModal = (props) => {
-  
+
     const { data, dispatch } = useContext(CategoryContext);
 
     const [des, setDes] = useState("")
@@ -40,7 +40,7 @@ const EditCategoryModal = (props) => {
     }
 
     return (
-      <Fragment>
+        <Fragment>
         {/* Black Overlay */}
         <div onClick={e=> dispatch({type:"editCategoryModalClose"})} className={`${data.editCategoryModal.modal ? "" : "hidden"} fixed top-0 left-0 z-30 w-full h-full bg-black opacity-50`} />
         {/* End Black Overlay */}

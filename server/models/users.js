@@ -4,12 +4,12 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        maxlength:32,
+        maxlength: 32,
     },
     email: {
         type: String,
         required: true,
-        trim:true,
+        trim: true,
         index: { unique: true },
         match: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
     },
@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     },
     userRole: {
         type: Number,
-        default:0,
+        default: 0,
         required: true,
     },
     phoneNumber: {
@@ -31,17 +31,17 @@ const userSchema = new mongoose.Schema({
     },
     verified: {
         type: String,
-        default:false
+        default: false
     },
     secretKey: {
         type: String,
         default: null
     },
     history: {
-        type:Array,
-        default:[]
+        type: Array,
+        default: []
     },
-},{timestamps:true})
+}, { timestamps: true })
 
 const userModel = mongoose.model("users", userSchema);
 module.exports = userModel;

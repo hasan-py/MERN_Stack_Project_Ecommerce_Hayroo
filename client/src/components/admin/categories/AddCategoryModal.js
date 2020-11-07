@@ -24,9 +24,11 @@ const AddCategoryModal = (props) => {
         }
     }
 
-    setTimeout(() => {
-        return setFdata({ ...fData, error: false })
-    }, 2000)
+    if(fData.error || fData.success){    
+      setTimeout(() => {
+          setFdata({ ...fData, success: false, error: false })
+      }, 2000)
+    }
 
     const submitForm = async (e) => {
         dispatch({ type: "loading", payload: true })

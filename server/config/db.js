@@ -5,7 +5,7 @@ try {
         useUnifiedTopology: true,
         useCreateIndex: true,
     })
-    console.log("==============Mongodb Database Connected Successfully==============")
+    console.log("==============Database Connected Successfully==============")
 } catch (err) {
     console.log("Database Not Connected !!!")
 }

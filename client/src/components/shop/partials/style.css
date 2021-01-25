@@ -1,10 +1,10 @@
 .userDropdown {
-    display: none;
+  display: none;
 }
 
 .userDropdownBtn:hover .userDropdown {
-    display: block;
-    display: flex;
-    flex-direction: column;
-    transition: all 1s;
+  display: block;
+  display: flex;
+  flex-direction: column;
+  transition: all 1s;
 }

@@ -12,18 +12,18 @@ import ProductByCategory from "./home/ProductByCategory";
 import CheckoutPage from "./order/CheckoutPage";
 
 export {
-    Home,
-    WishList,
-    ProtectedRoute,
-    AdminProtectedRoute,
-    CartProtectedRoute,
-    LayoutContext,
-    layoutState,
-    layoutReducer,
-    isAdmin,
-    isAuthenticate,
-    PageNotFound,
-    ProductDetails,
-    ProductByCategory,
-    CheckoutPage,
-}
+  Home,
+  WishList,
+  ProtectedRoute,
+  AdminProtectedRoute,
+  CartProtectedRoute,
+  LayoutContext,
+  layoutState,
+  layoutReducer,
+  isAdmin,
+  isAuthenticate,
+  PageNotFound,
+  ProductDetails,
+  ProductByCategory,
+  CheckoutPage,
+};

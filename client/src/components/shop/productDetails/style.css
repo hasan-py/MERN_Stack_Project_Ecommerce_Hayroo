@@ -2,27 +2,27 @@
 
 fieldset,
 label {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 /****** Style Star Rating Widget *****/
 
 .rating {
-    border: none;
-    float: left;
+  border: none;
+  float: left;
 }
 
-.rating>input {
-    display: none;
+.rating > input {
+  display: none;
 }
 
-.rating>label:before {
-    margin: 5px;
-    font-size: 2.25em;
-    font-family: FontAwesome;
-    display: inline-block;
-    content: "\f005";
+.rating > label:before {
+  margin: 5px;
+  font-size: 2.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
 }
 
 /* Half Rating System */
@@ -45,9 +45,9 @@ label {
 <input type="radio" id="starhalf" name="rating" defaultValue={0.5} /><label className="half" htmlFor="starhalf" title="Sucks big time - 0.5 stars" />
 */
 
-.rating>label {
-    color: #ddd;
-    float: right;
+.rating > label {
+  color: #ddd;
+  float: right;
 }
 
 /***** CSS Magic to Highlight Stars on Hover *****/
@@ -57,7 +57,7 @@ label {
 .rating:not(:checked)>label:hover,
 /* hover current star */
 .rating:not(:checked)>label:hover~label {
-    color: #b7791f;
+  color: #b7791f;
 }
 
 /* hover previous stars in list */
@@ -68,5 +68,5 @@ label {
 .rating>label:hover~input:checked~label,
 /* lighten current selection */
 .rating>input:checked~label:hover~label {
-    color: #b7791f;
+  color: #b7791f;
 }

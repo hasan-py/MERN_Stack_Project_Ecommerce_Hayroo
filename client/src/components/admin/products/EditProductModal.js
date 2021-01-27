@@ -67,31 +67,31 @@ const EditProductModal = (props) => {
     e.preventDefault();
     if (!editformData.pEditImages) {
       console.log("Image Not upload=============", editformData);
-      try {
-        let responseData = await editProduct(editformData);
-        if (responseData.success) {
-          fetchData();
-          setEditformdata({ ...editformData, success: responseData.success });
-          setTimeout(() => {
-            return setEditformdata({
-              ...editformData,
-              success: responseData.success,
-            });
-          }, 2000);
-        } else if (responseData.error) {
-          setEditformdata({ ...editformData, error: responseData.error });
-          setTimeout(() => {
-            return setEditformdata({
-              ...editformData,
-              error: responseData.error,
-            });
-          }, 2000);
-        }
-      } catch (error) {
-        console.log(error);
-      }
     } else {
       console.log("Image uploading");
+    }
+    try {
+      let responseData = await editProduct(editformData);
+      if (responseData.success) {
+        fetchData();
+        setEditformdata({ ...editformData, success: responseData.success });
+        setTimeout(() => {
+          return setEditformdata({
+            ...editformData,
+            success: responseData.success,
+          });
+        }, 2000);
+      } else if (responseData.error) {
+        setEditformdata({ ...editformData, error: responseData.error });
+        setTimeout(() => {
+          return setEditformdata({
+            ...editformData,
+            error: responseData.error,
+          });
+        }, 2000);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 

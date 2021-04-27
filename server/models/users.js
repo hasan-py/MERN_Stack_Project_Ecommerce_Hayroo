@@ -20,7 +20,6 @@ const userSchema = new mongoose.Schema(
     },
     userRole: {
       type: Number,
-      default: 0, // By default 0 for customer signup 1 for admin signup
       required: true,
     },
     phoneNumber: {

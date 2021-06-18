@@ -161,7 +161,7 @@ const CartModal = (props) => {
               onClick={(e) => cartModalOpen()}
               className="cursor-pointer px-4 py-2 border border-gray-400 text-white text-center cursor-pointer"
             >
-              Continue shipping
+              Continue shopping
             </div>
             {data.cartTotalCost ? (
               <Fragment>

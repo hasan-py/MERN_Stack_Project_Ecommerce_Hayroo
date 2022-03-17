@@ -1,5 +1,5 @@
 {
-  "name": "Hayroo",
+  "name": "zionpraise",
   "version": "1.0.0",
   "description": "A E-commerce website.",
   "main": "app.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hasan-py/MERN_Stack_Project_Hayroo_Ecommerce"
+    "url": "https://github.com/hasan-py/MERN_Stack_Project_zionpraise_Ecommerce"
   },
   "author": "Hasan | https://hasan-py.github.io",
   "license": "ISC",

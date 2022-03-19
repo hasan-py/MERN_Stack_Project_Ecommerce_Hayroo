@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import moment from "moment";
 import { DashboardContext } from "./";
@@ -9,10 +9,10 @@ const apiURL = process.env.REACT_APP_API_URL;
 const SellTable = () => {
   const history = useHistory();
   const { data, dispatch } = useContext(DashboardContext);
-  const [newList, setNewList] = useState(null);
 
   useEffect(() => {
     todayAllOrders(dispatch);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const ordersList = () => {

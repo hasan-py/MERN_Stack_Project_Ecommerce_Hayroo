@@ -12,6 +12,7 @@ const Slider = (props) => {
 
   useEffect(() => {
     sliderImages(dispatch);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

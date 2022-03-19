@@ -27,6 +27,8 @@ export const CheckoutComponent = (props) => {
   useEffect(() => {
     fetchData(cartListProduct, dispatch);
     fetchbrainTree(getBrainTreeToken, setState);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (data.loading) {

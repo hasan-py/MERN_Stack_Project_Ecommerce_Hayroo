@@ -8,7 +8,7 @@ import { subTotal, quantity, totalCost } from "./Mixins";
 
 const apiURL = process.env.REACT_APP_API_URL;
 
-const CartModal = (props) => {
+const CartModal = () => {
   const history = useHistory();
 
   const { data, dispatch } = useContext(LayoutContext);
@@ -19,6 +19,8 @@ const CartModal = (props) => {
 
   useEffect(() => {
     fetchData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchData = async () => {

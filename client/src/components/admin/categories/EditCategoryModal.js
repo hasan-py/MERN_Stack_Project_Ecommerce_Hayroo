@@ -13,6 +13,8 @@ const EditCategoryModal = (props) => {
     setDes(data.editCategoryModal.des);
     setStatus(data.editCategoryModal.status);
     setCid(data.editCategoryModal.cId);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data.editCategoryModal.modal]);
 
   const fetchData = async () => {

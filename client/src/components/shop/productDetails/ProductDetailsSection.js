@@ -18,16 +18,15 @@ const ProductDetailsSection = (props) => {
   let { id } = useParams();
 
   const { data, dispatch } = useContext(ProductDetailsContext);
-  const { data: layoutData, dispatch: layoutDispatch } = useContext(
-    LayoutContext
-  ); // Layout Context
+  const { data: layoutData, dispatch: layoutDispatch } =
+    useContext(LayoutContext); // Layout Context
 
   const sProduct = layoutData.singleProductDetail;
   const [pImages, setPimages] = useState(null);
   const [count, setCount] = useState(0); // Slide change state
 
   const [quantitiy, setQuantitiy] = useState(1); // Increse and decrese quantity state
-  const [alertQ, setAlertq] = useState(false); // Alert when quantity greater than stock
+  const [, setAlertq] = useState(false); // Alert when quantity greater than stock
 
   const [wList, setWlist] = useState(
     JSON.parse(localStorage.getItem("wishList"))
@@ -35,6 +34,7 @@ const ProductDetailsSection = (props) => {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchData = async () => {
@@ -219,14 +219,14 @@ const ProductDetailsSection = (props) => {
               {sProduct.pDescription}
             </div>
             <div className="my-4 md:my-6">
-              {quantitiy == sProduct.pQuantity ? (
+              {+quantitiy === +sProduct.pQuantity ? (
                 <span className="text-xs text-red-500">Stock limited</span>
               ) : (
                 ""
               )}
               <div
                 className={`flex justify-between items-center px-4 py-2 border ${
-                  quantitiy === sProduct.pQuantity && "border-red-500"
+                  +quantitiy === +sProduct.pQuantity && "border-red-500"
                 }`}
               >
                 <div

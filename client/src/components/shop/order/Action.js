@@ -46,7 +46,7 @@ export const pay = async (
     setState({ ...state, error: "Please provide your phone number" });
   } else {
     let nonce;
-    let getNonce = state.instance
+    state.instance
       .requestPaymentMethod()
       .then((data) => {
         dispatch({ type: "loading", payload: true });

@@ -1,9 +1,7 @@
 import React, { Fragment, useEffect, useContext } from "react";
 import moment from "moment";
-
-import Layout from "./Layout";
-import { DashboardUserContext } from "./Layout";
 import { fetchOrderByUser } from "./Action";
+import Layout, { DashboardUserContext } from "./Layout";
 
 const apiURL = process.env.REACT_APP_API_URL;
 
@@ -97,6 +95,7 @@ const OrdersComponent = () => {
 
   useEffect(() => {
     fetchOrderByUser(dispatch);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (data.loading) {

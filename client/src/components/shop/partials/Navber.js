@@ -30,7 +30,7 @@ const Navber = (props) => {
   return (
     <Fragment>
       {/* Navber Section */}
-      <nav className="fixed top-0 w-full z-10 shadow-lg lg:shadow-none bg-white">
+      <nav className="fixed top-0 w-full z-20 shadow-lg lg:shadow-none bg-white">
         <div className="m-4 md:mx-12 md:my-6 grid grid-cols-4 lg:grid-cols-3">
           <div className="hidden lg:block col-span-1 flex text-gray-600 mt-1">
             <span

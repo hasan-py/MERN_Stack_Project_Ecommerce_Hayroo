@@ -5,6 +5,7 @@
 In uploads folder you need create 3 folder like bellow.
 Folder structure will be like: 
 public -> uploads -> 1. products 2. customize 3. categories
+*** Now This folder will automatically create when we run the server file
 
 * Issue 2:
 For admin signup just go to the auth 
@@ -31,9 +32,12 @@ const brainTreeRouter = require("./routes/braintree");
 const orderRouter = require("./routes/orders");
 const usersRouter = require("./routes/users");
 const customizeRouter = require("./routes/customize");
-
 // Import Auth middleware for check user login or not~
 const { loginCheck } = require("./middleware/auth");
+const CreateAllFolder = require("./config/uploadFolderCreateScript");
+
+/* Create All Uploads Folder if not exists | For Uploading Images */
+CreateAllFolder();
 
 // Database Connection
 mongoose

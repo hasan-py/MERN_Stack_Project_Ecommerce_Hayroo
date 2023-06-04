@@ -72,4 +72,5 @@ Follow these setps 👇👇
 
 You can deploy frontend into vercel or netlify also. Thanks
 
+`designed by aliens`
 `Build with 💛 by Hasan`

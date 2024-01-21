@@ -10,6 +10,16 @@ These instructions will get you a copy of the project up and running on your loc
 
 NPM / Yarn and Node.js installed
 
+### .env
+
+In the server > .env file, you can find some information. Please use your own API key for future use, as this key may not work in the future.
+
+```
+BRAINTREE_MERCHANT_ID=your_id
+BRAINTREE_PUBLIC_KEY=your_public_key
+BRAINTREE_PRIVATE_KEY=your_private_key
+```
+
 ### Installing
 
 Installing NPM modules on both client and server folders

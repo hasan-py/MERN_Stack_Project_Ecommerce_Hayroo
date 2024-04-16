@@ -89,7 +89,7 @@ You can deploy frontend into vercel or netlify also. Thanks
 ### 16'th Of April Submission
 ### Screen Shots Of Our Application Running On Cloud
 
-[Client Side On Terminal]([Resim1.png](https://github.com/AtaErnam/CS436-Cloud-Project/blob/master/Resim1.png?raw=true))
+[Client Side On Terminal](https://github.com/AtaErnam/CS436-Cloud-Project/blob/master/Resim1.png?raw=true)
 [Server Side On Terminal](Resim2.png)
 [Client Side On Browser](Resim3.png)
 

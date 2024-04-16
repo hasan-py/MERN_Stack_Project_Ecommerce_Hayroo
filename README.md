@@ -89,6 +89,8 @@ You can deploy frontend into vercel or netlify also. Thanks
 ### 16'th Of April Submission
 ### Screen Shots Of Our Application Running On Cloud
 
+[Client Side](Resim1.png!)
+
 
 
 ### Draft Architecture

@@ -1,3 +1,12 @@
+# CS436 Term Project
+Our projects reports are located under the Project Demo and SetUp section.
+
+Names of our group members:
+- Arda Güney
+- Ata Ernam
+- Eren Yiğit Yaşar
+- Ahmet Burak Kurtulmuş
+- 
 # Project Demo
 
 [![Alt text](https://img.youtube.com/vi/lXk14qt2D28/0.jpg)](https://www.youtube.com/watch?v=lXk14qt2D28)

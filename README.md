@@ -92,8 +92,13 @@ Follow these setps 👇👇
 You can deploy frontend into vercel or netlify also. Thanks
 
 `Build with 💛 by Hasan`
-### --------------------------------------------------------------------------------------------------------
+### -------------------------------------------------------------------------------------------------------
 ### CS436 PROJECT
+## Group Members
+Eren Yiğit Yaşar
+Ata Ernam
+Burak Kurtulmuş
+Arda Güney
 
 ### 16'th Of April Submission/ Initial Reprot
 ### Screen Shots Of Our Application Running On Cloud

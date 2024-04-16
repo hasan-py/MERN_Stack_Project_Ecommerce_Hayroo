@@ -1,5 +1,5 @@
 # CS436 Term Project
-Our projects reports are located under the Project Demo and SetUp section.
+Our project reports are located under the Project Demo and SetUp section.
 
 Names of our group members:
 - Arda Güney

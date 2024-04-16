@@ -83,3 +83,9 @@ Follow these setps 👇👇
 You can deploy frontend into vercel or netlify also. Thanks
 
 `Build with 💛 by Hasan`
+
+
+### Draft Architecture
+![CS436](https://github.com/AtaErnam/CS436-Cloud-Project/assets/67603284/7c0c4279-02c2-4077-a947-7336c17a9668)
+
+

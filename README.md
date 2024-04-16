@@ -83,17 +83,16 @@ Follow these setps 👇👇
 You can deploy frontend into vercel or netlify also. Thanks
 
 `Build with 💛 by Hasan`
-### -----------------------------------------------------------------------------------------------------------------------
+### --------------------------------------------------------------------------------------------------------
 ### CS436 PROJECT
 
 ### 16'th Of April Submission
 ### Screen Shots Of Our Application Running On Cloud
+![ClientTerminal](https://github.com/AtaErnam/CS436-Cloud-Project/assets/71980713/6e16dba0-424b-4a0e-b463-9e32de6197b4)
 
-[Client Side On Terminal](https://github.com/AtaErnam/CS436-Cloud-Project/blob/master/Resim1.png?raw=true)
-[Server Side On Terminal](Resim2.png)
-[Client Side On Browser](Resim3.png)
+![ServerTerminal](https://github.com/AtaErnam/CS436-Cloud-Project/assets/71980713/40a6730c-c94f-4db7-aa09-9a7a84daf179)
 
-
+![ClientBrowser](https://github.com/AtaErnam/CS436-Cloud-Project/assets/71980713/7cd971b3-73a7-4c5b-81d4-9489fd292bfd)
 
 ### Draft Architecture
 ![CS436](https://github.com/AtaErnam/CS436-Cloud-Project/assets/67603284/7c0c4279-02c2-4077-a947-7336c17a9668)

@@ -6,7 +6,7 @@ Names of our group members:
 - Ata Ernam
 - Eren Yiğit Yaşar
 - Ahmet Burak Kurtulmuş
-- 
+
 # Project Demo
 
 [![Alt text](https://img.youtube.com/vi/lXk14qt2D28/0.jpg)](https://www.youtube.com/watch?v=lXk14qt2D28)
@@ -95,7 +95,7 @@ You can deploy frontend into vercel or netlify also. Thanks
 ### --------------------------------------------------------------------------------------------------------
 ### CS436 PROJECT
 
-### 16'th Of April Submission
+### 16'th Of April Submission/ Initial Reprot
 ### Screen Shots Of Our Application Running On Cloud
 ![ClientTerminal](https://github.com/AtaErnam/CS436-Cloud-Project/assets/71980713/6e16dba0-424b-4a0e-b463-9e32de6197b4)
 

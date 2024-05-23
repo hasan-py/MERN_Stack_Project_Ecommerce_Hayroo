@@ -10,6 +10,15 @@ export const getAllProduct = async () => {
   }
 };
 
+export const getDiscountCode = async () => {
+  try {
+    let res = await axios.get(`${apiURL}/api/product/get-discount-code`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const createPorductImage = async ({ pImage }) => {
   /* Most important part for uploading multiple image  */
   let formData = new FormData();

@@ -1,8 +1,38 @@
 const productModel = require("../models/products");
 const fs = require("fs");
 const path = require("path");
+const axios = require('axios');
+const https = require('https');
+
 
 class Product {
+  async getDiscountCode(req, res) {
+    const { email } = req.body;
+
+    try {
+      const response = await axios.post(
+        'https://me-west1-tokyo-ceiling-422016-m8.cloudfunctions.net/discount-func',
+        { email },
+        {
+          httpsAgent: new https.Agent({
+            rejectUnauthorized: false
+          })
+        }
+      );
+      // Assuming the discount code is returned in response.data.discountCode
+      const discountCode = response.data.discountCode;
+
+      console.log('Discount code:', discountCode);
+
+      // Respond with the discount code
+      return res.json({ discountCode });
+    } catch (error) {
+      console.error('Error:', error.response ? error.response.data.message : error.message);
+
+      // Respond with an error message
+      return res.status(500).json({ error: 'Failed to fetch discount code' });
+    }
+  }
   // Delete Image from uploads -> products folder
   static deleteImages(images, mode) {
     var basePath =

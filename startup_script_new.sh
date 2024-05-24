@@ -50,7 +50,7 @@ if [ ! -d "$folder_name" ]; then
   fi
 
   # Fix vulnerabilities (consider manual review before using --force)
-  npm --prefix /home/erenyasar/CS436-Cloud-Project/server/ audit fix --force
+  npm --prefix /home/$username/CS436-Cloud-Project/server/ audit fix --force
   log "Project setup complete."
 
   #Update Path variables

@@ -112,3 +112,34 @@ Arda Güney
 ![CS436](https://github.com/AtaErnam/CS436-Cloud-Project/assets/67603284/7c0c4279-02c2-4077-a947-7336c17a9668)
 
 
+
+
+---
+
+## Latest Developments as of May 26, 2024
+
+### Project Summary Update
+
+#### 1. Architecture Design
+- **Technology Stack:** The e-commerce site application is developed using Node.js for the backend and React for the frontend. This combination ensures a robust and responsive user experience.
+- **Cloud Infrastructure:** The application is hosted on Google Cloud Platform (GCP), leveraging its powerful cloud services. The architecture includes separate virtual machines (VMs) for the frontend and backend to enhance performance and manageability.
+- **Database:** MongoDB Atlas is utilized as the database solution, providing a scalable and flexible NoSQL database that is seamlessly integrated with the backend services.
+- **Advanced Features:**
+  - **Auto-Scaling:** The system is designed to automatically scale up or down based on the traffic load, ensuring optimal performance and cost efficiency.
+  - **Load Balancing:** A load balancer is implemented to distribute incoming traffic evenly across multiple virtual machines. This helps in maintaining system stability and performance during high traffic periods.
+  - **Serverless Functions:** Certain operations are handled using serverless functions, which are triggered by specific events. This reduces the load on the VMs and improves the overall efficiency of the system.
+- **Operational Flow:** User requests are directed from the browser to the load balancer, which then forwards them to the appropriate virtual machines or serverless functions. The backend processes these requests, interacts with the MongoDB database, and returns the necessary information to the frontend.
+
+#### 2. Experiment Design
+- **System Parameters:** Key parameters such as the size and geographical location of the virtual machines, the types of load balancing strategies, and the specifics of the stress testing scenarios were carefully defined.
+- **Stress Testing Tool:** Locust, an open-source load testing tool, was used to simulate various levels of user traffic and evaluate the system’s performance under different conditions.
+- **Test Scenarios:** Multiple test scenarios were created to simulate real-world usage patterns, including peak traffic periods and sudden spikes in user activity. These tests helped in understanding how the system behaves under stress and identifying potential bottlenecks.
+
+#### 3. Discussion of Results
+- **Virtual Machine Performance:** Tests were conducted on virtual machines of different sizes and in various geographical regions. It was found that medium-sized virtual machines offered the best balance between cost and performance.
+- **Load Balancing Policies:** Various load balancing policies, including Round Robin, Least Request, and Maglev, were evaluated. The Least Request policy resulted in the lowest error rate and most efficient distribution of traffic.
+- **User Load and Traffic:** The system's performance was analyzed under varying numbers of users and request rates. As the number of users and traffic increased, the system's response time and error rates were monitored. This analysis led to the optimization of system parameters to ensure that the application could handle high loads effectively without compromising on performance.
+- **Optimization Strategies:** Based on the findings from the stress tests, several optimization strategies were implemented. These included fine-tuning the auto-scaling rules, optimizing the serverless functions, and enhancing the database query performance to ensure quick response times.
+
+
+

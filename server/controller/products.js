@@ -11,7 +11,7 @@ class Product {
 
     try {
       const response = await axios.post(
-        'https://me-west1-tokyo-ceiling-422016-m8.cloudfunctions.net/discount-func',
+        'https://me-west1-cs436project.cloudfunctions.net/function-1',
         { email },
         {
           httpsAgent: new https.Agent({

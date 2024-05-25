@@ -103,14 +103,17 @@ Arda Güney
 ### 16'th Of April Submission/ Initial Reprot
 ### Screen Shots Of Our Application Running On Cloud
 ![ClientTerminal](https://github.com/AtaErnam/CS436-Cloud-Project/assets/71980713/6e16dba0-424b-4a0e-b463-9e32de6197b4)
+Figure 1: Client Terminal Interface
 
 ![ServerTerminal](https://github.com/AtaErnam/CS436-Cloud-Project/assets/71980713/40a6730c-c94f-4db7-aa09-9a7a84daf179)
+Figure 2: Server Terminal Interface
 
 ![ClientBrowser](https://github.com/AtaErnam/CS436-Cloud-Project/assets/71980713/7cd971b3-73a7-4c5b-81d4-9489fd292bfd)
+Figure 3: Client Browser Interface
 
 ### Draft Architecture
 ![CS436](https://github.com/AtaErnam/CS436-Cloud-Project/assets/67603284/7c0c4279-02c2-4077-a947-7336c17a9668)
-
+Figure 4: Draft Architecture Diagram
 
 
 

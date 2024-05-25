@@ -7,6 +7,24 @@ Names of our group members:
 - Eren Yiğit Yaşar
 - Ahmet Burak Kurtulmuş
 
+# Table of Contents
+
+1. Project Demo
+2. Getting Started
+    - Prerequisites
+    - .env
+    - Installing
+    - Running the app
+3. Deploying the Backend Server to Render
+4. CS436 Project - April 16th Submission/ Initial Report
+    - Screenshots of Our Application Running on Cloud
+    - Draft Architecture
+5. Latest Developments as of May 26, 2024
+    - Project Summary Update
+        - Architecture Design
+        - Experiment Design
+        - Discussion of Results
+
 # Project Demo
 
 [![Alt text](https://img.youtube.com/vi/lXk14qt2D28/0.jpg)](https://www.youtube.com/watch?v=lXk14qt2D28)

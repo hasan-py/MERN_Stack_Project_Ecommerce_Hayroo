@@ -1,4 +1,4 @@
-# CS436 Term Project
+# CS436 Term Project Group 2
 Our project reports are located under the Project Demo and SetUp section.
 
 Names of our group members:

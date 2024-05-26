@@ -130,7 +130,7 @@ Figure 2: Server Terminal Interface
 Figure 3: Client Browser Interface
 
 ### Draft Architecture
-![CS436](https://github.com/AtaErnam/CS436-Cloud-Project/assets/67603284/7c0c4279-02c2-4077-a947-7336c17a9668)
+![Business process flow example (4)](https://github.com/AtaErnam/CS436-Cloud-Project/assets/71980713/6bea576c-0cd4-4578-bdf3-150bfad3734c)
 Figure 4: Draft Architecture Diagram
 
 

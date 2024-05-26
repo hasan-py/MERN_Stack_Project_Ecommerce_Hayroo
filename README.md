@@ -139,7 +139,7 @@ Figure 4: Draft Architecture Diagram
 
 ## Latest Developments as of May 26, 2024
 
-**Important Note:** Complete version of our final report and our demo can be found as seperate files in this repository.
+**Important Note:** Complete version of our final report and our demo video can be found as seperate files in this repository.
 
 ### Project Summary Update
 

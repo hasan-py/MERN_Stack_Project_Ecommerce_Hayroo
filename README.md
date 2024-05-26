@@ -157,6 +157,9 @@ Figure 4: Draft Architecture Diagram
 - **Test Scenarios:** Multiple test scenarios were created to simulate real-world usage patterns, including peak traffic periods and sudden spikes in user activity. These tests helped in understanding how the system behaves under stress and identifying potential bottlenecks.
 
 #### 3. Discussion of Results
+
+**Important Note:** Complete version of our final report and our demo can be found as seperate files in this repository.
+
 - **Virtual Machine Performance:** Tests were conducted on virtual machines of different sizes and in various geographical regions. It was found that medium-sized virtual machines offered the best balance between cost and performance.
 - **Load Balancing Policies:** Various load balancing policies, including Round Robin, Least Request, and Maglev, were evaluated. The Least Request policy resulted in the lowest error rate and most efficient distribution of traffic.
 - **User Load and Traffic:** The system's performance was analyzed under varying numbers of users and request rates. As the number of users and traffic increased, the system's response time and error rates were monitored. This analysis led to the optimization of system parameters to ensure that the application could handle high loads effectively without compromising on performance.

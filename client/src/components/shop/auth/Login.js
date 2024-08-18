@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useContext } from "react";
 import { loginReq } from "./fetchApi";
 import { LayoutContext } from "../index";
-
+import { useSnackbar } from 'notistack';
 const Login = (props) => {
   const { data: layoutData, dispatch: layoutDispatch } = useContext(
     LayoutContext
@@ -15,6 +15,8 @@ const Login = (props) => {
   });
 
   const alert = (msg) => <div className="text-xs text-red-500">{msg}</div>;
+
+  const { enqueueSnackbar } = useSnackbar();
 
   const formSubmit = async () => {
     setData({ ...data, loading: true });
@@ -33,8 +35,10 @@ const Login = (props) => {
       } else if (responseData.token) {
         setData({ email: "", password: "", loading: false, error: false });
         localStorage.setItem("jwt", JSON.stringify(responseData));
+       enqueueSnackbar('Login Completed Successfully..!', { variant: 'success' })
         window.location.href = "/";
-      }
+
+      }    
     } catch (error) {
       console.log(error);
     }
